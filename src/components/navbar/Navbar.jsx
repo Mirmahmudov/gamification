@@ -12,7 +12,7 @@ function Navbar({ setModalOpen, userInfo }) {
       <div className="container">
         <div className="pageTitle">
           <div className="logo">
-            <img src="/public/imgs/logo.svg" alt="" />
+            <img src="public/imgs/logo.svg" alt="" />
           </div>
           <h1>Dashboard</h1>
         </div>
