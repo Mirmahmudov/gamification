@@ -1,0 +1,136 @@
+.main {
+  display: flex;
+  gap: 10px;
+  margin-top: 100px !important;
+  position: relative;
+}
+.links {
+  list-style: none;
+  width: 280px;
+  background-color: white;
+  min-height: 80vh;
+  border-radius: 10px;
+  padding: 40px 10px;
+  flex-shrink: 0;
+}
+
+.links_two {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  background-color: white;
+  bottom: 0px;
+  display: none;
+}
+.links_two a {
+  text-decoration: none;
+  color: #01bbfd;
+}
+.links_two h3 {
+  font-size: 11px;
+}
+.links_two svg {
+  font-size: 25px;
+}
+.links_two li{
+  width: 21%;
+  
+}
+
+.links_two li a {
+  padding: 5px 10px;
+  width: 100%;
+  border-radius: 15px;
+  z-index: 999 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+
+}
+.links_two li a.active {
+  border: 2px solid #E0E0E0;
+}
+
+.circle {
+  background-color: #FFB106;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-top: -40px;
+  border: 3px solid white;
+}
+
+.links li a {
+  display: flex !important;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #01bbfd;
+  padding: 10px 5px;
+  transition: all 0.3s ease;
+}
+
+.links li a:hover {
+  background-color: #01bbfd;
+  color: white;
+}
+
+.links li a.active {
+  background-color: #01bbfd;
+  color: white;
+}
+.links li a.active div {
+  gap: 40px;
+}
+
+.links li a div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.links li a div svg {
+  font-size: 24px;
+}
+
+.viewPage {
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 500px;
+  scrollbar-width: none;
+}
+
+.viewPage .none{
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+}
+
+@media (max-width: 640px) {
+  .main {
+    margin-top: 50px !important;
+  }
+  .viewPage {
+    background-color: transparent;
+    padding: 10px;
+  }
+
+  .links {
+    display: none;
+  }
+.links_two {
+  display: flex;
+}
+}

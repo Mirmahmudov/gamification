@@ -1,0 +1,109 @@
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 0px;
+  color: white;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #01bbfd;
+  top: 1px;
+}
+nav .logOutIcon{
+  display: none;
+}
+
+.pageTitle {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 24px;
+}
+nav .container > div {
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user span {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: black;
+  font-size: 24px;
+}
+
+.logo {
+  width: 270px;
+}
+
+.logOutBtn {
+  background-color: #ffa000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logOutBtn svg {
+  font-size: 20px;
+}
+
+@media (max-width: 640px) {
+  nav .container {
+    padding: 10px;
+  }
+  nav .logo {
+    width: 100px;
+  }
+  nav .pageTitle h1 {
+    display: none;
+  }
+  nav .logo img {
+    width: 100%;
+    object-fit: contain !important;
+  }
+
+  nav .logOutBtn {
+    display: none;
+  }
+  nav .logOutIcon{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    display: block;
+  }
+  nav .user span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background-color: #707070;
+    color: white;
+    width: 30px;
+    height: 30px;
+  }
+  nav .user .name {
+    width: 100px;
+  }
+}

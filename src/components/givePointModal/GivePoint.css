@@ -1,0 +1,81 @@
+
+.give_point .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal container */
+.give_point .modal-container {
+    background-color: white;
+    border-radius: 8px;
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+}
+
+/* Close button */
+.give_point .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #01C0FE;
+}
+
+/* Modal title */
+.give_point .modal-title {
+    font-size: 1.8rem;
+    color: #01C0FE;
+    margin-bottom: 20px;
+}
+
+/* Form group styling */
+.give_point .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.give_point .form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #FFB106;
+    margin-bottom: 5px;
+}
+
+.give_point .form-group input,
+.give_point .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Submit button */
+.give_point .submit-btn {
+    background-color: #01C0FE;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.give_point .submit-btn:hover {
+    background-color: #0093CC;
+}
