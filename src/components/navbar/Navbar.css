@@ -11,10 +11,6 @@ nav .container {
   background-color: #01bbfd;
   top: 1px;
 }
-nav .logOutIcon{
-  display: none;
-}
-
 .pageTitle {
   display: flex;
   align-items: center;
@@ -30,6 +26,68 @@ nav .container > div {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+}
+.navModal {
+  width: 400px;
+  position: absolute;
+  background-color: #161718;
+  top: 0px;
+  right: 70px;
+  padding: 15px 5px;
+  backdrop-filter: blur(150px);
+  background: white;
+  color: #161718;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.329);
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
+}
+.navModal.active {
+  transform: scale(1);
+}
+.navModal .exit {
+  font-size: 23px;
+  text-align: end;
+  cursor: pointer;
+  background-color: white;
+  margin-right: 10px;
+}
+
+.navModal .row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  gap: 10px;
+  text-transform: capitalize;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px 20px;
+  padding-left: 10px;
+  margin-left: 10px;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
+}
+.navModal .row:hover {
+  background-color: rgba(0, 0, 0, 0.068);
+}
+.navModal .row .div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.navModal .row .div h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+.navModal .row .div span {
+  height: 45px;
+  width: 45px;
+  background-color: rgba(0, 0, 0, 0.068);
+}
+.navModal .row .div span svg {
+  font-size: 20px;
 }
 
 .user span {
@@ -42,29 +100,11 @@ nav .container > div {
   border-radius: 50%;
   color: black;
   font-size: 24px;
+  cursor: pointer;
 }
 
 .logo {
   width: 270px;
-}
-
-.logOutBtn {
-  background-color: #ffa000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 20px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logOutBtn svg {
-  font-size: 20px;
 }
 
 @media (max-width: 640px) {
@@ -82,17 +122,6 @@ nav .container > div {
     object-fit: contain !important;
   }
 
-  nav .logOutBtn {
-    display: none;
-  }
-  nav .logOutIcon{
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
-    display: block;
-  }
   nav .user span {
     display: flex;
     align-items: center;
@@ -105,5 +134,43 @@ nav .container > div {
   }
   nav .user .name {
     width: 100px;
+  }
+
+  .navModal {
+    width: 260px;
+    top: 0px;
+    right: 0px;
+    padding: 10px 5px;
+    border-radius: 15px;
+  }
+  .navModal .exit {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+  .navModal .row {
+    margin-bottom: 15px;
+    gap: 5px;
+    font-size: 14px;
+    padding: 5px 10px;
+    padding-left:5px;
+    margin-left: 5px;
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  .navModal .row .div {
+    gap: 5px;
+  }
+  .navModal .row .div h3 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .navModal .row .div span {
+    height: 30px;
+    width: 30px;
+    
+  }
+  .navModal .row .div span svg {
+    font-size: 16px;
   }
 }

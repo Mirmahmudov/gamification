@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
-import { FaRegUser } from "react-icons/fa";
+import { FaChevronRight, FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LuLogOut } from "react-icons/lu";
 import { MdLogout } from "react-icons/md";
+import { CiUser } from "react-icons/ci";
+import { HiMiniXMark } from "react-icons/hi2";
+import { TiInfoLarge } from "react-icons/ti";
 
 function Navbar({ setModalOpen, userInfo }) {
-  
   const navigate = useNavigate();
+  const [userModal, setUserModal] = useState(false);
+
   return (
     <nav>
       <div className="container">
@@ -21,10 +25,15 @@ function Navbar({ setModalOpen, userInfo }) {
           <div className="name">
             {userInfo.first_name} {userInfo.last_name}
           </div>
-          <span>
+          <span
+            onClick={() => {
+              setUserModal(!userModal);
+              console.log(userModal);
+            }}
+          >
             <FaRegUser />
           </span>
-          <button
+          {/* <button
             className="logOutBtn"
             onClick={() => {
               localStorage.clear();
@@ -34,16 +43,54 @@ function Navbar({ setModalOpen, userInfo }) {
           >
             Log Out
             <MdLogout />
-          </button>
-          <button className="logOutIcon"
-            onClick={() => {
-              localStorage.clear();
-              navigate("/");
-              setModalOpen(true);
-            }}
-          >
-            <MdLogout />
-          </button>
+          </button> */}
+
+          <div className={userModal ? "navModal active " : "navModal"}>
+            <div
+              onClick={() => {
+                setUserModal(false);
+              }}
+              className="exit"
+            >
+              <HiMiniXMark />
+            </div>
+            <div className="row">
+              <div className="div">
+                <span>
+                  <FaRegUser />
+                </span>
+                <h3>shaxsiy ma'lumotlar</h3>
+              </div>
+              <FaChevronRight />
+            </div>
+
+            <div className="row">
+              <div className="div">
+                <span>
+                  <TiInfoLarge />
+                </span>
+                <h3>ilova haqida </h3>
+              </div>
+              <FaChevronRight />
+            </div>
+            <div
+              onClick={() => {
+                localStorage.clear();
+                navigate("/");
+                setModalOpen(true);
+                setUserModal(false);
+              }}
+              className="row"
+            >
+              <div className="div">
+                <span>
+                  <MdLogout />
+                </span>
+                <h3>logout</h3>
+              </div>
+              <FaChevronRight />
+            </div>
+          </div>
         </div>
       </div>
     </nav>

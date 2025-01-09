@@ -102,7 +102,10 @@ function Assessment({ courses }) {
               return <option value={item.id}>{item.name}</option>;
             })}
           </select>
-          <input className="dropdown" type="date" />
+          <input onInput={(e)=>{
+            console.log(e.target.value);
+            
+          }} className="dropdown" type="date" />
         </div>
 
         <NavLink to="/newadded" className={"recent-add"}>
