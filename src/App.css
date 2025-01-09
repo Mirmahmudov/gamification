@@ -37,9 +37,8 @@
 .links_two svg {
   font-size: 25px;
 }
-.links_two li{
+.links_two li {
   width: 21%;
-  
 }
 
 .links_two li a {
@@ -51,14 +50,13 @@
   align-items: center;
   justify-content: center;
   border: 2px solid transparent;
-
 }
 .links_two li a.active {
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e0e0e0;
 }
 
 .circle {
-  background-color: #FFB106;
+  background-color: #ffb106;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -112,7 +110,7 @@
   scrollbar-width: none;
 }
 
-.viewPage .none{
+.viewPage .none {
   color: white;
   text-align: center;
   padding-top: 50px;
@@ -125,12 +123,13 @@
   .viewPage {
     background-color: transparent;
     padding: 10px;
+    height: 100vh;
   }
 
   .links {
     display: none;
   }
-.links_two {
-  display: flex;
-}
+  .links_two {
+    display: flex;
+  }
 }
