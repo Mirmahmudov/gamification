@@ -110,7 +110,7 @@ function Student() {
 
         <div className="student_filter">
           <div className="search">
-            <input type="text" placeholder="Asadbek" />
+            <input type="text" placeholder="ism kiriting" />
             <CiSearch />
           </div>
           <div className="row">
@@ -160,6 +160,10 @@ function Student() {
             ? student
                 .sort((a, b) => b.point - a.point)
                 .map((item, index) => {
+                  const groupName = Array.isArray(groups)
+                    ? groups.find((group) => group?.id === item.group)?.name
+                    : "Mavjud emas";
+
                   return (
                     <div key={item?.id} className="student_row">
                       <div className="row">
@@ -184,17 +188,7 @@ function Student() {
                           ) : (
                             <h3>Ism mavjud emas</h3>
                           )}
-                          {groups?.find((items) => items?.id === item.group) ? (
-                            <h4>
-                              {
-                                groups?.find(
-                                  (items) => items?.id === item.group
-                                )?.name
-                              }
-                            </h4>
-                          ) : (
-                            <h4>mavjud emas</h4>
-                          )}
+                          <h4>{groupName}</h4>
                         </div>
                       </div>
                       <div className="student_point">
