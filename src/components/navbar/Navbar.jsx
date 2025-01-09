@@ -6,6 +6,7 @@ import { LuLogOut } from "react-icons/lu";
 import { MdLogout } from "react-icons/md";
 
 function Navbar({ setModalOpen, userInfo }) {
+  
   const navigate = useNavigate();
   return (
     <nav>
@@ -14,7 +15,7 @@ function Navbar({ setModalOpen, userInfo }) {
           <div className="logo">
             <img src="/imgs/logo.svg" alt="" />
           </div>
-          <h1>Dashboard</h1>
+          <h1>Gamification</h1>
         </div>
         <div className="user">
           <div className="name">

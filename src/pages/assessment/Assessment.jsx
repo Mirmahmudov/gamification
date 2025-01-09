@@ -5,6 +5,7 @@ import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 import GivePoint from "../../components/givePointModal/GivePoint";
 import { NavLink } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa";
 
 function Assessment({ courses }) {
   const [students, setStudents] = useState(null);
@@ -16,7 +17,15 @@ function Assessment({ courses }) {
   const [mentor, setMentor] = useState(null);
   const [student, setStudent] = useState(null);
 
-  const getStudents = () => {
+  useEffect(() => {
+    getStudents();
+  }, []);
+
+  // filter
+
+  const getStudents = (id) => {
+    console.log(id);
+
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -26,17 +35,13 @@ function Assessment({ courses }) {
       redirect: "follow",
     };
 
-    fetch(`${baseUrl}/students/`, requestOptions)
+    fetch(`${baseUrl}/students/?${id ? id : ""}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setStudents(result);
       })
       .catch((error) => console.error(error));
   };
-
-  useEffect(() => {
-    getStudents();
-  }, []);
 
   const givePoint = () => {
     const myHeaders = new Headers();
@@ -59,7 +64,7 @@ function Assessment({ courses }) {
       redirect: "follow",
     };
 
-    fetch(`${baseUrl}/give-points/create/`, requestOptions)
+    fetch(`${baseUrl}/give-points/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
@@ -84,9 +89,17 @@ function Assessment({ courses }) {
       />
       <header className="header">
         <div>
-          <select className="dropdown" name="" id="">
+          <select
+            onChange={(e) => {
+              getStudents(`group=${e.target.value}`);
+            }}
+            className="dropdown"
+            name=""
+            id=""
+          >
+            <option value={""}>Barchasi</option>;
             {courses?.map((item) => {
-              return <option value="">{item.name}</option>;
+              return <option value={item.id}>{item.name}</option>;
             })}
           </select>
           <input className="dropdown" type="date" />
@@ -121,16 +134,30 @@ function Assessment({ courses }) {
             return (
               <li key={index} className="student-item">
                 <div className="student-info">
-                  <div className="avatar"></div>
+                  <div className="avatar">
+                    {item?.image ? (
+                      <img src={`${baseUrl}/docs/${item?.image}`} alt="" />
+                    ) : (
+                      <FaRegUser />
+                    )}
+                  </div>
                   <div>
                     <p className="student-name">
-                      {item.user.first_name} {item.user.last_name}
+                      {item.user?.first_name || item.user?.last_name ? (
+                        <>
+                          {item.user?.first_name} {item.user?.last_name}
+                        </>
+                      ) : (
+                        <>Ism mavjud emas</>
+                      )}
                     </p>
-                    <p className="student-description">{item.bio}</p>
+                    <p className="student-description">
+                      {item.bio ? item.bio : "ma'lumot mavjud emas"}
+                    </p>
                   </div>
                 </div>
                 <div className="student-actions">
-                  <span className="xp">{item.point} XP</span>
+                  <span className="xp">{item.point ? item.point : 0} XP</span>
                   <button
                     onClick={() => {
                       setStudent(item.id);

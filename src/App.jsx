@@ -56,10 +56,7 @@ function App() {
       redirect: "follow",
     };
 
-    fetch(
-      "https://codialpoint.pythonanywhere.com/users/get-me/",
-      requestOptions
-    )
+    fetch(`${baseUrl}/users/get-me/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setRole(result.role);

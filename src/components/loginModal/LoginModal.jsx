@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./LoginModal.css";
 import { setToken } from "../../service/token";
+import { baseUrl } from "../../config";
 
 const LoginModal = ({ isOpen, onClose }) => {
   const [username, setUserName] = useState("");
@@ -22,7 +23,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       redirect: "follow",
     };
 
-    fetch("https://codialpoint.pythonanywhere.com/token/", requestOptions)
+    fetch(`${baseUrl}/token/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

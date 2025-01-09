@@ -106,11 +106,25 @@
 .avatar {
   width: 50px;
   height: 50px;
-  background-color: #ddd;
+  background-color: #afafafd8;
   border-radius: 50%;
   margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.avatar svg {
+  font-size: 20px;
+  color: white;
+}
+
+.avatar img {
+  object-fit: contain;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
 .assessment .student-name {
   margin: 0;
   font-weight: bold;
@@ -129,15 +143,13 @@
   align-items: center;
   gap: 40px;
 }
-.student-actions .btns{
-
-    display: flex;
-    align-items: center;
-    gap:  20px;
-
+.student-actions .btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
-.student-actions .btns button{
-    margin: 0px;
+.student-actions .btns button {
+  margin: 0px;
 }
 
 .xp {
