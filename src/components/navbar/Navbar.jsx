@@ -13,27 +13,29 @@ function Navbar({ setModalOpen, userInfo }) {
   const [userModal, setUserModal] = useState(false);
 
   return (
-    <nav>
-      <div className="container">
-        <div className="pageTitle">
-          <div className="logo">
-            <img src="/imgs/logo.svg" alt="" />
+    <>
+      <div className={userModal ? "modalBg active" : "modalBg"}></div>
+      <nav>
+        <div className="container">
+          <div className="pageTitle">
+            <div className="logo">
+              <img src="/imgs/logo.svg" alt="" />
+            </div>
+            <h1>Gamification</h1>
           </div>
-          <h1>Gamification</h1>
-        </div>
-        <div className="user">
-          <div className="name">
-            {userInfo.first_name} {userInfo.last_name}
-          </div>
-          <span
-            onClick={() => {
-              setUserModal(!userModal);
-              console.log(userModal);
-            }}
-          >
-            <FaRegUser />
-          </span>
-          {/* <button
+          <div className="user">
+            <div className="name">
+              {userInfo.first_name} {userInfo.last_name}
+            </div>
+            <span
+              onClick={() => {
+                setUserModal(!userModal);
+                console.log(userModal);
+              }}
+            >
+              <FaRegUser />
+            </span>
+            {/* <button
             className="logOutBtn"
             onClick={() => {
               localStorage.clear();
@@ -45,55 +47,56 @@ function Navbar({ setModalOpen, userInfo }) {
             <MdLogout />
           </button> */}
 
-          <div className={userModal ? "navModal active " : "navModal"}>
-            <div
-              onClick={() => {
-                setUserModal(false);
-              }}
-              className="exit"
-            >
-              <HiMiniXMark />
-            </div>
-            <div className="row">
-              <div className="div">
-                <span>
-                  <FaRegUser />
-                </span>
-                <h3>shaxsiy ma'lumotlar</h3>
+            <div className={userModal ? "navModal active " : "navModal"}>
+              <div
+                onClick={() => {
+                  setUserModal(false);
+                }}
+                className="exit"
+              >
+                <HiMiniXMark />
               </div>
-              <FaChevronRight />
-            </div>
+              <div className="row">
+                <div className="div">
+                  <span>
+                    <FaRegUser />
+                  </span>
+                  <h3>shaxsiy ma'lumotlar</h3>
+                </div>
+                <FaChevronRight />
+              </div>
 
-            <div className="row">
-              <div className="div">
-                <span>
-                  <TiInfoLarge />
-                </span>
-                <h3>ilova haqida </h3>
+              <div className="row">
+                <div className="div">
+                  <span>
+                    <TiInfoLarge />
+                  </span>
+                  <h3>ilova haqida </h3>
+                </div>
+                <FaChevronRight />
               </div>
-              <FaChevronRight />
-            </div>
-            <div
-              onClick={() => {
-                localStorage.clear();
-                navigate("/");
-                setModalOpen(true);
-                setUserModal(false);
-              }}
-              className="row"
-            >
-              <div className="div">
-                <span>
-                  <MdLogout />
-                </span>
-                <h3>logout</h3>
+              <div
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/");
+                  setModalOpen(true);
+                  setUserModal(false);
+                }}
+                className="row"
+              >
+                <div className="div">
+                  <span>
+                    <MdLogout />
+                  </span>
+                  <h3>logout</h3>
+                </div>
+                <FaChevronRight />
               </div>
-              <FaChevronRight />
             </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 
