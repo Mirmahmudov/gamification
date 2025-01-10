@@ -1,0 +1,215 @@
+.profilePage .profilName {
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: #1d537c;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.profilePage .navProfile {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.profilePage .navProfile .row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.profilePage .navProfile .row .images {
+  background-color: #ffb106;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profilePage .navProfile .row .images .imgs {
+  width: 95%;
+  height: 95%;
+  background-color: rgb(196, 187, 187);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+.profilePage .navProfile .row .images .imgs img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.profilePage .navProfile .row .images .imgs svg {
+  color: white;
+  font-size: 40px;
+}
+
+.profilePage .navProfile .row .userInfo {
+  color: #1d537c;
+}
+
+.profilePage .navProfile .row .userInfo h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.profilePage .navProfile .row .userInfo h5 {
+  width: 200px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.profilePage .navProfile .point {
+  font-size: 20px;
+  color: #1d537c;
+  font-weight: 600;
+}
+
+.profilePage .navProfile button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  bottom: 0px;
+  right: 0px;
+  padding: 10px 20px;
+  color: #1d537c;
+  border: 1px solid #1d537c;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.profilePage .profieInfo {
+  /* background-color: red; */
+  box-shadow: 0px 3px 50px 0px #00000014;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.profilePage .profieInfo .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.profilePage .profieInfo .row input,
+.profilePage .profieInfo .row select {
+  background-color: #fafafa;
+  border: none;
+  outline: none;
+  width: 550px;
+  color: #b3b3b3;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0px 10px 20px 0px #00000013;
+}
+
+.profilePage .profieInfo .row h4 {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #1d537c;
+}
+
+@media (max-width: 640px) {
+  .profilePage .profilName {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: white;
+    padding-top: 20px;
+  }
+
+  .profilePage .navProfile {
+    margin-bottom: 10px;
+  }
+
+  .profilePage .navProfile .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .profilePage .navProfile .row .images {
+    background-color: #ffb106;
+    width: 70px;
+    height: 70px;
+  }
+
+  .profilePage .navProfile .row .images .imgs svg {
+    color: white;
+    font-size: 30px;
+  }
+
+  .profilePage .navProfile .row .userInfo {
+    color: white;
+  }
+
+  .profilePage .navProfile .row .userInfo h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .profilePage .navProfile .row .userInfo h5 {
+    width: 150px;
+    font-size: 11px;
+  }
+
+  .profilePage .navProfile .point {
+    font-size: 18px;
+    color: white;
+  }
+
+  .profilePage .navProfile button {
+    gap: 10px;
+    bottom: 0px;
+    right: 0px;
+    padding: 5px 15px;
+    color: white;
+    border: 1px solid white;
+    background-color: transparent;
+  }
+  .profilePage .profieInfo {
+    box-shadow: 0px 3px 50px 0px #00000014;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .profilePage .profieInfo .row {
+    flex-direction: column;
+    display: flex;
+    align-items: self-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .profilePage .profieInfo .row input,
+  .profilePage .profieInfo .row select {
+    
+    
+    width: 100%;
+    color: #b3b3b3;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    
+  }
+
+  .profilePage .profieInfo .row h4 {
+    font-size: 16px;
+    
+    color: white;
+  }
+}

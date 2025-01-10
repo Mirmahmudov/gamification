@@ -149,7 +149,7 @@ function App() {
                 <NavLink to={"/"}>
                   <div>
                     <MdWhatshot />
-                    <h3>Student </h3>
+                    <h3>Leaderboard </h3>
                   </div>
                   <FaChevronRight />
                 </NavLink>
@@ -188,7 +188,7 @@ function App() {
                 <NavLink to={"/"}>
                   <div>
                     <MdWhatshot />
-                    <h3>Student </h3>
+                    <h3>Leaderboard </h3>
                   </div>
                 </NavLink>
               </li>

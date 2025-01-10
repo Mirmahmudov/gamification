@@ -5,7 +5,7 @@ nav .container {
   color: white;
   width: 100%;
   position: fixed;
-  z-index: 999;
+  z-index: 99999999;
   left: 50%;
   transform: translateX(-50%);
   background-color: #01bbfd;
@@ -28,13 +28,13 @@ nav .container > div {
   gap: 10px;
   position: relative;
 }
-.modalBg { 
+.modalBg {
   height: 100vh;
   width: 100%;
   position: fixed;
-  
+
   background-color: rgba(0, 0, 0, 0);
-  z-index: 2;
+  z-index: 9999999;
   backdrop-filter: blur(1px);
   transform: scale(0);
   transition: all 0.3s ease-in-out;
@@ -44,11 +44,11 @@ nav .container > div {
   transform: scale(1);
 }
 .navModal {
-  width: 400px;
+  width: 300px;
   position: absolute;
   background-color: #161718;
-  top: 10px;
-  right: 50px;
+  top: 50px;
+  right: 0px;
   padding: 15px 5px;
   background: white;
   color: #161718;
@@ -56,6 +56,10 @@ nav .container > div {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.329);
   transform: scale(0);
   transition: all 0.3s ease-in-out;
+}
+.navModal a {
+  color: #161718;
+  text-decoration: none;
 }
 .navModal.active {
   transform: scale(1);
@@ -92,16 +96,16 @@ nav .container > div {
   gap: 10px;
 }
 .navModal .row .div h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 }
 .navModal .row .div span {
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
   background-color: rgba(0, 0, 0, 0.068);
 }
 .navModal .row .div span svg {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .user span {
@@ -152,8 +156,8 @@ nav .container > div {
 
   .navModal {
     width: 260px;
-    top: 0px;
-    right: 40px;
+    top: 40px;
+    right: 0px;
     padding: 10px 5px;
     border-radius: 15px;
   }

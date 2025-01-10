@@ -1,25 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Navbar.css";
 import { FaChevronRight, FaRegUser } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { LuLogOut } from "react-icons/lu";
+import { Link, useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
-import { CiUser } from "react-icons/ci";
 import { HiMiniXMark } from "react-icons/hi2";
 import { TiInfoLarge } from "react-icons/ti";
 
 function Navbar({ setModalOpen, userInfo }) {
   const navigate = useNavigate();
   const [userModal, setUserModal] = useState(false);
+  const modalRef = useRef(null); // Modal uchun reference
+
+  // Modal tashqarisini bosganda yopish funksiyasi
+  const handleClickOutside = (e) => {
+    if (userModal && modalRef.current && !modalRef.current.contains(e.target)) {
+      setUserModal(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userModal]);
 
   return (
     <>
-      <div className={userModal ? "modalBg active" : "modalBg"}></div>
+      {/* Modal fon */}
+      <div
+        className={`modalBg ${userModal ? "active" : ""}`}
+        onClick={() => setUserModal(false)} // Fonga bosganda ham modal yopiladi
+      ></div>
       <nav>
         <div className="container">
           <div className="pageTitle">
             <div className="logo">
-              <img src="/imgs/logo.svg" alt="" />
+              <img src="/imgs/logo.svg" alt="logo" />
             </div>
             <h1>Gamification</h1>
           </div>
@@ -28,67 +46,61 @@ function Navbar({ setModalOpen, userInfo }) {
               {userInfo.first_name} {userInfo.last_name}
             </div>
             <span
-              onClick={() => {
-                setUserModal(!userModal);
-                console.log(userModal);
-              }}
+              onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
             >
               <FaRegUser />
             </span>
-            {/* <button
-            className="logOutBtn"
-            onClick={() => {
-              localStorage.clear();
-              navigate("/");
-              setModalOpen(true);
-            }}
-          >
-            Log Out
-            <MdLogout />
-          </button> */}
 
-            <div className={userModal ? "navModal active " : "navModal"}>
-              <div
-                onClick={() => {
-                  setUserModal(false);
-                }}
-                className="exit"
-              >
+            {/* Modal */}
+            <div
+              ref={modalRef}
+              className={`navModal ${userModal ? "active" : ""}`}
+            >
+              {/* Exit tugmasi */}
+              <div onClick={() => setUserModal(false)} className="exit">
                 <HiMiniXMark />
               </div>
-              <div className="row">
+
+              <Link
+                to="/profile"
+                className="row"
+                onClick={() => setUserModal(false)}
+              >
                 <div className="div">
                   <span>
                     <FaRegUser />
                   </span>
-                  <h3>shaxsiy ma'lumotlar</h3>
+                  <h3>Shaxsiy ma'lumotlar</h3>
                 </div>
                 <FaChevronRight />
-              </div>
+              </Link>
 
+              {/* Ilova haqida */}
               <div className="row">
                 <div className="div">
                   <span>
                     <TiInfoLarge />
                   </span>
-                  <h3>ilova haqida </h3>
+                  <h3>Ilova haqida</h3>
                 </div>
                 <FaChevronRight />
               </div>
+
+              {/* Logout */}
               <div
+                className="row"
                 onClick={() => {
                   localStorage.clear();
                   navigate("/");
                   setModalOpen(true);
                   setUserModal(false);
                 }}
-                className="row"
               >
                 <div className="div">
                   <span>
                     <MdLogout />
                   </span>
-                  <h3>logout</h3>
+                  <h3>Logout</h3>
                 </div>
                 <FaChevronRight />
               </div>
