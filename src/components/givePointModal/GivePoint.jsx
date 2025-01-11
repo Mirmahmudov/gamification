@@ -4,13 +4,12 @@ import { baseUrl } from "../../config";
 import { getToken } from "../../service/token";
 
 const GivePoint = ({
+  userInfo,
   givePoint,
   setAmount,
   setDescription,
   setDate,
   setPoint_type,
-  setMentor,
-  courses,
   isOpen,
   onClose,
 }) => {
@@ -34,6 +33,7 @@ const GivePoint = ({
   useEffect(() => {
     getPoitType();
   }, []);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,27 +96,12 @@ const GivePoint = ({
                   Select an option
                 </option>
                 {pointTypes?.map((item) => {
+
                   return (
                     <option value={item.id}>
                       {item.name} ({item.max_point}){" "}
                     </option>
                   );
-                })}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="select">Kursni tanlang</label>
-              <select
-                onChange={(e) => {
-                  setMentor(e.target.value);
-                }}
-                id="select"
-              >
-                <option value="" disabled selected>
-                  Select an option
-                </option>
-                {courses?.map((item) => {
-                  return <option value={item.id}>{item.name}</option>;
                 })}
               </select>
             </div>

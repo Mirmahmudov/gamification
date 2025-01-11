@@ -7,7 +7,7 @@ import GivePoint from "../../components/givePointModal/GivePoint";
 import { NavLink } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 
-function Assessment({ courses }) {
+function Assessment({ courses, userInfo }) {
   const [students, setStudents] = useState(null);
   const [showGivePoint, setShowGivePoint] = useState(false);
   const [amount, setAmount] = useState(null);
@@ -17,15 +17,30 @@ function Assessment({ courses }) {
   const [mentor, setMentor] = useState(null);
   const [student, setStudent] = useState(null);
 
+  const getMentor = () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${getToken()}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`${baseUrl}/mentors/get-me`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setMentor(result?.id);
+      })
+      .catch((error) => console.error(error));
+  };
+
   useEffect(() => {
     getStudents();
-  }, []);
-
-  // filter
+    getMentor();
+  }, [getToken()]);
 
   const getStudents = (id) => {
-    console.log(id);
-
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -77,13 +92,13 @@ function Assessment({ courses }) {
   return (
     <div className="assessment">
       <GivePoint
+        userInfo={userInfo}
         givePoint={givePoint}
         setAmount={setAmount}
         setDescription={setDescription}
         setDate={setDate}
         setPoint_type={setPoint_type}
         courses={courses}
-        setMentor={setMentor}
         isOpen={showGivePoint}
         onClose={() => setShowGivePoint(false)}
       />
@@ -99,13 +114,16 @@ function Assessment({ courses }) {
           >
             <option value={""}>Barchasi</option>;
             {courses?.map((item) => {
-              return <option value={item.id}>{item.name}</option>;
+              return <option value={item?.id}>{item?.name}</option>;
             })}
           </select>
-          <input onInput={(e)=>{
-            console.log(e.target.value);
-            
-          }} className="dropdown" type="date" />
+          <input
+            onInput={(e) => {
+              console.log(e.target.value);
+            }}
+            className="dropdown"
+            type="date"
+          />
         </div>
 
         <NavLink to="/newadded" className={"recent-add"}>
