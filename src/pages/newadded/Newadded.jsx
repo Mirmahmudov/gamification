@@ -5,11 +5,39 @@ import { CiSearch } from "react-icons/ci";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 import { FaRegUser } from "react-icons/fa";
+import { Autocomplete, TextField } from "@mui/material";
 
-function Newadded({ courses }) {
+function Newadded({ courses, setLoader }) {
   const [students, setStudents] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(""); // Qidiruv so'rovi uchun state
+
+  const daletStudent = (id) => {
+    setLoader(true);
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${getToken()}`);
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`${baseUrl}/students/${id}/`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        setLoader(false);
+        // O'chirilgandan keyin sahifani yangilash
+        getStudents();
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoader(false);
+      });
+  };
 
   const getStudents = (id) => {
+    setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -23,37 +51,51 @@ function Newadded({ courses }) {
       .then((response) => response.json())
       .then((result) => {
         setStudents(result);
+        setLoader(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setLoader(false);
+      });
   };
 
   useEffect(() => {
     getStudents();
   }, []);
 
+  // Filtered students based on search query
+  const filteredStudents = students?.filter((student) => {
+    const fullName =
+      (student?.user?.first_name || "").toLowerCase() +
+      " " +
+      (student?.user?.last_name || "").toLowerCase();
+    return fullName.includes(searchQuery.toLowerCase()); // Match with the search query
+  });
+
   return (
     <>
       <header className="header">
         <div>
-          <select
-            onChange={(e) => {
-              getStudents(`group=${e.target.value}`);
+          <Autocomplete
+            disablePortal
+            options={courses || []} // Kurslar ro'yxati
+            getOptionLabel={(option) =>
+              option?.name ? option.name : "Barchasi"
+            } // Kurs nomlari
+            onChange={(event, value) => {
+              // Kurs tanlanganda getStudents funksiyasiga group qiymati yuboriladi
+              getStudents(`group=${value?.id || ""}`);
             }}
-            className="dropdown"
-            name=""
-            id=""
-          >
-            <option value={""}>Barchasi</option>;
-            {courses?.map((item) => {
-              return <option value={item?.id}>{item?.name}</option>;
-            })}
-          </select>
-          <input
-            onInput={(e) => {
-              console.log(e.target.value);
-            }}
-            className="dropdown"
-            type="date"
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Kursni tanlang"
+                variant="outlined"
+              />
+            )}
+            sx={{ width: 300, margin: "0 auto" }} // Dizayn uchun uslublar
+            isOptionEqualToValue={(option, value) => option.id === value?.id}
+            className="custom-autocomplete"
           />
         </div>
 
@@ -68,40 +110,39 @@ function Newadded({ courses }) {
           <div className="search-filter">
             <div className="input_box">
               <CiSearch />
-              <input type="text" placeholder="Search" />
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+              />
             </div>
-            {/* <select name="" id="" className="gradeType">
-                    <option value="">Davomat</option>
-                    <option value="">Davomat</option>
-                    <option value="">Davomat</option>
-                    <option value="">Davomat</option>
-                  </select> */}
           </div>
         </div>
         <hr />
 
         <ul className="students-list">
-          {students?.map((item, index) => {
+          {filteredStudents?.map((item, index) => {
             return (
               <li key={index} className="student-item">
                 <div className="student-info">
                   <div className="avatar">
                     {item.image ? (
-                      <img src={`${baseUrl}/docs/${item.image}`} alt="" />
+                      <img src={`${item.image}`} alt="" />
                     ) : (
                       <FaRegUser />
                     )}
                   </div>
                   <div>
-                    <p className="student-name">
-                      {item.user?.first_name || item.user?.last_name ? (
+                    <div className="student-name">
+                      {item?.user?.first_name || item?.user?.last_name ? (
                         <h3>
-                          {item.user?.first_name} {item.user?.last_name}
+                          {item?.user?.first_name} {item?.user?.last_name}
                         </h3>
                       ) : (
                         <h3>Ism mavjud emas</h3>
                       )}
-                    </p>
+                    </div>
                     <p className="student-description">
                       {item?.bio ? item?.bio : " Bio mavjud emas"}
                     </p>
@@ -111,7 +152,14 @@ function Newadded({ courses }) {
                   <span className="xp">{item.point} XP</span>
                   <div className="btns">
                     <button className="recent-add">Tahrirlash</button>
-                    <button className="recent-add del">O’chirish</button>
+                    <button
+                      onClick={() => {
+                        daletStudent(item.id);
+                      }}
+                      className="recent-add del"
+                    >
+                      O’chirish
+                    </button>
                   </div>
                 </div>
               </li>

@@ -13,9 +13,16 @@ const GivePoint = ({
   isOpen,
   onClose,
 }) => {
-  if (!isOpen) return null;
-  const [pointTypes, setPointTypes] = useState(null);
-  const getPoitType = () => {
+  if (!isOpen) return null; // Modal faqat ochilganda render bo'ladi
+
+  const [pointTypes, setPointTypes] = useState([]);
+  const [date, setLocalDate] = useState(() => {
+    const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); // Vaqt zonasini hisobga olish
+    return today.toISOString().split("T")[0];
+  });
+
+  const getPointType = () => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -26,17 +33,23 @@ const GivePoint = ({
     };
 
     fetch(`${baseUrl}/point-types/`, requestOptions)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Serverda xatolik!");
+        }
+        return response.json();
+      })
       .then((result) => setPointTypes(result))
-      .catch((error) => console.error(error));
+      .catch((error) => console.error("Point turini olishda xatolik:", error));
   };
-  useEffect(() => {
-    getPoitType();
-  }, []);
 
+  useEffect(() => {
+    getPointType();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDate(date); // Tanlangan sanani belgilash
     givePoint();
   };
 
@@ -50,13 +63,26 @@ const GivePoint = ({
           <h2 className="modal-title">Baholash</h2>
           <form onSubmit={handleSubmit} className="custom-form">
             <div className="form-group">
+              <label htmlFor="select">Point Turi</label>
+              <select
+                onChange={(e) => setPoint_type(e.target.value)}
+                id="select"
+                defaultValue="" // Default bo'sh qiymat
+              >
+              
+                {pointTypes.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name} ({item.max_point})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
               <label htmlFor="input1">Point kiriting</label>
               <input
                 required
-                onChange={(e) => {
-                  setAmount(e.target.value);
-                }}
-                type="text"
+                onChange={(e) => setAmount(e.target.value)}
+                type="number" // Raqam kiritish uchun
                 id="input1"
                 placeholder="Enter value for point"
               />
@@ -65,9 +91,7 @@ const GivePoint = ({
               <label htmlFor="input2">Izoh</label>
               <input
                 required
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
+                onChange={(e) => setDescription(e.target.value)}
                 type="text"
                 id="input2"
                 placeholder="Enter value for description"
@@ -77,33 +101,11 @@ const GivePoint = ({
               <label htmlFor="input3">Sana</label>
               <input
                 required
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
+                value={date}
+                onChange={(e) => setLocalDate(e.target.value)}
                 type="date"
                 id="input3"
               />
-            </div>
-            <div className="form-group">
-              <label htmlFor="select">Point Turi</label>
-              <select
-                onChange={(e) => {
-                  setPoint_type(e.target.value);
-                }}
-                id="select"
-              >
-                <option value="" disabled selected>
-                  Select an option
-                </option>
-                {pointTypes?.map((item) => {
-
-                  return (
-                    <option value={item.id}>
-                      {item.name} ({item.max_point}){" "}
-                    </option>
-                  );
-                })}
-              </select>
             </div>
             <button type="submit" className="submit-btn">
               Submit

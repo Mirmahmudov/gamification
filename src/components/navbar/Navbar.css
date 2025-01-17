@@ -1,23 +1,34 @@
+.nav {
+  padding: 25px 0px;
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  background-color: #01bbfd;
+  top: 1px;
+
+
+
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  top: 0px;
+}
+
 nav .container {
   display: flex;
   justify-content: space-between;
-  padding: 25px 0px;
-  color: white;
-  width: 100%;
-  position: fixed;
-  z-index: 99;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #01bbfd;
-  top: 1px;
+  color: #17222B;
+
 }
+
 .pageTitle {
   display: flex;
   align-items: center;
   gap: 30px;
   font-size: 24px;
 }
-nav .container > div {
+
+nav .container>div {
   display: flex;
   align-items: center;
 }
@@ -28,6 +39,7 @@ nav .container > div {
   gap: 10px;
   position: relative;
 }
+
 .modalBg {
   height: 100vh;
   width: 100%;
@@ -40,9 +52,11 @@ nav .container > div {
   transition: all 0.3s ease-in-out;
   margin: 0 auto;
 }
+
 .modalBg.active {
   transform: scale(1);
 }
+
 .navModal {
   width: 300px;
   position: absolute;
@@ -57,13 +71,16 @@ nav .container > div {
   transform: scale(0);
   transition: all 0.3s ease-in-out;
 }
+
 .navModal a {
   color: #161718;
   text-decoration: none;
 }
+
 .navModal.active {
   transform: scale(1);
 }
+
 .navModal .exit {
   font-size: 23px;
   text-align: end;
@@ -87,23 +104,28 @@ nav .container > div {
   border-radius: 30px;
   transition: all 0.3s ease-in-out;
 }
+
 .navModal .row:hover {
   background-color: rgba(0, 0, 0, 0.068);
 }
+
 .navModal .row .div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .navModal .row .div h3 {
   font-size: 16px;
   font-weight: 500;
 }
+
 .navModal .row .div span {
   height: 40px;
   width: 40px;
   background-color: rgba(0, 0, 0, 0.068);
 }
+
 .navModal .row .div span svg {
   font-size: 18px;
 }
@@ -126,15 +148,22 @@ nav .container > div {
 }
 
 @media (max-width: 640px) {
+  .nav {
+    padding: 0px !important;
+  }
+
   nav .container {
     padding: 10px;
   }
+
   nav .logo {
     width: 100px;
   }
+
   nav .pageTitle h1 {
     display: none;
   }
+
   nav .logo img {
     width: 100%;
     object-fit: contain !important;
@@ -150,6 +179,7 @@ nav .container > div {
     width: 30px;
     height: 30px;
   }
+
   nav .user .name {
     width: 100px;
   }
@@ -161,6 +191,7 @@ nav .container > div {
     padding: 10px 5px;
     border-radius: 15px;
   }
+
   .navModal .exit {
     font-size: 20px;
     margin-right: 5px;
@@ -176,17 +207,21 @@ nav .container > div {
     border-radius: 20px;
     transition: all 0.3s ease-in-out;
   }
+
   .navModal .row .div {
     gap: 5px;
   }
+
   .navModal .row .div h3 {
     font-size: 16px;
     font-weight: 500;
   }
+
   .navModal .row .div span {
     height: 30px;
     width: 30px;
   }
+
   .navModal .row .div span svg {
     font-size: 16px;
   }

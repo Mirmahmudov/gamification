@@ -1,0 +1,136 @@
+.news h1 {
+  color: #333;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.new_cards a {
+  color: #00121c;
+}
+
+.news .new_box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.news .new_box:hover {
+  box-shadow: 2px 2px 20px #33333327;
+}
+
+.news .new_box:hover .imgs {
+  transform: scale(1.1);
+}
+
+.news .new_box .imgs {
+  width: 180px;
+  height: 150px;
+  background-color: #00121c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.news .new_box .imgs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news .new_box .imgs h2 {
+  color: white;
+  text-align: center;
+  font-size: 35px;
+  line-height: 25px;
+}
+
+.news .new_box .imgs h2 span {
+  color: #fa9f08;
+}
+
+.news .new_box .imgs h2 b {
+  font-size: 18px;
+}
+
+.news .new_box .new_info {
+  width: 80%;
+}
+
+.news .new_box .new_info h2 {
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+  font-size: 27px;
+}
+
+.news .new_box:hover .new_info h2 {
+  color: #fa9f08;
+}
+
+.news .new_box .new_info p {
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+  line-height: 20px;
+  font-size: 17px;
+}
+
+.news .new_box .new_info span {
+  color: #333333b9;
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  .news h1 {
+    margin: 10px 0px;
+    color: #00121c;
+  }
+
+  .news .new_box {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .news .new_box .imgs {
+    width: 100%;
+    height: 200px;
+  }
+
+  .news .new_box .imgs h2 {
+    font-size: 45px;
+  }
+
+  .news .new_box .new_info {
+    width: 100%;
+
+  }
+
+  .news .new_box .new_info h2 {
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+    font-size: 27px;
+    color: #00121c;
+
+  }
+
+  .news .new_box .new_info p {
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+    line-height: 20px;
+    font-size: 17px;
+    color: white;
+    color: #00121c;
+
+  }
+
+  .news .new_box .new_info span {
+    color: white;
+    font-size: 15px;
+    color: #333;
+
+  }
+}

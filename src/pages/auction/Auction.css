@@ -1,11 +1,14 @@
+
+
+
 .auction_data {
   text-align: center;
-}
-.auction_data {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
 }
+
 .auction_data h3 {
   color: #1d537c;
   margin-bottom: 10px;
@@ -30,6 +33,7 @@
   font-size: 20px;
   border-radius: 10px;
 }
+
 .auction_data .time {
   background-color: #ffb106;
   color: white;
@@ -44,15 +48,16 @@
 }
 
 .auction_product .cards {
-  height: 320px;
   width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  justify-content: start;
+  gap: 20px;
   scrollbar-width: none;
+
 }
+
 .auction_product h1 {
   margin: 15px 0px;
   text-transform: capitalize;
@@ -62,26 +67,40 @@
 .auction_product .card {
   width: 250px;
   padding: 10px;
-  color: #1d537c;
   border-radius: 15px;
   overflow: hidden;
-  background-color: #eef2f6;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
 }
 
-.auction_product .card img {
+.auction_product .card .images {
   width: 90%;
   height: 200px;
+  transition: all 0.3s ease-in-out;
   margin: 5px auto;
+  margin-bottom: 20px;
+
+}
+
+.auction_product .card:hover .images {
+  transform: scale(1.03);
+
+}
+
+
+.auction_product .card img {
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
-  margin-bottom: 10px;
   object-fit: contain;
 }
 
 .auction_product .card h4 {
+  color: #17222be3;
   text-align: left;
-  text-transform: capitalize;
   margin-bottom: 5px;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   padding-left: 5px;
 }
@@ -90,63 +109,94 @@
   text-align: left;
   text-transform: capitalize;
   margin-bottom: 5px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   padding-left: 5px;
+  color: #4a525e;
 }
+
 .auction_product .card h5 span {
   font-weight: 700;
 }
+
 .auction_product .card h6 {
   text-align: left;
   font-weight: 500;
   padding-left: 5px;
   text-transform: capitalize;
   margin-bottom: 5px;
-  font-size: 16px;
+  font-size: 14px;
+  color: #718096;
+
 }
 
 .auction_product .card h6 span {
   font-weight: 700;
 }
+
 .auction_point {
   text-align: end;
-  font-size: 26px;
+  font-size: 20px;
   color: #1d537c;
   margin-bottom: 10px;
 }
 
+.pageName {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .auction_point {
-    color: white;
     font-size: 18px;
   }
+
   .auction_data {
     flex-direction: column;
     gap: 20px;
     padding: 0px !important;
   }
+
   .auction_data h3 {
-    color: white;
     font-size: 12px;
   }
+
   .auction_data .date {
     width: 100% !important;
   }
 
-  .auction_data .date span{
+  .auction_data .date span {
     font-size: 16px;
-    color: white;
   }
 
-  .auction_data .time{
+  .auction_data .time {
     font-size: 40px;
   }
+
   .auction_data .div {
     width: 90%;
   }
-  .auction_product h1{
+
+  .auction_product h1 {
     font-size: 18px;
-    color: white;
+  }
+
+  .pageName {
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+    gap: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1d537c;
+    margin-bottom: 20px;
+  }
+
+  .pageName svg {
+    font-size: 20px;
+  }
+
+  .auction_product .card {
+    width: 80%;
+    margin: 0 auto;
   }
 }

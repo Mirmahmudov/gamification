@@ -212,9 +212,7 @@
   text-align: center;
 }
 
-.pageName {
-  display: none;
-}
+
 .student_imgs .imgs {
   object-fit: contain;
   overflow: hidden;
@@ -238,19 +236,7 @@
     width: 100% !important;
     height: 100% !important;
   }
-  .pageName {
-    display: flex;
-    align-items: center;
-    margin: 10px 0px;
-    gap: 50px;
-    font-size: 16px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 20px;
-  }
-  .pageName svg {
-    font-size: 20px;
-  }
+  
   .student_filter {
     flex-direction: column;
     gap: 20px;

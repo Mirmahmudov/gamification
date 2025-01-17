@@ -112,6 +112,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .avatar svg {
@@ -120,10 +121,11 @@
 }
 
 .avatar img {
-  object-fit: contain;
+  object-fit: cover;
   overflow: hidden;
   width: 100%;
   height: 100%;
+
 }
 .assessment .student-name {
   margin: 0;
@@ -191,4 +193,19 @@
 }
 .input_box svg {
   font-size: 20px;
+}
+
+.custom-autocomplete {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  
+}
+.css-1jnmu3x-MuiAutocomplete-root .MuiOutlinedInput-root {
+  padding: 0px !important;
+}
+
+.custom-autocomplete .MuiInputLabel-root {
+  top: 0px !important;
+  margin-top: -7px !important;
 }

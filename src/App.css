@@ -4,6 +4,7 @@
   margin-top: 100px !important;
   position: relative;
 }
+
 .links {
   list-style: none;
   width: 280px;
@@ -27,16 +28,20 @@
   bottom: 0px;
   display: none;
 }
+
 .links_two a {
   text-decoration: none;
   color: #01bbfd;
 }
+
 .links_two h3 {
   font-size: 11px;
 }
+
 .links_two svg {
   font-size: 25px;
 }
+
 .links_two li {
   width: 21%;
 }
@@ -51,6 +56,7 @@
   justify-content: center;
   border: 2px solid transparent;
 }
+
 .links_two li a.active {
   border: 2px solid #e0e0e0;
 }
@@ -85,6 +91,7 @@
   background-color: #01bbfd;
   color: white;
 }
+
 .links li a.active div {
   gap: 40px;
 }
@@ -106,7 +113,7 @@
   background-color: white;
   flex-grow: 1;
   overflow-y: auto;
-  height: 500px;
+  height: 80vh;
   scrollbar-width: none;
 }
 
@@ -120,15 +127,18 @@
   .main {
     margin-top: 50px !important;
   }
+
   .viewPage {
     background-color: transparent;
     padding: 10px;
     height: 100vh;
+    margin-bottom: 50px;
   }
 
   .links {
     display: none;
   }
+
   .links_two {
     display: flex;
   }

@@ -1,3 +1,19 @@
-.new_add{
-    background-color: #01C0FE;
+.new_add {
+  background-color: #01c0fe;
+}
+.custom-autocomplete {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+
+
+.custom-autocomplete .MuiOutlinedInput-root {
+  padding: 0px !important;
+}
+
+.custom-autocomplete .MuiInputLabel-root {
+  top: 0px !important;
+  margin-top: -7px !important;
 }

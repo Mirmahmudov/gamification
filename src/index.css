@@ -4,11 +4,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
+  text-decoration: none;
 }
 
 body{
-  background-color: #01BBFD;
+  background-color: #F8F8F8;
 }
 
 .container{

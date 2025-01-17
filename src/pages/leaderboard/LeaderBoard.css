@@ -1,116 +1,146 @@
 .leaderBoard .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .leaderBoard .dropdown {
-    background-color: #29b6f6;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #29b6f6;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .leaderBoard .search-input {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .leaderBoard .filter-button {
-    background-color: #e3f2fd;
-    color: #333;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #e3f2fd;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .leaderBoard .content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .leaderBoard .title {
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .students_list {
-    margin-top: 20px;
-    background-color: #ffa000;
-    padding: 20px 50px;
-    border-radius: 10px;
+  margin-top: 20px;
+  background-color: #ffa000;
+  padding: 20px 50px;
+  border-radius: 10px;
 }
 
 .leaderBoard .top-students {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .leaderBoard .student-card {
-    text-align: center;
-    color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
 }
 
 .leaderBoard .student-card:nth-child(2) .avatar {
-    width: 120px;
-    height: 120px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .leaderBoard .avatar {
-    width: 70px;
-    height: 70px;
-    background-color: #fff;
-    border-radius: 50%;
-    margin: 0 auto 10px;
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.leaderBoard .student-card:nth-child(2) svg {
+  font-size: 40px;
+}
+.leaderBoard .avatar svg {
+  color: #333;
+  font-size: 30px;
+}
+.leaderBoard .avatar .imgs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.leaderBoard .avatar .imgs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .leaderBoard .student-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .leaderBoard .student-role {
-    font-size: 0.9em;
+  font-size: 0.9em;
 }
 
 .leaderBoard .student-list {
-    background-color: #29b6f6;
-    border-radius: 10px;
-    padding: 20px 50px;
-    min-height: 400px;
-    overflow-y: auto;
+  background-color: #29b6f6;
+  border-radius: 10px;
+  padding: 20px 50px;
+  /* min-height: 400px; */
+
+  overflow-y: auto;
 }
 
 .leaderBoard .student-row {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    color: #29b6f6;
-    border-bottom: 1px solid #fff;
-    margin-bottom: 10px;
-    padding: 10px 14px;
-    border-radius: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  color: #29b6f6;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  border-radius: 5px;
 }
 
 .leaderBoard .student-row:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .leaderBoard .student-info {
-    font-size: 0.95em;
+  font-size: 0.95em;
 }
 
 .leaderBoard .student-xp {
-    font-weight: bold;
+  font-weight: bold;
 }

@@ -3,11 +3,12 @@ import "./LoginModal.css";
 import { setToken } from "../../service/token";
 import { baseUrl } from "../../config";
 
-const LoginModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, onClose, setLoader }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const getDeviceToken = () => {
+    setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -27,13 +28,18 @@ const LoginModal = ({ isOpen, onClose }) => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        
-       if (result.access) {
-         setToken(result.access);
-         onClose();
-       }
+        setLoader(false);
+
+        if (result.access) {
+          setToken(result.access);
+          onClose();
+          setLoader(false);
+        }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setLoader(false);
+      });
   };
 
   if (!isOpen) return null;

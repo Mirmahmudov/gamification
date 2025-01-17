@@ -1,1 +1,1 @@
-export const baseUrl = "https://codialpointv2.pythonanywhere.com";
+export const baseUrl = "https://codialpointv3.pythonanywhere.com";

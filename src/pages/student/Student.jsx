@@ -6,206 +6,182 @@ import { getToken } from "../../service/token";
 import { IoIosArrowBack } from "react-icons/io";
 import { baseUrl } from "../../config";
 
-function Student() {
+function Student({ setLoader }) {
   const [studentInfo, setStudentInfo] = useState();
-  const [student, setStudent] = useState();
-  const [filterData, setFilterData] = useState();
-  const [groups, setGroups] = useState();
-  const getStudentInfo = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${getToken()}`);
+  const [student, setStudent] = useState([]); // Default to empty array
+  const [filterData, setFilterData] = useState([]); // Default to empty array
+  const [groups, setGroups] = useState([]); // Default to empty array
+  const [searchTerm, setSearchTerm] = useState("");
 
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(`${baseUrl}/students/get-me/`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setStudentInfo(result);
-        console.log(result);
-      })
-      .catch((error) => console.error(error));
+  const getStudentInfo = async () => {
+    try {
+      setLoader(true);
+      const myHeaders = new Headers({
+        Authorization: `Bearer ${getToken()}`,
+      });
+      const response = await fetch(`${baseUrl}/students/get-me/`, {
+        method: "GET",
+        headers: myHeaders,
+      });
+      const result = await response.json();
+      setStudentInfo(result);
+    } catch (error) {
+      console.error("Error fetching student info:", error);
+    } finally {
+      setLoader(false);
+    }
   };
 
-  const getStudent = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${getToken()}`);
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(`${baseUrl}/students/`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setStudent(result);
-        setFilterData(result);
-        console.log(result);
-      })
-      .catch((error) => console.error(error));
+  const getStudent = async () => {
+    try {
+      setLoader(true);
+      const myHeaders = new Headers({
+        Authorization: `Bearer ${getToken()}`,
+      });
+      const response = await fetch(`${baseUrl}/students/`, {
+        method: "GET",
+        headers: myHeaders,
+      });
+      const result = await response.json();
+      setStudent(result);
+      setFilterData(result);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    } finally {
+      setLoader(false);
+    }
   };
 
-  const getGroup = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${getToken()}`);
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(`${baseUrl}/groups/`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setGroups(result);
-      })
-      .catch((error) => console.error(error));
+  const getGroup = async () => {
+    try {
+      setLoader(true);
+      const myHeaders = new Headers({
+        Authorization: `Bearer ${getToken()}`,
+      });
+      const response = await fetch(`${baseUrl}/groups/`, {
+        method: "GET",
+        headers: myHeaders,
+      });
+      const result = await response.json();
+      setGroups(result);
+    } catch (error) {
+      console.error("Error fetching groups:", error);
+    } finally {
+      setLoader(false);
+    }
   };
 
   useEffect(() => {
     getStudentInfo();
     getStudent();
     getGroup();
-  }, [getToken()]);
-
-  console.log();
-
-  // filter
-
+  }, []);
   const filterGroup = (group) => {
-    if (group == "barchasi") {
-      var filterStudent = filterData.filter((item) => {
-        return item;
-      });
-    } else {
-      var filterStudent = filterData.filter((item) => {
-        return item.group === group;
-      });
-    }
-
+    const filterStudent =
+      group === "barchasi"
+        ? filterData
+        : filterData.filter((item) => item.group === group);
     setStudent(filterStudent);
   };
 
-  var topPoints = student ? student[0]?.point : 0;
-  var userPoints = Array.isArray(student)
-    ? student.find((item) => item?.user?.id === studentInfo?.user?.id)?.point
-    : undefined;
+  const filteredStudents = student.filter((item) =>
+    `${item?.user?.first_name || ""} ${item?.user?.last_name || ""}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
-  var user = Array.isArray(student)
-    ? student.findIndex((item) => item?.user?.id === studentInfo?.user?.id)
-    : -1;
+  const topPoints = student.length > 0 ? student[0]?.point : 0;
+  const userPoints = student.find((item) => item?.user?.id === studentInfo?.user?.id)?.point || 0;
+  const userPosition = student.findIndex((item) => item?.user?.id === studentInfo?.user?.id) + 1;
+
   return (
-    <>
-      <div className="student">
-        <div className="pageName">
-          <IoIosArrowBack />
-          <h2>Leaderboards</h2>
-        </div>
+    <div className="student">
+      <div className="pageName">
+        <IoIosArrowBack />
+        <h2>Leaderboards</h2>
+      </div>
 
-        <div className="student_filter">
-          <div className="search">
-            <input type="text" placeholder="ism kiriting" />
-            <CiSearch />
-          </div>
-          <div className="row">
-            <button
-              onClick={() => {
-                filterGroup("barchasi");
-              }}
-            >
-              Barchasi
-            </button>
-            <button
-              onClick={() => {
-                filterGroup(studentInfo?.group);
-              }}
-            >
-              {Array.isArray(groups)
-                ? groups.find((items) => items?.id === studentInfo?.group)
-                    ?.name || "Guruh nomi yo'q"
-                : "Groups massiv emas"}
-            </button>
-          </div>
+      <div className="student_filter">
+        <div className="search">
+          <input
+            type="text"
+            placeholder="Ism kiriting"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <CiSearch />
         </div>
-        <div className="student_score">
-          <div className="student_position">
-            <div className="student_imgs">
-              <div className="imgs userImg">
-                {studentInfo?.image ? (
-                  <img src={`${baseUrl}/docs/${studentInfo.image}`} alt="" />
-                ) : (
-                  <FaRegUser />
-                )}
-              </div>
-              <div className="score">{userPoints - topPoints}</div>
-            </div>
-            <h2>
-              {studentInfo?.user?.first_name} {studentInfo?.user?.last_name}
-            </h2>
-            <h3>
-              {user + 1}
-              -o'rin
-            </h3>
-          </div>
-          <div className="student_point">{studentInfo?.point} XP</div>
-        </div>
-        <div className="student_col">
-          {Array.isArray(student)
-            ? student
-                .sort((a, b) => b.point - a.point)
-                .map((item, index) => {
-                  const groupName = Array.isArray(groups)
-                    ? groups.find((group) => group?.id === item.group)?.name
-                    : "Mavjud emas";
-
-                  return (
-                    <div key={item?.id} className="student_row">
-                      <div className="row">
-                        <div className="student_imgs">
-                          <div className="imgs">
-                            {item.image ? (
-                              <img
-                                src={`${baseUrl}/docs/${item.image}`}
-                                alt=""
-                              />
-                            ) : (
-                              <FaRegUser />
-                            )}
-                          </div>
-                          <div className="num">{index + 1}</div>
-                        </div>
-                        <div className="student_name">
-                          {item.user?.first_name || item.user?.last_name ? (
-                            <h3>
-                              {item.user?.first_name} {item.user?.last_name}
-                            </h3>
-                          ) : (
-                            <h3>Ism mavjud emas</h3>
-                          )}
-                          <h4>{groupName}</h4>
-                        </div>
-                      </div>
-                      <div className="student_point">
-                        {item.point ? item.point : "0"} XP <FaChevronRight />
-                      </div>
-                      <div className="student_star">
-                        <FaRegStar />
-                        <FaRegStar />
-                        <FaRegStar />
-                      </div>
-                    </div>
-                  );
-                })
-            : "O'quvchilar ro'yxati mavjud emas"}
+        <div className="row">
+          <button onClick={() => filterGroup("barchasi")}>Barchasi</button>
+          <button onClick={() => filterGroup(studentInfo?.group)}>
+            {
+              groups.find((items) => items?.id === studentInfo?.group)?.name ||
+              "Guruh nomi yo'q"
+            }
+          </button>
         </div>
       </div>
-    </>
+
+      <div className="student_score">
+        <div className="student_position">
+          <div className="student_imgs">
+            <div className="imgs userImg">
+              {studentInfo?.image ? (
+                <img src={`${baseUrl}/docs/${studentInfo.image}`} alt="" />
+              ) : (
+                <FaRegUser />
+              )}
+            </div>
+            <div className="score">{userPoints - topPoints}</div>
+          </div>
+          <h2>
+            {studentInfo?.user?.first_name} {studentInfo?.user?.last_name}
+          </h2>
+          <h3>{userPosition}-o'rin</h3>
+        </div>
+        <div className="student_point">{userPoints} XP</div>
+      </div>
+
+      <div className="student_col">
+        {filteredStudents.length > 0 ? (
+          filteredStudents
+            .sort((a, b) => b.point - a.point)
+            .map((item, index) => (
+              <div key={item?.id} className="student_row">
+                <div className="row">
+                  <div className="student_imgs">
+                    <div className="imgs">
+                      {item.image ? (
+                        <img src={`${baseUrl}/docs/${item.image}`} alt="" />
+                      ) : (
+                        <FaRegUser />
+                      )}
+                    </div>
+                    <div className="num">{index + 1}</div>
+                  </div>
+                  <div className="student_name">
+                    <h3>
+                      {item.user?.first_name || ""} {item.user?.last_name || ""}
+                    </h3>
+                    <h4>
+                      {groups.find((group) => group?.id === item.group)?.name ||
+                        "Mavjud emas"}
+                    </h4>
+                  </div>
+                </div>
+                <div className="student_point">{item.point || "0"} XP</div>
+                <div className="student_star">
+                  <FaRegStar />
+                  <FaRegStar />
+                  <FaRegStar />
+                </div>
+              </div>
+            ))
+        ) : (
+          <p>O'quvchilar ro'yxati mavjud emas</p>
+        )}
+      </div>
+    </div>
   );
 }
 

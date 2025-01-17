@@ -28,81 +28,69 @@ function Navbar({ setModalOpen, userInfo }) {
 
   return (
     <>
-      {/* Modal fon */}
+
       <div
         className={`modalBg ${userModal ? "active" : ""}`}
         onClick={() => setUserModal(false)} // Fonga bosganda ham modal yopiladi
       ></div>
-      <nav>
-        <div className="container">
-          <div className="pageTitle">
-            <div className="logo">
-              <img src="/imgs/logo.svg" alt="logo" />
-            </div>
-            <h1>Gamification</h1>
-          </div>
-          <div className="user">
-            <div className="name">
-              {userInfo.first_name} {userInfo.last_name}
-            </div>
-            <span
-              onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
-            >
-              <FaRegUser />
-            </span>
+      <nav >
 
-            {/* Modal */}
-            <div
-              ref={modalRef}
-              className={`navModal ${userModal ? "active" : ""}`}
-            >
-              {/* Exit tugmasi */}
-              <div onClick={() => setUserModal(false)} className="exit">
-                <HiMiniXMark />
+        <div className="nav">
+          <div className="container">
+            <div className="pageTitle">
+              <div className="logo">
+                <img src="/imgs/logo.svg" alt="logo" />
               </div>
-
-              <Link
-                to="/profile"
-                className="row"
-                onClick={() => setUserModal(false)}
+              <h1>Gamification</h1>
+            </div>
+            <div className="user">
+              <div className="name">
+                {userInfo.first_name} {userInfo.last_name}
+              </div>
+              <span
+                onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
               >
-                <div className="div">
-                  <span>
-                    <FaRegUser />
-                  </span>
-                  <h3>Shaxsiy ma'lumotlar</h3>
-                </div>
-                <FaChevronRight />
-              </Link>
+                <FaRegUser />
+              </span>
 
-              {/* Ilova haqida */}
-              <div className="row">
-                <div className="div">
-                  <span>
-                    <TiInfoLarge />
-                  </span>
-                  <h3>Ilova haqida</h3>
-                </div>
-                <FaChevronRight />
-              </div>
-
-              {/* Logout */}
+              {/* Modal */}
               <div
-                className="row"
-                onClick={() => {
-                  localStorage.clear();
-                  navigate("/");
-                  setModalOpen(true);
-                  setUserModal(false);
-                }}
+                ref={modalRef}
+                className={`navModal ${userModal ? "active" : ""}`}
               >
-                <div className="div">
-                  <span>
-                    <MdLogout />
-                  </span>
-                  <h3>Logout</h3>
+                {/* Exit tugmasi */}
+                <div onClick={() => setUserModal(false)} className="exit">
+                  <HiMiniXMark />
                 </div>
-                <FaChevronRight />
+                {/* Ilova haqida */}
+                <div className="row">
+                  <div className="div">
+                    <span>
+                      <TiInfoLarge />
+                    </span>
+                    <h3>Ilova haqida</h3>
+                  </div>
+                  <FaChevronRight />
+                </div>
+
+                {/* Logout */}
+                <div
+                  className="row"
+                  onClick={() => {
+                    localStorage.clear();
+                    navigate("/");
+                    setModalOpen(true);
+                    setUserModal(false);
+                  }}
+                >
+                  <div className="div">
+                    <span>
+                      <MdLogout />
+                    </span>
+                    <h3>Logout</h3>
+                  </div>
+                  <FaChevronRight />
+                </div>
               </div>
             </div>
           </div>
