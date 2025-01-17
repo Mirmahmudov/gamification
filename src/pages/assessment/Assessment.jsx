@@ -19,6 +19,18 @@ function Assessment({ courses, userInfo, setLoader }) {
   const [student, setStudent] = useState(null);
   const [searchQuery, setSearchQuery] = useState(""); // Qidiruv query
 
+  // Bugungi sanani olish
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0]; // YYYY-MM-DD formatida qaytaradi
+  };
+
+  useEffect(() => {
+    setDate(getCurrentDate()); // page load bo'lganda, sana defaultini qo'shamiz
+    getStudents();
+    getMentor();
+  }, [getToken()]);
+
   const getMentor = () => {
     setLoader(true);
     const myHeaders = new Headers();
@@ -41,11 +53,6 @@ function Assessment({ courses, userInfo, setLoader }) {
         setLoader(false);
       });
   };
-
-  useEffect(() => {
-    getStudents();
-    getMentor();
-  }, [getToken()]);
 
   const getStudents = (id) => {
     setLoader(true);
@@ -89,7 +96,7 @@ function Assessment({ courses, userInfo, setLoader }) {
     const raw = JSON.stringify({
       amount,
       description,
-      date,
+      date, // Default sana shu yerda yuboriladi
       mentor,
       student,
       point_type,
@@ -129,20 +136,19 @@ function Assessment({ courses, userInfo, setLoader }) {
         onClose={() => setShowGivePoint(false)}
       />
       <header className="header">
-
         <div>
           <Autocomplete
             disablePortal
-            options={courses && Array.isArray(courses) ? courses : []} // courses array bo'lishini tekshirish
-            getOptionLabel={(option) => option?.name || ""} // option?.name bo'lishini tekshirib, bo'sh qiymatni oldini olish
+            options={courses && Array.isArray(courses) ? courses : []}
+            getOptionLabel={(option) => option?.name || ""}
             sx={{ width: 300, padding: "0px" }}
             onChange={(event, value) => {
-              getStudents(`group=${value?.id || ""}`); // Agar value bo'sh bo'lsa, default qiymat sifatida "" yuboriladi
+              getStudents(`group=${value?.id || ""}`);
             }}
             renderInput={(params) => (
               <TextField {...params} label="Kursni tanlang" />
             )}
-            isOptionEqualToValue={(option, value) => option?.id === value?.id} // ikkalasi teng bo'lishi kerak
+            isOptionEqualToValue={(option, value) => option?.id === value?.id}
             className="custom-autocomplete"
           />
         </div>

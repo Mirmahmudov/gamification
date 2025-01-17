@@ -27,7 +27,7 @@ const LoginModal = ({ isOpen, onClose, setLoader }) => {
     fetch(`${baseUrl}/token/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        
         setLoader(false);
 
         if (result.access) {

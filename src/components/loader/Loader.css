@@ -1,12 +1,61 @@
-.loader {
-  width: 100%;
+/* Container uchun uslublar */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-color: red;
+  width: 100%;
+  background-color: #f0f0f0;
+  overflow: hidden;
   position: fixed;
-  z-index: 999999999999;
   top: 0px;
   left: 0px;
+  z-index: 99999999999;
+}
+
+/* Loader uchun 3D animatsiya */
+.loader {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center   ;
+  width: 80px;
+  height: 80px;
+  perspective: 1000px;
+  /* 3D effektini yaratish */
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+/* 3D effekti va animatsiya */
+.dot1 {
+  animation-delay: 0s;
+}
+
+.dot2 {
+  animation-delay: 0.2s;
+}
+
+.dot3 {
+  animation-delay: 0.4s;
+}
+
+/* Bouncing animatsiyasi */
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.7);
+  }
+
+  50% {
+    transform: translateY(-30px);
+    box-shadow: 0 0 40px rgba(52, 152, 219, 0.8);
+  }
 }

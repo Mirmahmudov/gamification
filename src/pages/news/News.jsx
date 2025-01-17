@@ -47,8 +47,8 @@ function News({ setLoader }) {
         <h1>yangiliklar</h1>
         <div className="new_cards">
           {
-            newData?.map((item) => {
-              return <Link to={`/newread/${item?.id}`} className="new_box">
+            newData?.map((item, index) => {
+              return <Link key={index} to={`/newread/${item?.id}`} className="new_box">
                 <div className="imgs">
                   {
                     item.image ? <img src={item.image} alt="" /> : <h2>codi<span>a</span>l <br />

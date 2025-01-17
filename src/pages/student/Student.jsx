@@ -147,7 +147,7 @@ function Student({ setLoader }) {
           filteredStudents
             .sort((a, b) => b.point - a.point)
             .map((item, index) => (
-              <div key={item?.id} className="student_row">
+              <div key={index} className="student_row">
                 <div className="row">
                   <div className="student_imgs">
                     <div className="imgs">

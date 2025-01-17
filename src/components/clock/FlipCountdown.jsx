@@ -3,6 +3,7 @@ import './FlipCountdown.css';
 
 function FlipCountdown({ targetTime }) {
     const [timeLeft, setTimeLeft] = useState(0); // vaqtni saqlash uchun
+    const [initialRender, setInitialRender] = useState(true); // Sahifa boshlanganda animatsiyani to'xtatish
 
     const flipAllCards = (time) => {
         const seconds = Math.floor(time % 60);
@@ -21,6 +22,8 @@ function FlipCountdown({ targetTime }) {
     };
 
     const flip = (flipCard, newNumber) => {
+        if (!flipCard) return;  // Agar flipCard mavjud bo'lmasa, xatolikdan saqlanish
+
         const top = flipCard.querySelector('.top');
         const bottom = flipCard.querySelector('.bottom');
         const startNumber = flipCard.querySelector('.top').textContent;
@@ -41,25 +44,36 @@ function FlipCountdown({ targetTime }) {
             flipCard.classList.remove('flip');
         });
 
-        flipCard.classList.add('flip');
+        if (!initialRender) {
+            flipCard.classList.add('flip');
+        }
     };
 
     useEffect(() => {
         const targetDate = new Date(targetTime);  // Target date
+        const currentTime = new Date().getTime();
+        let totalTime = Math.ceil((targetDate - currentTime) / 1000);
+
+        // Initially set the time
+        setTimeLeft(totalTime);  // Set the initial time
+        flipAllCards(totalTime);  // Update the flip effect immediately
+
+        // Prevent animations on initial render
+        setInitialRender(false); // Allow animations after the first render
 
         const interval = setInterval(() => {
             const currentTime = new Date().getTime();
-            const totalTime = Math.ceil((targetDate - currentTime) / 1000);
+            const remainingTime = Math.ceil((targetDate - currentTime) / 1000);
 
-            if (totalTime <= 0) {
+            if (remainingTime <= 0) {
                 clearInterval(interval);
                 setTimeLeft(0);  // End countdown if time is over
             } else {
-                setTimeLeft(totalTime); // Update the remaining time
+                setTimeLeft(remainingTime); // Update the remaining time
             }
 
-            flipAllCards(totalTime);  // Update the flip effect
-        }, 250);
+            flipAllCards(remainingTime);  // Update the flip effect
+        }, 1000);  // Change interval to 1000ms for smoother updates
 
         return () => {
             clearInterval(interval);
