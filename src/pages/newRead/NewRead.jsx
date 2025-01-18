@@ -31,9 +31,32 @@ function NewRead({ setLoader }) {
                 setLoader(false)
             });
     }
+
+    const readNews = () => {
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer  ${getToken()}`);
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch(`${baseUrl}/news/${id}/mark-as-read/`, requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result)
+            })
+            .catch((error) => console.error(error));
+
+    }
+
+
     useEffect(() => {
         getOneNews()
+        readNews()
     }, [])
+
 
 
     function formatDate(createdAt) {

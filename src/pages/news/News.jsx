@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 
-function News({ setLoader }) {
+function News({ getNewsStatus, setLoader, allNewsStatus }) {
   const [newData, setNewData] = useState()
   const getNews = () => {
     setLoader(true)
@@ -22,12 +22,16 @@ function News({ setLoader }) {
       .then((result) => {
         setNewData(result)
         setLoader(false)
+
       })
       .catch((error) => {
         console.error(error)
         setLoader(false)
       });
   }
+
+
+
 
   function formatDate(createdAt) {
     const date = new Date(createdAt);
@@ -40,6 +44,7 @@ function News({ setLoader }) {
 
   useEffect(() => {
     getNews()
+    getNewsStatus()
   }, [getToken])
   return (
     <>
@@ -48,7 +53,9 @@ function News({ setLoader }) {
         <div className="new_cards">
           {
             newData?.map((item, index) => {
-              return <Link key={index} to={`/newread/${item?.id}`} className="new_box">
+              console.log();
+
+              return <Link key={index} to={`/newread/${item?.id}`} className={allNewsStatus?.unread_news_ids.includes(item.id) ? "new_box active " : "new_box "} >
                 <div className="imgs">
                   {
                     item.image ? <img src={item.image} alt="" /> : <h2>codi<span>a</span>l <br />

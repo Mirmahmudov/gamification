@@ -35,6 +35,31 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [mentorInfo, setMentorInfo] = useState()
   const [mentorId, setMentorId] = useState()
+  const [allNewsStatus, setAllNewsStatus] = useState()
+
+
+  const getNewsStatus = () => {
+    setLoader(true)
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer  ${getToken()}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    fetch(`${baseUrl}/news/get-read-status/`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setAllNewsStatus(result)
+        setLoader(false)
+      })
+      .catch((error) => {
+        console.error(error)
+        setLoader(false)
+      });
+  }
 
   const getMentorInfo = () => {
     setLoader(true)
@@ -111,6 +136,7 @@ function App() {
   useEffect(() => {
     userRole();
     getMentorInfo()
+    getNewsStatus()
   }, [getToken()]);
 
   useEffect(() => {
@@ -134,7 +160,7 @@ function App() {
           setLoader={setLoader}
           onClose={() => setModalOpen(false)}
         />
-        {role ? <Navbar setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
+        {role ? <Navbar allNewsStatus={allNewsStatus} setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
 
         {role == "mentor" ? (
           <div className="main container">
@@ -249,7 +275,7 @@ function App() {
                   path="/leaderboard"
                   element={<Students setLoader={setLoader} />}
                 />
-                <Route path="/news" element={<News setLoader={setLoader} />} />
+                <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
 
                 <Route
                   path="/auction"
@@ -343,7 +369,7 @@ function App() {
             </ul>
             <div className="viewPage">
               <Routes>
-                <Route path="/news" element={<News setLoader={setLoader} />} />
+                <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus}  setLoader={setLoader} />} />
                 <Route
                   path="/profile"
                   element={<Profile setLoader={setLoader} />}

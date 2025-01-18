@@ -9,11 +9,12 @@ import { IoIosNotifications } from "react-icons/io";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 
-function Navbar({ setLoader, setModalOpen, userInfo }) {
+function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
   const navigate = useNavigate();
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef(null);
   const [studentInfo, setStudentInfo] = useState(null);
+
 
 
   const getStudentInfo = () => {
@@ -47,7 +48,7 @@ function Navbar({ setLoader, setModalOpen, userInfo }) {
   useEffect(() => {
     getStudentInfo();
   }, []);
-  
+
   const handleClickOutside = (e) => {
     if (userModal && modalRef.current && !modalRef.current.contains(e.target)) {
       setUserModal(false);
@@ -61,6 +62,8 @@ function Navbar({ setLoader, setModalOpen, userInfo }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [userModal]);
+
+  
 
   return (
     <>
@@ -80,7 +83,8 @@ function Navbar({ setLoader, setModalOpen, userInfo }) {
               <h1>Gamification</h1>
             </div>
             <div className="user">
-              <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications /> <b>10</b> </span>
+              <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />
+                <b>{allNewsStatus?.num_unread_news}</b> </span>
               </Link>
               <span
                 onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
