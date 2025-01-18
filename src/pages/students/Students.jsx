@@ -8,7 +8,8 @@ function Students({ setLoader }) {
     const [studentList, setStudentList] = useState([]);
     const [filterData, setFilterData] = useState([]);
     const [groups, setGroups] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(''); // Qidiruv uchun holat
+    const [searchTerm, setSearchTerm] = useState('');
+    const [isLargeScreen, setIsLargeScreen] = useState(false);
 
     const getStudent = () => {
         setLoader(true);
@@ -62,27 +63,55 @@ function Students({ setLoader }) {
         getGroup();
     }, []);
 
+    useEffect(() => {
+        // Detect screen size
+        const handleResize = () => {
+            if (window.innerWidth > 700) {
+                setIsLargeScreen(true);
+            } else {
+                setIsLargeScreen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial check
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const handleSearch = (event) => {
-        const query = event.target.value.toLowerCase(); // Qidiruvni kichik harflarda qilish
+        const query = event.target.value.toLowerCase();
         setSearchTerm(query);
 
         const filteredStudents = filterData.filter((student) => {
             const name =
                 (student?.user?.first_name || '') + ' ' + (student?.user?.last_name || '');
-            return name.toLowerCase().includes(query); // Faqat ismlar bo'yicha qidiruv
+            return name.toLowerCase().includes(query);
         });
-        setStudentList(filteredStudents); // Filtrlangan ro'yxatni o'rnatish
+        setStudentList(filteredStudents);
     };
 
     const filterGroup = (group) => {
         if (group === 'barchasi') {
-            setStudentList(filterData); // Barcha o'quvchilarni qaytarish
+            setStudentList(filterData);
         } else {
             const filteredStudents = filterData.filter(
                 (item) => item.group === parseInt(group, 10)
             );
-            setStudentList(filteredStudents); // Guruh bo'yicha filtrlangan ro'yxat
+            setStudentList(filteredStudents);
         }
+    };
+
+    const reorderTopStudents = () => {
+        if (isLargeScreen && studentList.length > 1) {
+            const reordered = [...studentList];
+            const temp = reordered[0];
+            reordered[0] = reordered[1];
+            reordered[1] = temp;
+            return reordered;
+        }
+        return studentList;
     };
 
     return (
@@ -90,14 +119,17 @@ function Students({ setLoader }) {
             <div className="students">
                 <div className="topStudents">
                     <div className="row">
-                        {Array.isArray(studentList) && studentList.length > 0
-                            ? studentList.slice(0, 3).map((item, index) => {
+                        {Array.isArray(reorderTopStudents()) && reorderTopStudents().length > 0
+                            ? reorderTopStudents().slice(0, 3).map((item, index) => {
                                 const groupName = Array.isArray(groups)
                                     ? groups.find((group) => group?.id === item.group)?.name
                                     : 'Mavjud emas';
 
                                 return (
-                                    <div key={index} className="col">
+                                    <div
+                                        key={index}
+                                        className={`col top-student-${index}`}
+                                    >
                                         <div className="Crown">
                                             <FaCrown />
                                         </div>
@@ -119,7 +151,7 @@ function Students({ setLoader }) {
                                                             ({groupName ? groupName : 'guruh mavjud emas'})
                                                         </h3>
                                                         <div className="pointRow">
-                                                            <span className="number">{index + 1}</span>
+                                                            <span className="number">{}</span>
                                                             <span className="point">{item?.point} XP</span>
                                                         </div>
                                                     </>
@@ -130,7 +162,7 @@ function Students({ setLoader }) {
                                                             ({groupName ? groupName : 'guruh mavjud emas'})
                                                         </h3>
                                                         <div className="pointRow">
-                                                            <span className="number">{index + 1}</span>
+                                                            <span className="number">{}</span>
                                                             <span className="point">{item?.point} XP</span>
                                                         </div>
                                                     </>

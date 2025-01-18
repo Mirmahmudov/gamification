@@ -38,17 +38,18 @@
 }
 
 .students .topStudents .col:nth-child(1) .Crown {
-
-  color: #f0c02d;
+  font-size: 30px;
+  color: #8D8D8D;
 }
 
 .students .topStudents .col:nth-child(2) .Crown {
 
-  color: #8D8D8D;
+  color: #f0c02d;
+
 }
 
 .students .topStudents .col:nth-child(3) .Crown {
-
+  font-size: 30px;
   color: #9C5020;
 }
 
@@ -61,12 +62,25 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-  border: 5px solid #F0C02D;
+  border: 5px solid #8D8D8D;
+
   overflow: hidden;
 }
 
+.students .topStudents .col:nth-child(1) .number::after {
+  content: "2";
+}
+
+.students .topStudents .col:nth-child(2) .number::after {
+  content: "1";
+}
+
+.students .topStudents .col:nth-child(3) .number::after {
+  content: "3";
+}
+
 .students .topStudents .col:nth-child(2) .imgs {
-  border: 5px solid #8D8D8D;
+  border: 5px solid #F0C02D;
 }
 
 .students .topStudents .col:nth-child(3) .imgs {
@@ -284,6 +298,14 @@
 
   .students .topStudents .col .Crown {
     display: none;
+  }
+
+  .students .topStudents .col:nth-child(1) .imgs {
+    border: 5px solid #F0C02D;
+  }
+
+  .students .topStudents .col:nth-child(2) .imgs {
+    border: 5px solid #8D8D8D;
   }
 
   .students .topStudents .col .topStudentInfo {

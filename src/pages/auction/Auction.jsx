@@ -97,7 +97,7 @@ function Auction({ setLoader }) {
           {memoizedCountdown}
         </div>
         <div className="div">
-          <h3>Sana va vaqt va manzil</h3>
+          <h3>Sana va vaqt</h3>
           <div className="date">
             <span>{formattedDate}</span> <span>{formattedTime}</span>
           </div>

@@ -111,13 +111,12 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  gap: 20px;
 
 }
 
 .profilePage .profieInfo .row .col {
   /* box-shadow: 2px 2px 2px; */
-  width: 50%;
+  width: 48%;
   padding: 0px 20px;
 
 }
@@ -137,7 +136,12 @@
   color: #434D54;
   font-weight: 600;
   font-size: 18px;
-
+  width: 100%;
+  border: 1px solid #E1E5E8;
+  background-color: #F5F7FA;
+  padding: 5px 10px ;
+  border-radius: 5px;
+  user-select: none;
 
 }
 
