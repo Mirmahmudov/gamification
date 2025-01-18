@@ -183,6 +183,53 @@ function App() {
                 </NavLink>
               </li>
             </ul>
+            <ul className="links_two">
+              <li>
+                <NavLink to={"/"}>
+                  <div>
+                    <RiDashboardLine />
+                    <h3>Dashboard</h3>
+                  </div>
+                 
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/assessment"}>
+                  <div>
+                    <MdOutlineAssessment />
+                    <h3>Baholash</h3>
+                  </div>
+                 
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/news"}>
+                  <div>
+                    <MdOutlineWatchLater />
+                    <h3>Yangiliklar</h3>
+                  </div>
+                 
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/leaderboard"}>
+                  <div>
+                    <MdOutlineLeaderboard />
+                    <h3>Leaderboard</h3>
+                  </div>
+                 
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/auction"}>
+                  <div>
+                    <RiAuctionLine />
+                    <h3>Auksion</h3>
+                  </div>
+                 
+                </NavLink>
+              </li>
+            </ul>
             <div className="viewPage">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
@@ -198,7 +245,7 @@ function App() {
                 />
                 <Route
                   path="/leaderboard"
-                  element={<LeaderBoard setLoader={setLoader} />}
+                  element={<Students setLoader={setLoader} />}
                 />
                 <Route path="/news" element={<News setLoader={setLoader} />} />
 
@@ -307,7 +354,9 @@ function App() {
                   path="/auction"
                   element={<Auction setLoader={setLoader} />}
                 />
-                <Route path="/" element={<Students setLoader={setLoader} />} />
+                <Route path="/"
+                  element={<Students setLoader={setLoader} />}
+                />
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
 
               </Routes>

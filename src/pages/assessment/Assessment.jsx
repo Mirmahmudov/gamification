@@ -19,11 +19,11 @@ function Assessment({ courses, userInfo, setLoader }) {
   const [student, setStudent] = useState(null);
   const [searchQuery, setSearchQuery] = useState(""); // Qidiruv query
 
-  // Bugungi sanani olish
   const getCurrentDate = () => {
     const today = new Date();
-    return today.toISOString().split('T')[0]; // YYYY-MM-DD formatida qaytaradi
+    return today.toISOString().split('T')[0];
   };
+  console.log(mentor);
 
   useEffect(() => {
     setDate(getCurrentDate()); // page load bo'lganda, sana defaultini qo'shamiz
@@ -146,7 +146,7 @@ function Assessment({ courses, userInfo, setLoader }) {
               getStudents(`group=${value?.id || ""}`);
             }}
             renderInput={(params) => (
-              <TextField {...params} label="Kursni tanlang" />
+              <TextField {...params} label="Barcha guruhlar" />
             )}
             isOptionEqualToValue={(option, value) => option?.id === value?.id}
             className="custom-autocomplete"
@@ -154,7 +154,7 @@ function Assessment({ courses, userInfo, setLoader }) {
         </div>
 
         <NavLink to="/newadded" className={"recent-add"}>
-          Yaqinda qo'shildi
+          Baholangan o'quvchilar
         </NavLink>
       </header>
 

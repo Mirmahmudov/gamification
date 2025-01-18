@@ -89,7 +89,7 @@ function Newadded({ courses, setLoader }) {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Kursni tanlang"
+                label=" Barcha guruhlar"
                 variant="outlined"
               />
             )}

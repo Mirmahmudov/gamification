@@ -1,12 +1,3 @@
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .timaPage {
     width: 100%;
     color: #1d537c;
@@ -15,6 +6,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: Arial, Helvetica, sans-serif !important;
+
 }
 
 
@@ -35,6 +28,8 @@
     height: 0.75em;
     line-height: 1;
     overflow: hidden;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .top,
@@ -43,6 +38,8 @@
     border-top-left-radius: 0.1em;
     border-top-right-radius: 0.1em;
     border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .bottom,
@@ -52,6 +49,8 @@
     background-color: white;
     border-bottom-left-radius: 0.1em;
     border-bottom-right-radius: 0.1em;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .flip-card.flip::before {
@@ -63,6 +62,8 @@
     transform-origin: bottom;
     animation: flip-bottom 500ms ease;
     backface-visibility: hidden;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 @keyframes flip-bottom {
@@ -81,6 +82,9 @@
     animation: flip-top 500ms ease;
     transform: rotateX(180deg);
     backface-visibility: hidden;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 @keyframes flip-top {
@@ -91,13 +95,21 @@
 
 .timaPage .countdown-container {
     display: flex;
-    gap: 0.5em;
+    gap: 0.5em; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .countdown-cards {
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .card-title {
@@ -106,9 +118,13 @@
     margin-bottom: .5em;
     color: rgb(29, 27, 27);
     text-transform: uppercase;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .card-container {
     display: flex;
     gap: 0.125em;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
