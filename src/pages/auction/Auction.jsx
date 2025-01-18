@@ -101,7 +101,6 @@ function Auction({ setLoader }) {
           <div className="date">
             <span>{formattedDate}</span> <span>{formattedTime}</span>
           </div>
-          <h3>{auctionData?.description}</h3>
         </div>
       </div>
       <div className="auction_product">

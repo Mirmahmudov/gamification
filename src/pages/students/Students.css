@@ -1,3 +1,8 @@
+.students {
+  width: 100%;
+
+}
+
 .students .topStudents {
   margin-bottom: 20px;
 }
@@ -126,9 +131,11 @@
 
 /* studentTable */
 .studentTable {
+  width: 100% !important;
   border-radius: 5px;
   max-height: 400px;
   overflow: auto;
+  position: relative;
 }
 
 .studentTable::-webkit-scrollbar {
@@ -166,6 +173,7 @@
 .studentTable thead tr {
   position: sticky;
   top: 0;
+  left: 0px;
 
   background-color: white;
 }
@@ -206,6 +214,11 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 99;
+  background-color: white;
 
 }
 
@@ -248,7 +261,7 @@
 
 @media (max-width: 640px) {
 
-  .students .topStudents {}
+
 
   .students .topStudents .row {
     align-items: self-start;
@@ -361,7 +374,7 @@
     border: none;
     font-size: 14px;
     padding: 8px;
-    
+
   }
 
 

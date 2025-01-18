@@ -1,17 +1,53 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Navbar.css";
-import { FaChevronRight, FaRegUser } from "react-icons/fa";
+import { FaChevronRight, FaRegUser, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 import { HiMiniXMark } from "react-icons/hi2";
 import { TiInfoLarge } from "react-icons/ti";
+import { IoIosNotifications } from "react-icons/io";
+import { getToken } from "../../service/token";
+import { baseUrl } from "../../config";
 
-function Navbar({ setModalOpen, userInfo }) {
+function Navbar({ setLoader, setModalOpen, userInfo }) {
   const navigate = useNavigate();
   const [userModal, setUserModal] = useState(false);
-  const modalRef = useRef(null); // Modal uchun reference
+  const modalRef = useRef(null);
+  const [studentInfo, setStudentInfo] = useState(null);
 
-  // Modal tashqarisini bosganda yopish funksiyasi
+
+  const getStudentInfo = () => {
+    setLoader(true);
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${getToken()}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`${baseUrl}/students/get-me/`, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch student info");
+        }
+        return response.json();
+      })
+      .then((result) => {
+        setStudentInfo(result);
+        setLoader(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoader(false);
+      });
+  };
+
+  useEffect(() => {
+    getStudentInfo();
+  }, []);
+  
   const handleClickOutside = (e) => {
     if (userModal && modalRef.current && !modalRef.current.contains(e.target)) {
       setUserModal(false);
@@ -38,19 +74,18 @@ function Navbar({ setModalOpen, userInfo }) {
         <div className="nav">
           <div className="container">
             <div className="pageTitle">
-              <div className="logo">
+              <Link to={"/"} className="logo">
                 <img src="/imgs/logo.svg" alt="logo" />
-              </div>
+              </Link>
               <h1>Gamification</h1>
             </div>
             <div className="user">
-              <div className="name">
-                {userInfo.first_name} {userInfo.last_name}
-              </div>
+              <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications /> <b>10</b> </span>
+              </Link>
               <span
                 onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
               >
-                <FaRegUser />
+                <FaUser />
               </span>
 
               {/* Modal */}
@@ -62,6 +97,26 @@ function Navbar({ setModalOpen, userInfo }) {
                 <div onClick={() => setUserModal(false)} className="exit">
                   <HiMiniXMark />
                 </div>
+
+                <div className="row">
+                  <Link onClick={() => {
+                    setUserModal(false);
+                  }} to={"/profile"} className="div">
+                    <span className="navUserImg">
+                      {/* <TiInfoLarge /> */}
+                      {studentInfo?.image ? (
+                        <img src={studentInfo?.image} alt="" />
+
+                      ) : (
+                        <FaUser />
+                      )}
+                    </span>
+                    <h3> {userInfo.first_name} {userInfo.last_name} </h3>
+                  </Link>
+                  <FaChevronRight />
+                </div>
+                <hr />
+
                 {/* Ilova haqida */}
                 <div className="row">
                   <div className="div">

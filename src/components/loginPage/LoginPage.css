@@ -1,0 +1,177 @@
+
+
+.user_login_pages .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: #FEF6EF;
+
+}
+
+.user_login_pages .loginPage {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 200px;
+}
+
+.user_login_pages .loginPage .info {
+    width: 540px;
+    text-align: center;
+    padding: 40px;
+}
+
+.user_login_pages .loginPage .info h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #424242;
+}
+
+.user_login_pages .loginPage .row {
+    padding: 15px 20px;
+    width: 380px;
+    text-align: left;
+    border: 1px solid #757575;
+    border-radius: 60px;
+    margin: auto;
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.user_login_pages .loginPage .row input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+}
+
+.user_login_pages .loginPage .row>img {
+    width: 22px;
+    height: 22px;
+}
+
+.user_login_pages .loginPage .row h5 {
+    position: absolute;
+    background-color: #FEF6EF;
+    color: #757575;
+    font-weight: 500;
+    padding: 5px 7px;
+    border-radius: 30px;
+    top: -14px;
+    left: 45px;
+    font-size: 16px;
+}
+
+.user_login_pages .loginPage .row .eye {
+    /* margin-left: 90px; */
+    position: absolute;
+    right: 15px;
+
+}
+
+.user_login_pages .loginPage .info h4 {
+    color: #616161;
+    text-align: right;
+    margin-right: 35px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.user_login_pages .loginPage .info button {
+    color: #92613A;
+    background-color: #FCE2CE;
+    padding: 15px 170px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.user_login_pages .loginPage .icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    margin: 20px 0px;
+}
+
+.user_login_pages .loginPage .info p {
+    color: #55392263;
+}
+
+.user_login_pages .loginPage p span {
+    color: #C3824E;
+    font-weight: 600;
+}
+
+
+.user_login_pages .loginPage .person_img {
+    background-color: #FCE2CE;
+    width: 400px;
+    border-radius: 395px 395px 0px 0px;
+    padding: 150px 10px;
+    padding-bottom: 130px;
+}
+
+.user_login_pages .loginPage .person_img img {
+    width: 350px;
+    background-color: transparent;
+    margin-left: -100px;
+}
+
+
+@media (max-width:496px) {
+
+    .user_login_pages .loginPage {
+        flex-direction: column-reverse;
+        width: 100%;
+        margin-top: 0px;
+        gap: 0px;
+    }
+
+    .user_login_pages .loginPage h1 {
+        display: none;
+    }
+
+    .user_login_pages .loginPage .info {
+        width: 90%;
+    }
+
+    .user_login_pages .loginPage .person_img {
+        width: 100%;
+        padding: 50px;
+        padding-top: 110px;
+        text-align: center;
+        border-radius: 0px 0px 395px 395px;
+        margin-bottom: 20px;
+
+    }
+
+    .user_login_pages .loginPage .person_img img {
+        width: 85%;
+        margin-bottom: -85px;
+        margin-left: 5px;
+    }
+
+    .user_login_pages .loginPage .info {
+        width: 100%;
+    }
+
+    .user_login_pages .loginPage form {
+        width: 100%;
+    }
+
+    .user_login_pages .loginPage .info button {
+        padding: 15px 140px;
+    }
+
+    .user_login_pages .loginPage .icons {
+        margin-bottom: 30px;
+    }
+
+}

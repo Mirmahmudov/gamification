@@ -63,14 +63,16 @@
 
 .profilePage .navProfile .row .userInfo h2 {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: 600;
+
 }
 
 .profilePage .navProfile .row .userInfo h5 {
-  width: 200px;
-  font-size: 14px;
+  width: 250px;
+  font-size: 16px;
   text-transform: capitalize;
+
 }
 
 .profilePage .navProfile .point {
@@ -101,6 +103,7 @@
   padding: 30px;
   border-radius: 20px;
 
+
 }
 
 .profilePage .profieInfo .row {
@@ -109,12 +112,14 @@
   justify-content: space-between;
   margin-bottom: 20px;
   gap: 20px;
+
 }
 
 .profilePage .profieInfo .row .col {
   /* box-shadow: 2px 2px 2px; */
   width: 50%;
   padding: 0px 20px;
+
 }
 
 .profilePage .profieInfo .row h4 {
@@ -125,34 +130,42 @@
   color: #1a202c;
   text-align: left;
 
+
 }
 
 .profilePage .profieInfo .row h3 {
   color: #434D54;
   font-weight: 600;
   font-size: 18px;
+
+
 }
 
 .profilNavModal {
   margin-bottom: 20px;
+
 }
 
 .profilNavModal .editRow {
   display: flex;
   align-items: start;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   gap: 20px;
+
 }
 
 .profilNavModal .editRow .col {
   width: 50%;
+
 }
 
 .profilNavModal .editRow .col h4 {
   font-size: 20px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #434D54;
+
+
 }
 
 .profilNavModal .editRow .col textarea {
@@ -162,6 +175,7 @@
   min-height: 100px;
   padding: 10px;
   border-radius: 5px;
+  font-size: 17px;
   border: 1px solid #E1E5E8;
 }
 
@@ -172,6 +186,7 @@
   outline: none;
   padding: 10px;
   border-radius: 5px;
+  font-size: 17px;
   border: 1px solid #E1E5E8;
 }
 
@@ -192,6 +207,8 @@
   color: white;
   border: none;
   cursor: pointer;
+  font-size: 16px;
+
 }
 
 .profilNavModal .btns button:nth-child(2) {
@@ -200,17 +217,18 @@
 
 input[type="file"] {
   display: none;
-  /* Standart fayl tanlash oynasini yashirish */
 }
 
 .custom-file-input {
-  padding: 8px 15px;
+  padding: 6px 10px;
   background-color: #1d537c;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+
 }
 
 .custom-file-input:hover {
@@ -219,6 +237,7 @@ input[type="file"] {
 
 
 @media (max-width: 640px) {
+
   .profilePage .profilName {
     font-size: 18px;
     padding-top: 20px;
@@ -240,8 +259,8 @@ input[type="file"] {
   .profilePage .navProfile .row .images,
   .profilNavModal .images {
     background-color: #ffb106;
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
 
   .profilePage .navProfile .row .images .imgs svg {
@@ -258,11 +277,12 @@ input[type="file"] {
 
   .profilePage .navProfile .row .userInfo h5 {
     width: 150px;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .profilePage .navProfile .point {
     font-size: 18px;
+
   }
 
   .profilePage .navProfile button {
@@ -276,18 +296,40 @@ input[type="file"] {
   .profilePage .profieInfo {
     box-shadow: 0px 3px 50px 0px #00000014;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   .profilePage .profieInfo .row {
-    flex-direction: column;
+    /* flex-direction: column; */
     display: flex;
     align-items: self-start;
     gap: 10px;
+
     margin-bottom: 20px;
   }
 
   .profilePage .profieInfo .row h4 {
+    font-size: 14px;
+  }
+
+  .profilePage .profieInfo .row h3 {
     font-size: 16px;
+  }
+
+  .profilNavModal .editRow .col h4 {
+    font-size: 15px;
+  }
+
+  .viewPage {
+    height: 100%;
+  }
+  .profilNavModal .editRow .col textarea {
+    font-size: 14px;
+  }
+  .profilNavModal .editRow .col input{
+    font-size: 14px;
+  }
+  .profilNavModal .btns button {
+    font-size: 14px;
   }
 }

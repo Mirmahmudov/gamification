@@ -25,6 +25,7 @@ import Newadded from "./pages/newadded/Newadded";
 import Loader from "./components/loader/Loader";
 import Students from "./pages/students/Students";
 import NewRead from "./pages/newRead/NewRead";
+import LoginPage from "./components/loginPage/LoginPage";
 
 function App() {
   const [isModalOpen, setModalOpen] = useState(getToken() ? false : true);
@@ -126,13 +127,14 @@ function App() {
     <>
       <BrowserRouter>
         {loader ? <Loader /> : ""}
+        {/* <LoginPage /> */}
 
         <LoginModal
           isOpen={isModalOpen}
           setLoader={setLoader}
           onClose={() => setModalOpen(false)}
         />
-        {role ? <Navbar setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
+        {role ? <Navbar setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
 
         {role == "mentor" ? (
           <div className="main container">
@@ -190,7 +192,7 @@ function App() {
                     <RiDashboardLine />
                     <h3>Dashboard</h3>
                   </div>
-                 
+
                 </NavLink>
               </li>
               <li>
@@ -199,7 +201,7 @@ function App() {
                     <MdOutlineAssessment />
                     <h3>Baholash</h3>
                   </div>
-                 
+
                 </NavLink>
               </li>
               <li>
@@ -208,7 +210,7 @@ function App() {
                     <MdOutlineWatchLater />
                     <h3>Yangiliklar</h3>
                   </div>
-                 
+
                 </NavLink>
               </li>
               <li>
@@ -217,7 +219,7 @@ function App() {
                     <MdOutlineLeaderboard />
                     <h3>Leaderboard</h3>
                   </div>
-                 
+
                 </NavLink>
               </li>
               <li>
@@ -226,7 +228,7 @@ function App() {
                     <RiAuctionLine />
                     <h3>Auksion</h3>
                   </div>
-                 
+
                 </NavLink>
               </li>
             </ul>
