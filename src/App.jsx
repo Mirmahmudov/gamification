@@ -153,13 +153,15 @@ function App() {
     <>
       <BrowserRouter>
         {loader ? <Loader /> : ""}
-        {/* <LoginPage /> */}
+        <LoginPage isOpen={isModalOpen}
+          setLoader={setLoader}
+          onClose={() => setModalOpen(false)} />
 
-        <LoginModal
+        {/* <LoginModal
           isOpen={isModalOpen}
           setLoader={setLoader}
           onClose={() => setModalOpen(false)}
-        />
+        /> */}
         {role ? <Navbar allNewsStatus={allNewsStatus} setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
 
         {role == "mentor" ? (
@@ -369,7 +371,7 @@ function App() {
             </ul>
             <div className="viewPage">
               <Routes>
-                <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus}  setLoader={setLoader} />} />
+                <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
                 <Route
                   path="/profile"
                   element={<Profile setLoader={setLoader} />}

@@ -1,15 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", serif;
+}
 
 
 .user_login_pages .container {
     max-width: 1300px;
+    min-height: 100vh;
+    min-width: 100vw;
     margin: 0 auto;
-    background-color: #FEF6EF;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
 }
+
 
 .user_login_pages .loginPage {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 100px;
     gap: 200px;
 }
@@ -23,11 +40,12 @@
 .user_login_pages .loginPage .info h1 {
     font-size: 40px;
     font-weight: 700;
-    color: #424242;
+    color: #01C0FE;
+
 }
 
 .user_login_pages .loginPage .row {
-    padding: 15px 20px;
+    padding: 0px 20px;
     width: 380px;
     text-align: left;
     border: 1px solid #757575;
@@ -45,6 +63,8 @@
     background-color: transparent;
     border: none;
     font-size: 15px;
+    padding: 15px 0px;
+    padding-right: 90px;
 }
 
 .user_login_pages .loginPage .row>img {
@@ -52,22 +72,26 @@
     height: 22px;
 }
 
-.user_login_pages .loginPage .row h5 {
+.user_login_pages .loginPage .row label {
     position: absolute;
-    background-color: #FEF6EF;
-    color: #757575;
+    /* background-color: #01C0FE; */
+    color: white;
     font-weight: 500;
     padding: 5px 7px;
     border-radius: 30px;
-    top: -14px;
-    left: 45px;
+    top: 8px;
+    left: 40px;
     font-size: 16px;
+    color: #616161;
+    /* background-color: red; */
+    transition: all 0.3s ease;
+
 }
 
 .user_login_pages .loginPage .row .eye {
-    /* margin-left: 90px; */
     position: absolute;
     right: 15px;
+    top: 15px;
 
 }
 
@@ -81,8 +105,8 @@
 }
 
 .user_login_pages .loginPage .info button {
-    color: #92613A;
-    background-color: #FCE2CE;
+    color: white;
+    background-color: #01C0FE;
     padding: 15px 170px;
     border-radius: 30px;
     border: none;
@@ -90,7 +114,19 @@
     font-size: 16px;
     margin-top: 50px;
     margin-bottom: 25px;
+    cursor: pointer;
 }
+
+.user_login_pages .loginPage .info button:hover {
+    transform: scale(1.01);
+    transition: all .3s ease;
+}
+
+.user_login_pages .loginPage .info button:active {
+    transform: scale(1);
+    transition: all .3s ease;
+}
+
 
 .user_login_pages .loginPage .icons {
     display: flex;
@@ -111,7 +147,7 @@
 
 
 .user_login_pages .loginPage .person_img {
-    background-color: #FCE2CE;
+    background-color: #01C0FE;
     width: 400px;
     border-radius: 395px 395px 0px 0px;
     padding: 150px 10px;
@@ -124,28 +160,82 @@
     margin-left: -100px;
 }
 
+.user_login_pages .loginPage .row.focused label,
+.user_login_pages .loginPage .row input:not(:placeholder-shown)~label {
+    top: -20px;
+    font-size: 12px;
+    color: white;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    background-color: #01C0FE;
 
-@media (max-width:496px) {
+}
+
+
+.user_login_pages .loginPage .row.focused {
+    border-color: #01C0FE;
+    transition: border-color 0.3s ease;
+}
+
+#input-logo {
+    color: #757575;
+    font-size: 18px;
+}
+
+
+
+
+@media (max-width:760px) {
+
+    .user_login_pages .container {
+        min-height: 100vh;
+        min-width: 100vw;
+        margin: 0 auto;
+        display: flex;
+        align-items: self-start;
+        justify-content: center;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+
 
     .user_login_pages .loginPage {
         flex-direction: column-reverse;
+        align-items: self-start;
+        justify-content: space-between;
         width: 100%;
         margin-top: 0px;
         gap: 0px;
     }
 
-    .user_login_pages .loginPage h1 {
-        display: none;
+
+    .user_login_pages .loginPage .info h1 {
+        /* display: none; */
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
     }
 
     .user_login_pages .loginPage .info {
+        padding: 0px 10px;
         width: 90%;
+    }
+
+
+    .user_login_pages .loginPage .row {
+        width: 100%;
+    }
+
+    .user_login_pages .loginPage .info input {
+        width: 100%;
+        padding: 12px 0px;
     }
 
     .user_login_pages .loginPage .person_img {
         width: 100%;
-        padding: 50px;
-        padding-top: 110px;
+        padding-top: 60px;
         text-align: center;
         border-radius: 0px 0px 395px 395px;
         margin-bottom: 20px;
@@ -153,7 +243,7 @@
     }
 
     .user_login_pages .loginPage .person_img img {
-        width: 85%;
+        width: 55%;
         margin-bottom: -85px;
         margin-left: 5px;
     }
