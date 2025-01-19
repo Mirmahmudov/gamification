@@ -162,12 +162,12 @@
 
 .user_login_pages .loginPage .row.focused label,
 .user_login_pages .loginPage .row input:not(:placeholder-shown)~label {
-    top: -20px;
-    font-size: 12px;
-    color: white;
+    top: -18px;
+    font-size: 16px;
+    color: #01C0FE;
     transition: all 0.3s ease;
     padding: 5px 10px;
-    background-color: #01C0FE;
+    background-color: #F8F8F8;
 
 }
 
