@@ -2,7 +2,7 @@
   padding: 15px 0px;
   position: fixed;
   z-index: 99;
-  left: 0;
+  right: 0;
   background-color: #1E537D;
   top: 1px;
   width: 100%;
@@ -14,6 +14,7 @@
 nav .container {
   padding: 0px 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   color: #17222B;
 
@@ -23,8 +24,40 @@ nav .container {
 .pageTitle {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   font-size: 24px;
+  width: 280px;
+}
+
+
+.pageTitle .logo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pageTitle .logo img:nth-child(2) {
+  margin-bottom: 10px;
+}
+
+.pageTitle .logo.active img:nth-child(2) {
+  display: none;
+}
+
+.pageTitle .logo .coin_img {
+  width: 50px;
+}
+
+.pageTitle .logo.active {
+  width: 50px;
+  /* background-color: red; */
+}
+
+.pageTitle .bar {
+  color: #1d537c;
+  cursor: pointer;
 }
 
 .pageTitle h1 {
@@ -47,23 +80,22 @@ nav .container>div {
 
 .user .nav_point {
 
-  font-size: 23px;
+  font-size: 24px;
   color: #1d537c;
   height: 50px;
   font-weight: 500;
   display: flex;
   gap: 5px;
-
   align-items: center;
 }
 
 .user .nav_point h3 {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .user .nav_point img {
-  width: 20px;
+  width: 30px;
 }
 
 .modalBg {
@@ -143,6 +175,7 @@ nav .container>div {
 .navModal .row .div h3 {
   font-size: 16px;
   font-weight: 500;
+
 }
 
 .navModal .row .div span {
@@ -156,21 +189,21 @@ nav .container>div {
 }
 
 .user span {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   color: #1E537D;
-  font-size: 24px;
+  font-size: 26px;
   cursor: pointer;
 
 }
 
 .navNotificat {
-  font-size: 30px !important;
+  font-size: 35px !important;
   position: relative;
 
 }
@@ -219,8 +252,25 @@ nav .container>div {
     padding: 10px;
   }
 
-  nav .logo {
+
+
+  .pageTitle .logo {
+    width: 100%;
     width: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+  }
+
+  .pageTitle .logo img:nth-child(1) {
+    display: none;
+  }
+
+  .pageTitle .logo img:nth-child(2) {
+    margin-bottom: 0px;
   }
 
   nav .pageTitle h1 {
@@ -311,4 +361,9 @@ nav .container>div {
     font-weight: 500;
     border-radius: 50%;
   }
+
+  .pageTitle .bar {
+    display: none;
+  }
+
 }

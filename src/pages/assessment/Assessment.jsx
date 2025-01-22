@@ -61,6 +61,10 @@ function Assessment({ courses, userInfo, setLoader }) {
     fetch(`${baseUrl}/students/?group__mentor=${mentor ? mentor : ""}&${id ? id : ""}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
+
+
+
         setStudents(result);
         setLoader(false);
       })
@@ -79,6 +83,7 @@ function Assessment({ courses, userInfo, setLoader }) {
       `${student.user?.first_name} ${student.user?.last_name}`.toLowerCase();
     return fullName.includes(searchQuery.toLowerCase());
   });
+
 
   const givePoint = () => {
     setLoader(true);
@@ -212,7 +217,7 @@ function Assessment({ courses, userInfo, setLoader }) {
                     {/* <img src="imgs/coin-3.png" alt="" /> */}
                     <span className="xp">
                       {item?.point ? item?.point : 0} </span>
-                      point
+                    point
                   </div>
                   <button
                     onClick={() => {

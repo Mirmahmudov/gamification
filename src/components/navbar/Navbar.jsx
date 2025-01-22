@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Navbar.css";
-import { FaChevronRight, FaRegUser, FaUser } from "react-icons/fa";
+import { FaBars, FaChevronRight, FaRegUser, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 import { HiMiniXMark } from "react-icons/hi2";
@@ -9,8 +9,9 @@ import { IoIosNotifications } from "react-icons/io";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 import { toast } from "react-toastify";
+import { FaBarsStaggered } from "react-icons/fa6";
 
-function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
+function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive, barActive }) {
   const navigate = useNavigate();
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef(null);
@@ -68,71 +69,78 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
   return (
     <>
 
-      <div
-        className={`modalBg ${userModal ? "active" : ""}`}
-        onClick={() => setUserModal(false)} // Fonga bosganda ham modal yopiladi
-      ></div>
-      <nav >
+      <div className="navBar">
+        <div
+          className={`modalBg ${userModal ? "active" : ""}`}
+          onClick={() => setUserModal(false)} // Fonga bosganda ham modal yopiladi
+        ></div>
+        <nav >
 
-        <div className="nav">
-          <div className="container">
-            <div className="pageTitle">
-              <Link to={"/"} className="logo">
-                <img src="/imgs/logo.svg" alt="logo" />
-              </Link>
-            </div>
-            <div className="user">
-              <div className="nav_point">
-                <img src="imgs/coin-3.png" alt="" />
-                <h3>{studentInfo?.point}</h3>
-
+          <div className="nav">
+            <div className="container">
+              <div className="pageTitle">
+                <Link to={"/"} className={barActive?"logo active":"logo"} >
+                  <img className="coin_img" src="imgs/coin-3.png" alt="" />
+                  <img src="/imgs/logo.svg" alt="logo" />
+                </Link>
+                <div className="bar">
+                  <FaBars onClick={() => {
+                    setBarActive(!barActive)
+                  }} />
+                </div>
               </div>
+              <div className="user">
+                <div className="nav_point">
+                  <img src="imgs/coin-3.png" alt="" />
+                  <h3>{studentInfo?.point}</h3>
 
-              <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
-                allNewsStatus?.num_unread_news != 0 ?
-                  <b>{allNewsStatus?.num_unread_news}</b>
-                  : ""
-
-              }
-              </span>
-              </Link>
-              <span
-                onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
-              >
-                <FaUser />
-              </span>
-
-              {/* Modal */}
-              <div
-                ref={modalRef}
-                className={`navModal ${userModal ? "active" : ""}`}
-              >
-                {/* Exit tugmasi */}
-                <div onClick={() => setUserModal(false)} className="exit">
-                  <HiMiniXMark />
                 </div>
 
-                <div className="row">
-                  <Link onClick={() => {
-                    setUserModal(false);
-                  }} to={"/profile"} className="div">
-                    <span className="navUserImg">
-                      {/* <TiInfoLarge /> */}
-                      {studentInfo?.image ? (
-                        <img src={studentInfo?.image} alt="" />
+                <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
+                  allNewsStatus?.num_unread_news != 0 ?
+                    <b>{allNewsStatus?.num_unread_news}</b>
+                    : ""
 
-                      ) : (
-                        <FaUser />
-                      )}
-                    </span>
-                    <h3> {userInfo.first_name} {userInfo.last_name} </h3>
-                  </Link>
-                  <FaChevronRight />
-                </div>
-                <hr />
+                }
+                </span>
+                </Link>
+                <span
+                  onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
+                >
+                  <FaUser />
+                </span>
 
-                {/* Ilova haqida */}
-                {/* <div className="row">
+                {/* Modal */}
+                <div
+                  ref={modalRef}
+                  className={`navModal ${userModal ? "active" : ""}`}
+                >
+                  {/* Exit tugmasi */}
+                  <div onClick={() => setUserModal(false)} className="exit">
+                    <HiMiniXMark />
+                  </div>
+
+                  <div className="row">
+                    <Link onClick={() => {
+                      setUserModal(false);
+                    }} to={"/profile"} className="div">
+                      <span className="navUserImg">
+                        {/* <TiInfoLarge /> */}
+                        {studentInfo?.image ? (
+                          <img src={studentInfo?.image} alt="" />
+
+                        ) : (
+                          <FaUser />
+                        )}
+                      </span>
+                      <h3> {userInfo.first_name} {userInfo.last_name} </h3>
+                    </Link>
+                    <FaChevronRight />
+                  </div>
+                  <hr />
+
+                  {/* Ilova haqida */}
+                  {/* <div className="row">
                     <div className="div">
                       <span>
                         <TiInfoLarge />
@@ -142,30 +150,31 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
                     <FaChevronRight />
                   </div> */}
 
-                {/* Logout */}
-                <div
-                  className="row"
-                  onClick={() => {
-                    localStorage.clear();
-                    navigate("/");
-                    setModalOpen(true);
-                    setUserModal(false);
-                    toast.success("Tizimdan muvafaqqiyatli chiqdingiz")
-                  }}
-                >
-                  <div className="div">
-                    <span>
-                      <MdLogout />
-                    </span>
-                    <h3>Logout</h3>
+                  {/* Logout */}
+                  <div
+                    className="row"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate("/");
+                      setModalOpen(true);
+                      setUserModal(false);
+                      toast.success("Tizimdan muvafaqqiyatli chiqdingiz")
+                    }}
+                  >
+                    <div className="div">
+                      <span>
+                        <MdLogout />
+                      </span>
+                      <h3>Logout</h3>
+                    </div>
+                    <FaChevronRight />
                   </div>
-                  <FaChevronRight />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </>
   );
 }

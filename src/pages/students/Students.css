@@ -103,13 +103,15 @@
   font-size: 18px;
   margin-bottom: 5px;
   line-height: 20px;
-  color: #162b3a;
+  color: #1E537D;
+
 }
 
 .students .topStudents .col h3 {
   font-size: 15px;
   line-height: 17px;
   margin-bottom: 10px;
+  font-weight: 500;
   color: #7f868b;
 }
 
@@ -147,7 +149,7 @@
 .studentTable {
   width: 100% !important;
   border-radius: 5px;
-  max-height: 400px;
+  max-height: 500px;
   overflow: auto;
   position: relative;
 }
@@ -318,6 +320,7 @@
 
 .table_Body .student_table_row h2 {
   color: #1E537D;
+  font-weight:600;
 }
 
 .table_Body .student_table_row h3 {

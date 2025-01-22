@@ -4,6 +4,7 @@
   margin-top: 90px !important;
   position: relative;
 }
+
 .links {
   list-style: none;
   width: 280px;
@@ -12,10 +13,37 @@
   border-radius: 10px;
   padding: 40px 10px;
   flex-shrink: 0;
+  transition: all 0.1s ease-in-out;
+
 }
-.links h3{
+
+.links.active {
+  width: 80px;
+}
+
+.links h3 {
   font-weight: 500;
 }
+
+.links.active li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.links.active li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.links.active h3 {
+  display: none;
+  margin: 0 auto;
+}
+
 
 .links_two {
   text-align: center;
@@ -38,7 +66,7 @@
 
 .links_two h3 {
   font-size: 11px;
-  
+
 }
 
 .links_two svg {

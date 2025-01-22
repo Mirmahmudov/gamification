@@ -63,7 +63,7 @@
 }
 
 .profilePage .navProfile .row .userInfo h2 {
-  font-size: 24px;
+  font-size: 25px;
   margin-bottom: 8px;
   font-weight: 500;
 
@@ -75,7 +75,6 @@
   text-transform: capitalize;
   font-weight: 500;
   color: #1d537cc7;
-
 }
 
 .profilePage .navProfile .point {
@@ -85,6 +84,7 @@
   font-weight: 600;
   display: flex;
   gap: 5px;
+
 
   align-items: center;
 }
@@ -107,6 +107,7 @@
   background-color: transparent;
   border-radius: 10px;
   cursor: pointer;
+  
 }
 
 .profilePage .profieInfo {
@@ -114,16 +115,13 @@
   box-shadow: 2px 2px 10px 0px #00000014;
   padding: 30px;
   border-radius: 20px;
-
-
-}
+  }
 
 .profilePage .profieInfo .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-
 }
 
 .profilePage .profieInfo .row .col {
@@ -134,8 +132,8 @@
 }
 
 .profilePage .profieInfo .row h4 {
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   text-transform: capitalize;
   margin-bottom: 3px;
   color: #1a202c;
@@ -147,7 +145,7 @@
 .profilePage .profieInfo .row h3 {
   color: #434D54;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 18px;
   width: 100%;
   border: 1px solid #E1E5E8;
   background-color: #F5F7FA;

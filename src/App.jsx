@@ -36,6 +36,7 @@ function App() {
   const [mentorInfo, setMentorInfo] = useState()
   const [mentorId, setMentorId] = useState(null)
   const [allNewsStatus, setAllNewsStatus] = useState()
+  const [barActive, setBarActive] = useState(false)
 
   const getNewsStatus = () => {
     setLoader(true)
@@ -173,11 +174,11 @@ function App() {
           setLoader={setLoader}
           onClose={() => setModalOpen(false)}
         /> */}
-        {role ? <Navbar allNewsStatus={allNewsStatus} setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
+        {role ? <Navbar barActive={barActive} setBarActive={setBarActive} allNewsStatus={allNewsStatus} setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
 
         {role == "mentor" ? (
           <div className="main container">
-            <ul className="links">
+            <ul className="links ">
               <li>
                 <NavLink to={"/"}>
                   <div>
@@ -303,7 +304,7 @@ function App() {
           </div>
         ) : role === "student" ? (
           <div className="main container">
-            <ul className="links">
+            <ul className={barActive?"links active ":"links "} >
               <li>
                 <NavLink to={"/"}>
                   <div>
