@@ -40,7 +40,7 @@
 .user_login_pages .loginPage .info h1 {
     font-size: 40px;
     font-weight: 700;
-    color: #01C0FE;
+    color: #1E537D;
 
 }
 
@@ -74,7 +74,7 @@
 
 .user_login_pages .loginPage .row label {
     position: absolute;
-    /* background-color: #01C0FE; */
+    /* background-color: #1E537D; */
     color: white;
     font-weight: 500;
     padding: 5px 7px;
@@ -106,7 +106,7 @@
 
 .user_login_pages .loginPage .info button {
     color: white;
-    background-color: #01C0FE;
+    background-color: #1E537D;
     padding: 15px 170px;
     border-radius: 30px;
     border: none;
@@ -147,7 +147,7 @@
 
 
 .user_login_pages .loginPage .person_img {
-    background-color: #01C0FE;
+    background-color: #1E537D;
     width: 400px;
     border-radius: 395px 395px 0px 0px;
     padding: 150px 10px;
@@ -164,7 +164,7 @@
 .user_login_pages .loginPage .row input:not(:placeholder-shown)~label {
     top: -18px;
     font-size: 16px;
-    color: #01C0FE;
+    color: #1E537D;
     transition: all 0.3s ease;
     padding: 5px 10px;
     background-color: #F8F8F8;
@@ -173,7 +173,7 @@
 
 
 .user_login_pages .loginPage .row.focused {
-    border-color: #01C0FE;
+    border-color: #1E537D;
     transition: border-color 0.3s ease;
 }
 

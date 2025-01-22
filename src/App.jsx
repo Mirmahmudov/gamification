@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import { RiAuctionLine, RiDashboardLine } from "react-icons/ri";
-import { FaChevronRight, FaRegUser } from "react-icons/fa";
+import { FaChevronRight, FaHistory, FaRegUser } from "react-icons/fa";
 import "./App.css";
 import {
   MdOutlineAssessment,
@@ -12,20 +12,19 @@ import {
 } from "react-icons/md";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Assessment from "./pages/assessment/Assessment";
-import Attendance from "./pages/attendance/Attendance";
-import LeaderBoard from "./pages/leaderboard/LeaderBoard";
 import Auction from "./pages/auction/Auction";
-import LoginModal from "./components/loginModal/LoginModal";
 import { getToken } from "./service/token";
 import { baseUrl } from "./config";
 import News from "./pages/news/News";
 import Profile from "./pages/profile/Profile";
-import Student from "./pages/student/Student";
-import Newadded from "./pages/newadded/Newadded";
 import Loader from "./components/loader/Loader";
 import Students from "./pages/students/Students";
 import NewRead from "./pages/newRead/NewRead";
 import LoginPage from "./components/loginPage/LoginPage";
+import { ToastContainer } from "react-toastify";
+import PointHistory from "./components/pointHistory/PointHistory";
+import PointHistoryTeacher from "./components/pointHistoryTeacher/PointHistoryTeacher";
+import EditPointHistory from "./components/pointHistoryTeacher/EditPointHistory";
 
 function App() {
   const [isModalOpen, setModalOpen] = useState(getToken() ? false : true);
@@ -34,9 +33,8 @@ function App() {
   const [userInfo, setUserInfo] = useState();
   const [loader, setLoader] = useState(false);
   const [mentorInfo, setMentorInfo] = useState()
-  const [mentorId, setMentorId] = useState()
+  const [mentorId, setMentorId] = useState(null)
   const [allNewsStatus, setAllNewsStatus] = useState()
-
 
   const getNewsStatus = () => {
     setLoader(true)
@@ -77,7 +75,7 @@ function App() {
       .then((result) => {
         setLoader(false)
         setMentorInfo(result);
-        setMentorId(result?.id); // mentorId ni to'g'ri oling
+        setMentorId(result.id); // mentorId ni to'g'ri oling
       })
       .catch((error) => {
         setLoader(false)
@@ -152,6 +150,18 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light" />
+
         {loader ? <Loader /> : ""}
         <LoginPage isOpen={isModalOpen}
           setLoader={setLoader}
@@ -262,17 +272,14 @@ function App() {
             </ul>
             <div className="viewPage">
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<Dashboard setLoader={setLoader} />} />
                 <Route
                   path="/assessment"
                   element={
                     <Assessment setLoader={setLoader} courses={courses} />
                   }
                 />
-                <Route
-                  path="/attendance"
-                  element={<Attendance setLoader={setLoader} />}
-                />
+
                 <Route
                   path="/leaderboard"
                   element={<Students setLoader={setLoader} />}
@@ -284,10 +291,11 @@ function App() {
                   element={<Auction setLoader={setLoader} />}
                 />
                 <Route
-                  path="/newadded"
-                  element={<Newadded courses={courses} setLoader={setLoader} />}
+                  path="/teacherhistory"
+                  element={<PointHistoryTeacher mentorId={mentorId && mentorId} courses={courses} setLoader={setLoader} />}
                 />
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
+                <Route path="/edithistory/:id" element={<EditPointHistory setLoader={setLoader} mentorId={mentorId && mentorId} />} />
 
               </Routes>
             </div>
@@ -332,6 +340,15 @@ function App() {
                   <FaChevronRight />
                 </NavLink>
               </li>
+              <li>
+                <NavLink to={"/pointhistory"}>
+                  <div>
+                    <FaHistory />
+                    <h3>Pointlar Tarixi</h3>
+                  </div>
+                  <FaChevronRight />
+                </NavLink>
+              </li>
             </ul>
             <ul className="links_two">
               <li>
@@ -360,11 +377,12 @@ function App() {
                   </div>
                 </NavLink>
               </li>
+
               <li>
-                <NavLink to={"/profile"}>
+                <NavLink to={"/pointhistory"}>
                   <div>
-                    <FaRegUser />
-                    <h3>Profil</h3>
+                    <FaHistory />
+                    <h3>Point_Tarixi</h3>
                   </div>
                 </NavLink>
               </li>
@@ -377,10 +395,6 @@ function App() {
                   element={<Profile setLoader={setLoader} />}
                 />
                 <Route
-                  path="/leaderboard"
-                  element={<LeaderBoard setLoader={setLoader} />}
-                />
-                <Route
                   path="/auction"
                   element={<Auction setLoader={setLoader} />}
                 />
@@ -388,6 +402,8 @@ function App() {
                   element={<Students setLoader={setLoader} />}
                 />
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
+
+                <Route path="/pointhistory" element={<PointHistory setLoader={setLoader} />} />
 
               </Routes>
             </div>

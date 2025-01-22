@@ -18,14 +18,14 @@
 }
 
 .new_read .newNavbar .rows .logo svg {
-    color: #162B3A;
+    color: #1E537D;
     font-size: 20px;
 }
 
 .new_read .newNavbar .rows h1 {
     text-transform: capitalize;
     font-size: 20px;
-    color: #162B3A;
+    color: #1E537D;
 }
 
 
@@ -53,7 +53,7 @@
 
 .new_read .info h1 {
     font-size: 25px;
-    color: #162B3A;
+    color: #1E537D;
     margin-bottom: 20px;
 }
 
@@ -111,7 +111,7 @@
 
     .new_read .info h1 {
         font-size: 22px;
-        color: #162B3A;
+        color: #1E537D;
         margin-bottom: 20px;
     }
 

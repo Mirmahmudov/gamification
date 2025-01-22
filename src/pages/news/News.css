@@ -5,7 +5,7 @@
 }
 
 .new_cards a {
-  color: #00121c;
+  color: #1E537D;
 }
 
 .news .new_box {
@@ -16,6 +16,8 @@
   transition: all 0.3s ease-in-out;
   border-radius: 5px;
   margin-bottom: 20px;
+  padding: 10px;
+  box-shadow: 2px 2px 10px #1e527daf;
 }
 
 .news .new_box.active {

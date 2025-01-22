@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./GivePoint.css";
 import { baseUrl } from "../../config";
 import { getToken } from "../../service/token";
+import { toast } from "react-toastify";
 
 const GivePoint = ({
   userInfo,
@@ -13,12 +14,15 @@ const GivePoint = ({
   isOpen,
   onClose,
 }) => {
-  if (!isOpen) return null; // Modal faqat ochilganda render bo'ladi
+  if (!isOpen) return null;
 
   const [pointTypes, setPointTypes] = useState([]);
+  const [selectedPointType, setSelectedPointType] = useState("");
+  const [descriptionRequired, setDescriptionRequired] = useState(false);
+  const [description, updateDescription] = useState("");
   const [date, setLocalDate] = useState(() => {
     const today = new Date();
-    today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); // Vaqt zonasini hisobga olish
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
     return today.toISOString().split("T")[0];
   });
 
@@ -39,17 +43,38 @@ const GivePoint = ({
         }
         return response.json();
       })
-      .then((result) => setPointTypes(result))
-      .catch((error) => console.error("Point turini olishda xatolik:", error));
+      .then((result) => {
+        setPointTypes(result);
+      })
+      .catch((error) => toast.error("Point turini olishda xatolik:", error));
   };
 
   useEffect(() => {
     getPointType();
   }, []);
 
+  const handlePointTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setSelectedPointType(selectedType);
+
+    const selectedPoint = pointTypes.find((item) => item.id.toString() === selectedType);
+    if (selectedPoint?.name === "Rag'bat") {
+      setDescriptionRequired(true);
+    } else {
+      setDescriptionRequired(false);
+    }
+
+    setPoint_type(selectedType);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDate(date); // Tanlangan sanani belgilash
+    if (descriptionRequired && !description.trim()) {
+      toast.error("Iltimos, izoh kiriting!");
+      return;
+    }
+    setDescription(description);
+    setDate(date);
     givePoint();
   };
 
@@ -65,11 +90,10 @@ const GivePoint = ({
             <div className="form-group">
               <label htmlFor="select">Point Turi</label>
               <select
-                onChange={(e) => setPoint_type(e.target.value)}
+                onChange={handlePointTypeChange}
                 id="select"
-                defaultValue="" // Default bo'sh qiymat
+                defaultValue="1"
               >
-              
                 {pointTypes.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name} ({item.max_point})
@@ -82,7 +106,7 @@ const GivePoint = ({
               <input
                 required
                 onChange={(e) => setAmount(e.target.value)}
-                type="number" // Raqam kiritish uchun
+                type="number"
                 id="input1"
                 placeholder="Enter value for point"
               />
@@ -90,11 +114,11 @@ const GivePoint = ({
             <div className="form-group">
               <label htmlFor="input2">Izoh</label>
               <input
-                required
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => updateDescription(e.target.value)}
                 type="text"
                 id="input2"
                 placeholder="Enter value for description"
+                required={descriptionRequired}
               />
             </div>
             <div className="form-group">

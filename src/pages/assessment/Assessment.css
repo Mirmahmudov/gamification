@@ -4,13 +4,14 @@
   align-items: center;
   margin-bottom: 20px;
 }
-.header > div {
+
+.header>div {
   display: flex;
   gap: 20px;
 }
 
-.header > div select,
-.header > div input {
+.header>div select,
+.header>div input {
   font-size: 18px;
   border: none;
 }
@@ -56,7 +57,7 @@
 .title {
   margin: 0;
   font-size: 1.5em;
-  color: #333;
+  color: #1E537D;
 }
 
 .search-filter {
@@ -77,7 +78,7 @@
 
 .sort-button {
   background-color: #e3f2fd;
-  color: #333;
+  color: #1E537D;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -127,6 +128,7 @@
   height: 100%;
 
 }
+
 .assessment .student-name {
   margin: 0;
   font-weight: bold;
@@ -143,20 +145,37 @@
   text-align: right;
   display: flex;
   align-items: center;
-  gap: 40px;
+  justify-content: end;
+  gap: 10px;
 }
+
+.student-actions .div {
+  display: flex;
+
+  gap: 10px;
+  align-items: center;
+  font-weight: 600;
+  color: #666666;
+  /* justify-content: space-between; */
+}
+
+.student-actions img {
+  width: 30px;
+}
+
 .student-actions .btns {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .student-actions .btns button {
   margin: 0px;
 }
 
 .xp {
   font-weight: bold;
-  color: #333;
+  color: #1E537D;
 }
 
 .reward-button {
@@ -186,11 +205,13 @@
   outline: none;
   background-color: transparent;
 }
+
 .input_box {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .input_box svg {
   font-size: 20px;
 }
@@ -199,13 +220,14 @@
   width: 100%;
   max-width: 200px;
   margin: 0 auto;
-  
-}
-.css-1jnmu3x-MuiAutocomplete-root .MuiOutlinedInput-root {
   padding: 0px !important;
 }
 
 .custom-autocomplete .MuiInputLabel-root {
   top: 0px !important;
   margin-top: -7px !important;
+}
+
+.MuiInputBase-root {
+  padding: 0px !important;
 }

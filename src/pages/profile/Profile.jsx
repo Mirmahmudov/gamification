@@ -10,6 +10,7 @@ function Profile({ setLoader }) {
   const [editBio, setEditBio] = useState("");
   const [editDate, setEditDate] = useState("");
   const [editImg, setEditImg] = useState(null);
+  const [imgView, setImgView] = useState(false)
 
 
   const getStudentInfo = () => {
@@ -88,13 +89,28 @@ function Profile({ setLoader }) {
   return (
     <div className="profilePage">
       <h1 className="profilName">Mening profilim</h1>
+      {imgView && <div className="userProfileImgView" onClick={() => {
+        setImgView(false)
+
+      }}>
+        {studentInfo?.image ? (
+          <img src={studentInfo?.image} alt="" />
+        ) : (
+          <FaRegUser />
+        )}
+      </div>}
       {editModal ? (
         <form onSubmit={editUser} className="profilNavModal">
           <div className="editRow">
-            <div className="images">
+            <div className="images" onClick={() => {
+              studentInfo?.image && setImgView(true)
+
+
+            }}>
               <div className="imgs">
                 {studentInfo?.image ? (
                   <img src={studentInfo?.image} alt="" />
+
                 ) : (
                   <FaRegUser />
                 )}
@@ -138,7 +154,9 @@ function Profile({ setLoader }) {
       ) : (
         <div className="navProfile">
           <div className="row">
-            <div className="images">
+            <div className="images" onClick={() => {
+              setImgView(true)
+            }}>
               <div className="imgs">
                 {studentInfo?.image ? (
                   <img src={`${studentInfo?.image}`} alt="" />
@@ -155,7 +173,8 @@ function Profile({ setLoader }) {
             </div>
           </div>
           <div className="point">
-            {studentInfo?.point} XP
+            <img src="imgs/coin-3.png" alt="" />
+            {studentInfo?.point}
             <button onClick={() => setEditModal(true)}>
               <FaPen /> Tahrirlash
             </button>
@@ -189,6 +208,10 @@ function Profile({ setLoader }) {
               <div className="col">
                 <h4>Tug'ilgan sana</h4>
                 <h3>{studentInfo?.birth_date}</h3>
+              </div>
+              <div className="col">
+                <h4>Telfon raqam</h4>
+                <h3>{studentInfo?.phone_number ? studentInfo?.phone_number : "+998xxxxxxx"}</h3>
               </div>
             </div>
           </div>

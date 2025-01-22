@@ -8,6 +8,7 @@ import { TiInfoLarge } from "react-icons/ti";
 import { IoIosNotifications } from "react-icons/io";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
+import { toast } from "react-toastify";
 
 function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
   const navigate = useNavigate();
@@ -40,7 +41,6 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
         setLoader(false);
       });
   };
@@ -63,7 +63,7 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
     };
   }, [userModal]);
 
-  
+
 
   return (
     <>
@@ -83,8 +83,19 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
               <h1>Gamification</h1>
             </div>
             <div className="user">
-              <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />
-                <b>{allNewsStatus?.num_unread_news}</b> </span>
+              {/* <div className="nav_point">
+                <img src="imgs/coin-3.png" alt="" />
+                <h3>100</h3>
+
+              </div> */}
+
+              <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
+                allNewsStatus?.num_unread_news != 0 ?
+                  <b>{allNewsStatus?.num_unread_news}</b>
+                  : ""
+
+              }
+              </span>
               </Link>
               <span
                 onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
@@ -122,15 +133,15 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
                 <hr />
 
                 {/* Ilova haqida */}
-                <div className="row">
-                  <div className="div">
-                    <span>
-                      <TiInfoLarge />
-                    </span>
-                    <h3>Ilova haqida</h3>
-                  </div>
-                  <FaChevronRight />
-                </div>
+                {/* <div className="row">
+                    <div className="div">
+                      <span>
+                        <TiInfoLarge />
+                      </span>
+                      <h3>Ilova haqida</h3>
+                    </div>
+                    <FaChevronRight />
+                  </div> */}
 
                 {/* Logout */}
                 <div
@@ -140,6 +151,7 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
                     navigate("/");
                     setModalOpen(true);
                     setUserModal(false);
+                    toast.success("Tizimdan muvafaqqiyatli chiqdingiz")
                   }}
                 >
                   <div className="div">

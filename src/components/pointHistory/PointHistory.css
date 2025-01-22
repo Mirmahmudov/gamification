@@ -1,0 +1,86 @@
+.pointhistory .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.274);
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.pointhistory .row .div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pointhistory .row .div .imgs {
+    width: 80px;
+}
+
+.pointhistory .row .div .imgs img {
+    width: 100%;
+    height: 100%;
+}
+
+.pointhistory .row .div h3 {
+    color: #1E537D;
+    font-size: 25px;
+}
+
+.pointhistory .row .div h4 {
+    color: #6B6B6B;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.pointhistory .row .div h5 {
+    font-weight: 500;
+    color: #6B6B6B;
+}
+
+.pointhistory .row .pointHistoryNumber {
+    font-size: 19px;
+    color: #72B34A;
+}
+
+@media (max-width: 640px) {
+    .pointhistory .row {
+        padding: 10px;
+        background-color: white;
+    }
+
+    .pointhistory .row .div {
+        gap: 10px;
+    }
+
+    .pointhistory .row .div h3 {
+        font-size: 16px;
+    }
+
+    .pointhistory .row .div h4 {
+        font-size: 13px;
+    }
+
+    .pointhistory .row .div h5 {
+        font-size: 10px;
+    }
+
+    .pointhistory .row .pointHistoryNumber {
+        font-size: 12px;
+    }
+
+    .pointhistory .row .div .imgs {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pointhistory .row .div .imgs img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+
+    }
+
+   
+}

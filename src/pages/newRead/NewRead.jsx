@@ -45,7 +45,7 @@ function NewRead({ setLoader }) {
         fetch(`${baseUrl}/news/${id}/mark-as-read/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result)
+                // console.log(result)
             })
             .catch((error) => console.error(error));
 

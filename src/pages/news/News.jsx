@@ -20,7 +20,7 @@ function News({ getNewsStatus, setLoader, allNewsStatus }) {
     fetch(`${baseUrl}/news/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setNewData(result)
+        setNewData(result.reverse())
         setLoader(false)
 
       })
@@ -53,8 +53,6 @@ function News({ getNewsStatus, setLoader, allNewsStatus }) {
         <div className="new_cards">
           {
             newData?.map((item, index) => {
-              console.log();
-
               return <Link key={index} to={`/newread/${item?.id}`} className={allNewsStatus?.unread_news_ids.includes(item.id) ? "new_box active " : "new_box "} >
                 <div className="imgs">
                   {

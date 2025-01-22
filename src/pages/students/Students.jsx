@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Students.css';
-import { FaCrown, FaUser } from 'react-icons/fa';
+import { FaCrown, FaRegUser, FaUser } from 'react-icons/fa';
 import { getToken } from '../../service/token';
 import { baseUrl } from '../../config';
+import { HiTrophy } from 'react-icons/hi2';
 
 function Students({ setLoader }) {
     const [studentList, setStudentList] = useState([]);
@@ -10,7 +11,9 @@ function Students({ setLoader }) {
     const [groups, setGroups] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [isLargeScreen, setIsLargeScreen] = useState(false);
-
+    const [imgViewModal, setImgViewModal] = useState(false)
+    const [userImg, setUserImg] = useState()
+    const [studentInfo, setStudentInfo] = useState()
     const getStudent = () => {
         setLoader(true);
         const myHeaders = new Headers();
@@ -34,6 +37,26 @@ function Students({ setLoader }) {
                 setLoader(false);
             });
     };
+
+    const getStudentInfo = () => {
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${getToken()}`);
+
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch(`${baseUrl}/students/get-me/ `, requestOptions)
+            .then((response) => response.json())
+
+            .then((result) => {
+                setStudentInfo(result)
+            })
+            .catch((error) => console.error(error));
+    }
+
 
     const getGroup = () => {
         setLoader(true);
@@ -61,6 +84,7 @@ function Students({ setLoader }) {
     useEffect(() => {
         getStudent();
         getGroup();
+        getStudentInfo()
     }, []);
 
     useEffect(() => {
@@ -92,9 +116,19 @@ function Students({ setLoader }) {
         setStudentList(filteredStudents);
     };
 
+
+
     const filterGroup = (group) => {
-        if (group === 'barchasi') {
+
+        if (group.toLowerCase() === 'barchasi') {
             setStudentList(filterData);
+        } else if (group.toLowerCase() === 'meningguruhim') {
+            const filteredStudents = filterData.filter(
+
+                (item) => item.group == parseInt(studentInfo?.group, 10)
+
+            );
+            setStudentList(filteredStudents);
         } else {
             const filteredStudents = filterData.filter(
                 (item) => item.group === parseInt(group, 10)
@@ -114,9 +148,21 @@ function Students({ setLoader }) {
         return studentList;
     };
 
+    const getGroupName = (id) => {
+        return groups?.find((item) => item.id == id);
+    };
     return (
         <>
             <div className="students">
+                {imgViewModal && <div className="userProfileImgView" onClick={() => {
+                    setImgViewModal(false)
+                }}>
+                    {userImg ? (
+                        <img src={userImg} alt="" />
+                    ) : (
+                        <FaRegUser />
+                    )}
+                </div>}
                 <div className="topStudents">
                     <div className="row">
                         {Array.isArray(reorderTopStudents()) && reorderTopStudents().length > 0
@@ -134,9 +180,13 @@ function Students({ setLoader }) {
                                             <FaCrown />
                                         </div>
                                         <div className="topStudentInfo">
-                                            <div className="imgs">
+                                            <div className="imgs" onClick={() => {
+                                                setUserImg(item?.image);
+
+                                                item.image && setImgViewModal(true);
+                                            }}>
                                                 {item.image ? (
-                                                    <img src={item.image} alt="" />
+                                                    <img src={item?.image} alt="" />
                                                 ) : (
                                                     <FaUser />
                                                 )}
@@ -145,25 +195,25 @@ function Students({ setLoader }) {
                                                 {item?.user?.first_name || item?.user?.last_name ? (
                                                     <>
                                                         <h2>
-                                                            {item.user?.first_name} {item.user?.last_name}
+                                                            {item?.user?.first_name} {item?.user?.last_name}
                                                         </h2>
                                                         <h3>
-                                                            ({groupName ? groupName : 'guruh mavjud emas'})
+                                                            {groupName ? groupName : 'guruh mavjud emas'}
                                                         </h3>
                                                         <div className="pointRow">
-                                                            <span className="number">{}</span>
-                                                            <span className="point">{item?.point} XP</span>
+                                                            <span className="number">{ }</span>
+                                                            {/* <span className="point">{item?.point} XP</span> */}
                                                         </div>
                                                     </>
                                                 ) : (
                                                     <>
                                                         <h2>Ism mavjud emas</h2>
                                                         <h3>
-                                                            ({groupName ? groupName : 'guruh mavjud emas'})
+                                                            {groupName ? groupName : 'guruh mavjud emas'}
                                                         </h3>
                                                         <div className="pointRow">
-                                                            <span className="number">{}</span>
-                                                            <span className="point">{item?.point} XP</span>
+                                                            <span className="number">{ }</span>
+                                                            {/* <span className="point">{item?.point} XP</span> */}
                                                         </div>
                                                     </>
                                                 )}
@@ -178,72 +228,126 @@ function Students({ setLoader }) {
                             : 'O\'quvchilar ro\'yxati mavjud emas'}
                     </div>
                 </div>
+
                 <div className="studentTable">
                     <div className="tableHeader">
                         <h1>O'quvchilar jadvali</h1>
-                        <div className="user_filter">
-                            <input
-                                onInput={(e) => {
-                                    handleSearch(e);
-                                }}
-                                type="text"
-                                placeholder="Ism kiriting"
-                            />
-                            <select
-                                onChange={(e) => {
-                                    filterGroup(e.target.value);
-                                }}
-                                name=""
-                                id=""
-                            >
-                                <option value="barchasi">Barchasi</option>
-                                {Array.isArray(groups) &&
+                       
+                        {
+                          
+                            
+                          !studentInfo?.detail ?
+                                <>
+                                    <div className="user_filter">
+                                        <input
+                                            onInput={(e) => {
+                                                handleSearch(e);
+                                            }}
+                                            type="text"
+                                            placeholder="Ism kiriting"
+                                        />
+                                        <select
+                                            onChange={(e) => {
+                                                filterGroup(e.target.value);
+                                            }}
+                                            name=""
+                                            id=""
+                                        >
+                                            <option value="barchasi">Barchasi</option>
+                                            <option value="meningGuruhim">mening guruhim</option>
+                                            {/* {Array.isArray(groups) &&
                                     groups.map((item, index) => (
                                         <option key={index} value={item?.id}>
                                             {item.name}
                                         </option>
-                                    ))}
-                            </select>
-                        </div>
+                                    ))} */}
+                                        </select>
+                                    </div>
+                                    <div className="user_btns">
+                                        <button onClick={(e) => {
+                                            filterGroup(e.target.textContent);
+                                        }}>Barchasi</button>
+                                        <button onClick={(e) => {
+                                            filterGroup(e.target.textContent);
+                                        }} value={"meningguruhim"}>meningguruhim</button>
+                                    </div>
+                                </> : <>
+                                    <div className="user_filter">
+                                        <input
+                                            onInput={(e) => {
+                                                handleSearch(e);
+                                            }}
+                                            type="text"
+                                            placeholder="Ism kiriting"
+                                        />
+                                        <select
+                                            onChange={(e) => {
+                                                filterGroup(e.target.value);
+                                            }}
+                                            name=""
+                                            id=""
+                                        >
+                                            <option value="barchasi">Barchasi</option>
+                                            {Array.isArray(groups) &&
+                                                groups.map((item, index) => (
+                                                    <option key={index} value={item?.id}>
+                                                        {item.name}
+                                                    </option>
+                                                ))}
+                                        </select>
+                                    </div>
+                                </>}
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>№</td>
-                                <td>O'quvchilar</td>
-                                <td>Yo'nalish</td>
-                                <td>Ball</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array.isArray(studentList) && studentList.length > 0
-                                ? studentList
-                                    .sort((a, b) => b.point - a.point)
-                                    .map((item, index) => {
-                                        const groupName = Array.isArray(groups)
-                                            ? groups.find((group) => group?.id === item.group)?.name
-                                            : 'Mavjud emas';
 
-                                        return (
-                                            <tr key={index}>
-                                                <td>{index + 1}. </td>
-                                                {item?.user?.first_name || item?.user?.last_name ? (
-                                                    <td>
-                                                        {item.user?.first_name} {item.user?.last_name}
-                                                    </td>
-                                                ) : (
-                                                    <td>Ism mavjud emas</td>
-                                                )}
-                                                <td> {groupName ? groupName : 'guruh mavjud emas'}</td>
-                                                <td>
-                                                    <div className="point">{item?.point} XP</div>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })
-                                : 'O\'quvchilar ro\'yxati mavjud emas'}
-                        </tbody>
-                    </table>
+
+
+
+                    <div className="table_Body">
+                        {Array.isArray(studentList) && studentList.length > 0
+                            ? studentList
+                                .sort((a, b) => b.point - a.point)
+                                .map((item, index) => {
+
+                                    return (
+                                        <div key={index} className={studentInfo?.id == item?.id ? "student_table_row active" : "student_table_row"}>
+                                            <div className="div">
+                                                <span className='student_num'>{index + 1}</span>
+                                                <div className="studentsTableImg" onClick={() => {
+                                                    setUserImg(item?.image);
+
+                                                    item.image && setImgViewModal(true);
+                                                }}>
+                                                    {item?.image ?
+                                                        <img src={item?.image} alt="" />
+                                                        :
+                                                        <div className="icon">
+                                                            <FaRegUser />
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <div className="studentTableCol">
+                                                    {item?.user?.first_name || item?.user?.last_name ? (
+                                                        <h2>
+                                                            {item.user?.first_name} {item.user?.last_name}
+                                                        </h2>
+                                                    ) : (
+                                                        <h2>Ism mavjud emas</h2>
+                                                    )}
+
+
+                                                    <h3>  {getGroupName(item?.group)?.name || "Guruh mavjud emas"}</h3>
+                                                </div>
+                                            </div>
+                                            <div className="studetTableCrown" >
+                                                <HiTrophy />
+                                            </div>
+
+                                        </div>
+                                    );
+                                })
+                            : 'O\'quvchilar ro\'yxati mavjud emas'}
+                    </div>
                 </div>
             </div>
         </>

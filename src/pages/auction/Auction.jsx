@@ -6,34 +6,14 @@ import { getToken } from "../../service/token";
 import FlipCountdown from "../../components/clock/FlipCountdown";
 
 function Auction({ setLoader }) {
-  const [studentPoint, setStudentPoint] = useState(null);
   const [auctionData, setAuctionData] = useState(null);
 
   useEffect(() => {
     setLoader(true);
-    // Parallel API calls for better performance
-    Promise.all([getStudentInfo(), getAuctionData()])
+    Promise.all([getAuctionData()])
       .catch((error) => console.error("Error fetching data:", error))
       .finally(() => setLoader(false));
   }, []);
-
-  const getStudentInfo = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/students/get-me/`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      setStudentPoint(result.point);
-    } catch (error) {
-      console.error("Error fetching student info:", error);
-    }
-  };
 
   const getAuctionData = async () => {
     try {
@@ -86,11 +66,7 @@ function Auction({ setLoader }) {
         <IoIosArrowBack />
         <h2>Auction</h2>
       </div>
-      {studentPoint !== null && (
-        <h4 className="auction_point">
-          <span>Ball :</span> {studentPoint} XP
-        </h4>
-      )}
+
       <div className="auction_data">
         <div className="div">
           <h3>Keyingi auctiongacha qolgan vaqt</h3>

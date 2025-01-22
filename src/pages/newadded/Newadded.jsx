@@ -7,8 +7,10 @@ import { baseUrl } from "../../config";
 import { FaRegUser } from "react-icons/fa";
 import { Autocomplete, TextField } from "@mui/material";
 
-function Newadded({ courses, setLoader }) {
+function Newadded({ mentorId, courses, setLoader }) {
+
   const [students, setStudents] = useState(null);
+  const [filteredStudents, setFilteredStudents] = useState(null)
   const [searchQuery, setSearchQuery] = useState(""); // Qidiruv so'rovi uchun state
 
   const daletStudent = (id) => {
@@ -22,12 +24,10 @@ function Newadded({ courses, setLoader }) {
       redirect: "follow",
     };
 
-    fetch(`${baseUrl}/students/${id}/`, requestOptions)
+    fetch(`${baseUrl}/give-points/${id}/`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         setLoader(false);
-        // O'chirilgandan keyin sahifani yangilash
         getStudents();
       })
       .catch((error) => {
@@ -37,6 +37,8 @@ function Newadded({ courses, setLoader }) {
   };
 
   const getStudents = (id) => {
+    console.log(mentorId);
+
     setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
@@ -44,33 +46,43 @@ function Newadded({ courses, setLoader }) {
     const requestOptions = {
       method: "GET",
       headers: myHeaders,
-      redirect: "follow",
+      redirect: "follow"
     };
 
-    fetch(`${baseUrl}/students/?${id ? id : ""}`, requestOptions)
+    fetch(`${baseUrl}/give-points/?mentor=${mentorId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
+
         setStudents(result);
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
         setLoader(false);
       });
   };
+
 
   useEffect(() => {
     getStudents();
   }, []);
 
-  // Filtered students based on search query
-  const filteredStudents = students?.filter((student) => {
-    const fullName =
-      (student?.user?.first_name || "").toLowerCase() +
-      " " +
-      (student?.user?.last_name || "").toLowerCase();
-    return fullName.includes(searchQuery.toLowerCase()); // Match with the search query
-  });
+  useEffect(() => {
+    if (Array.isArray(students)) {
+      const Filtered = students.filter((student) => {
+        const fullName =
+          (student?.student?.user?.first_name || "").toLowerCase() +
+          " " +
+          (student?.student?.user?.last_name || "").toLowerCase();
+        return fullName.includes(searchQuery?.toLowerCase()); // Match with the search query
+      });
+      setFilteredStudents(Filtered);
+    } else {
+      setFilteredStudents([]);
+    }
+  }, [students, searchQuery]);
+
+
 
   return (
     <>
@@ -127,29 +139,29 @@ function Newadded({ courses, setLoader }) {
               <li key={index} className="student-item">
                 <div className="student-info">
                   <div className="avatar">
-                    {item.image ? (
-                      <img src={`${item.image}`} alt="" />
+                    {item?.student?.image ? (
+                      <img src={`${item?.student?.image}`} alt="" />
                     ) : (
                       <FaRegUser />
                     )}
                   </div>
                   <div>
                     <div className="student-name">
-                      {item?.user?.first_name || item?.user?.last_name ? (
+                      {item?.student?.user?.first_name || item?.student?.user?.last_name ? (
                         <h3>
-                          {item?.user?.first_name} {item?.user?.last_name}
+                          {item?.student?.user?.first_name} {item?.student?.user?.last_name}
                         </h3>
                       ) : (
                         <h3>Ism mavjud emas</h3>
                       )}
                     </div>
                     <p className="student-description">
-                      {item?.bio ? item?.bio : " Bio mavjud emas"}
+                      {item?.student?.bio ? item?.student?.bio : " Bio mavjud emas"}
                     </p>
                   </div>
                 </div>
                 <div className="student-actions">
-                  <span className="xp">{item.point} XP</span>
+                  <span className="xp">{item.amount} XP</span>
                   <div className="btns">
                     <button className="recent-add">Tahrirlash</button>
                     <button

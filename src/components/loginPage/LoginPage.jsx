@@ -4,17 +4,17 @@ import { MdEmail } from 'react-icons/md';
 import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
 import { setToken } from '../../service/token';
 import { baseUrl } from '../../config';
+import { toast } from 'react-toastify';
 
 function LoginPage({ isOpen, onClose, setLoader }) {
     const [emailFocus, setEmailFocus] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
 
     const getDeviceToken = () => {
-        setLoader(true);
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -30,21 +30,25 @@ function LoginPage({ isOpen, onClose, setLoader }) {
             redirect: "follow",
         };
 
+
         fetch(`${baseUrl}/token/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-
                 setLoader(false);
-
                 if (result.access) {
                     setToken(result.access);
                     onClose();
                     setLoader(false);
+                    toast.success("Siz muvafaqqiyatli ro'hatdan o'tdingiz");
+                } else {
+                    toast.error("Login yoki parolda hatolik bor");
+
                 }
             })
             .catch((error) => {
-                console.error(error);
+
                 setLoader(false);
+                toast.error("Login yoki parolda hatolik bor");
             });
     };
 
@@ -64,7 +68,7 @@ function LoginPage({ isOpen, onClose, setLoader }) {
                                 {/* Email */}
                                 <div className={`row ${emailFocus ? "focused" : ""}`}>
                                     <label htmlFor="email" className={`placeholder ${emailFocus ? "active" : ""}`}>
-                                        login
+                                        Login
                                     </label>
                                     {/* <img src="/public/imgs/email.svg" alt="" /> */}
                                     <MdEmail id="input-logo" />
@@ -109,11 +113,11 @@ function LoginPage({ isOpen, onClose, setLoader }) {
                                         </div>
                                     }
                                 </div>
-                                <button type="submit"  >Login</button>
+                                <button type="submit" >Login</button>
                             </form>
                         </div>
                         <div className="person_img">
-                            <img src="/public/imgs/boy_img.svg" alt="" />
+                            <img src="/imgs/boy_img.svg" alt="" />
                         </div>
                     </div>
                 </div>

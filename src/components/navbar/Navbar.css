@@ -12,6 +12,7 @@
 }
 
 nav .container {
+  padding: 0px 20px;
   display: flex;
   justify-content: space-between;
   color: #17222B;
@@ -40,6 +41,22 @@ nav .container>div {
   align-items: center;
   gap: 10px;
   position: relative;
+}
+
+.user .nav_point {
+
+  font-size: 23px;
+  color: #1d537c;
+  height: 50px;
+  font-weight: 600;
+  display: flex;
+  gap: 5px;
+
+  align-items: center;
+}
+
+.user .nav_point img {
+  width: 30px;
 }
 
 .modalBg {

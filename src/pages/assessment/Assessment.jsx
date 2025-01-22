@@ -7,6 +7,7 @@ import GivePoint from "../../components/givePointModal/GivePoint";
 import { NavLink } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import { Autocomplete, TextField } from "@mui/material";
+import { toast } from "react-toastify";
 
 function Assessment({ courses, userInfo, setLoader }) {
   const [students, setStudents] = useState(null);
@@ -14,23 +15,15 @@ function Assessment({ courses, userInfo, setLoader }) {
   const [amount, setAmount] = useState(null);
   const [description, setDescription] = useState(null);
   const [date, setDate] = useState(null);
-  const [point_type, setPoint_type] = useState(null);
+  const [point_type, setPoint_type] = useState("1");
   const [mentor, setMentor] = useState(null);
   const [student, setStudent] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(""); // Qidiruv query
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getCurrentDate = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
   };
-  console.log(mentor);
-
-  useEffect(() => {
-    setDate(getCurrentDate()); // page load bo'lganda, sana defaultini qo'shamiz
-    getStudents();
-    getMentor();
-  }, [getToken()]);
-
   const getMentor = () => {
     setLoader(true);
     const myHeaders = new Headers();
@@ -65,7 +58,7 @@ function Assessment({ courses, userInfo, setLoader }) {
       redirect: "follow",
     };
 
-    fetch(`${baseUrl}/students/?${id ? id : ""}`, requestOptions)
+    fetch(`${baseUrl}/students/?group__mentor=${mentor ? mentor : ""}&${id ? id : ""}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setStudents(result);
@@ -96,7 +89,7 @@ function Assessment({ courses, userInfo, setLoader }) {
     const raw = JSON.stringify({
       amount,
       description,
-      date, // Default sana shu yerda yuboriladi
+      date,
       mentor,
       student,
       point_type,
@@ -115,13 +108,24 @@ function Assessment({ courses, userInfo, setLoader }) {
         setShowGivePoint(false);
         getStudents();
         setLoader(false);
+        toast.success("Baholandi")
       })
       .catch((error) => {
         setLoader(false);
-        console.error(error);
+        toast.error("hatolik mavjud");
       });
   };
 
+  useEffect(() => {
+    setDate(getCurrentDate());
+    getMentor();
+  }, [getToken()]);
+
+  useEffect(() => {
+    if (mentor) {
+      getStudents();
+    }
+  }, [mentor]);
   return (
     <div className="assessment">
       <GivePoint
@@ -153,8 +157,8 @@ function Assessment({ courses, userInfo, setLoader }) {
           />
         </div>
 
-        <NavLink to="/newadded" className={"recent-add"}>
-          Baholangan o'quvchilar
+        <NavLink to="/teacherhistory" className={"recent-add"}>
+          Baholar Tarixi
         </NavLink>
       </header>
 
@@ -204,7 +208,12 @@ function Assessment({ courses, userInfo, setLoader }) {
                   </div>
                 </div>
                 <div className="student-actions">
-                  <span className="xp">{item?.point ? item?.point : 0} XP</span>
+                  <div className="div">
+                    {/* <img src="imgs/coin-3.png" alt="" /> */}
+                    <span className="xp">
+                      {item?.point ? item?.point : 0} </span>
+                      point
+                  </div>
                   <button
                     onClick={() => {
                       setStudent(item?.id);
