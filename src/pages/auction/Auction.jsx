@@ -4,9 +4,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import { baseUrl } from "../../config";
 import { getToken } from "../../service/token";
 import FlipCountdown from "../../components/clock/FlipCountdown";
+import { useNavigate } from "react-router-dom";
 
 function Auction({ setLoader }) {
   const [auctionData, setAuctionData] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoader(true);
@@ -63,7 +65,9 @@ function Auction({ setLoader }) {
   return (
     <>
       <div className="pageName">
-        <IoIosArrowBack />
+        <IoIosArrowBack onClick={() => {
+          navigate(-1)
+        }} />
         <h2>Auction</h2>
       </div>
 

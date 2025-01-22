@@ -3,6 +3,8 @@ import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 import "./Profile.css";
 import { FaPen, FaRegUser } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 function Profile({ setLoader }) {
   const [studentInfo, setStudentInfo] = useState(null);
@@ -11,6 +13,7 @@ function Profile({ setLoader }) {
   const [editDate, setEditDate] = useState("");
   const [editImg, setEditImg] = useState(null);
   const [imgView, setImgView] = useState(false)
+  const navigate = useNavigate()
 
 
   const getStudentInfo = () => {
@@ -88,7 +91,12 @@ function Profile({ setLoader }) {
 
   return (
     <div className="profilePage">
-      <h1 className="profilName">Mening profilim</h1>
+       <div className="pageName">
+          <IoIosArrowBack onClick={() => {
+            navigate(-1)
+          }} />
+          <h2>Mening profilim</h2>
+        </div>
       {imgView && <div className="userProfileImgView" onClick={() => {
         setImgView(false)
 

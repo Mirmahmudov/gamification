@@ -4,6 +4,8 @@ import { FaCrown, FaRegUser, FaUser } from 'react-icons/fa';
 import { getToken } from '../../service/token';
 import { baseUrl } from '../../config';
 import { HiTrophy } from 'react-icons/hi2';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 function Students({ setLoader }) {
     const [studentList, setStudentList] = useState([]);
@@ -14,6 +16,7 @@ function Students({ setLoader }) {
     const [imgViewModal, setImgViewModal] = useState(false)
     const [userImg, setUserImg] = useState()
     const [studentInfo, setStudentInfo] = useState()
+    const navigate = useNavigate()
     const getStudent = () => {
         setLoader(true);
         const myHeaders = new Headers();
@@ -231,12 +234,17 @@ function Students({ setLoader }) {
 
                 <div className="studentTable">
                     <div className="tableHeader">
-                        <h1>O'quvchilar jadvali</h1>
-                       
+                        <div className="pageName">
+                            <IoIosArrowBack onClick={() => {
+                                navigate(-1)
+                            }} />
+                            <h2>O'quvchilar jadvali</h2>
+                        </div>
+
                         {
-                          
-                            
-                          !studentInfo?.detail ?
+
+
+                            !studentInfo?.detail ?
                                 <>
                                     <div className="user_filter">
                                         <input

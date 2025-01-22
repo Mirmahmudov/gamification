@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import "./PointHistory.css"
 import { getToken } from '../../service/token';
 import { baseUrl } from '../../config';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 function PointHistory({ setLoader }) {
   const [pointData, setPointData] = useState()
@@ -28,6 +30,7 @@ function PointHistory({ setLoader }) {
       })
       .catch((error) => console.error(error));
   }
+  const navigate =useNavigate()
   const getPoints = () => {
     setLoader(true)
     const myHeaders = new Headers();
@@ -42,8 +45,6 @@ function PointHistory({ setLoader }) {
     fetch(`${baseUrl}/give-points/?student=${studentId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-
         setPointData(result?.reverse());
         setLoader(false)
       })
@@ -130,6 +131,12 @@ function PointHistory({ setLoader }) {
 
   return (
     <>
+      <div className="pageName">
+        <IoIosArrowBack onClick={() => {
+          navigate(-1)
+        }} />
+        <h2>Pointlar tarixi</h2>
+      </div>
       <div className="pointhistory">
         {
           pointData?.length == 0 ? "ma'lumot hozzircha mavjud emas" : pointData?.map((item) => {

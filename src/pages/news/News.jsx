@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./News.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
+import { IoIosArrowBack } from "react-icons/io";
 
 function News({ getNewsStatus, setLoader, allNewsStatus }) {
   const [newData, setNewData] = useState()
+  const navigate = useNavigate()
   const getNews = () => {
     setLoader(true)
     const myHeaders = new Headers();
@@ -49,7 +51,12 @@ function News({ getNewsStatus, setLoader, allNewsStatus }) {
   return (
     <>
       <div className="news">
-        <h1>yangiliklar</h1>
+        <div className="pageName">
+          <IoIosArrowBack onClick={() => {
+            navigate(-1)
+          }} />
+          <h2>Yangiliklar</h2>
+        </div>
         <div className="new_cards">
           {
             newData?.map((item, index) => {
