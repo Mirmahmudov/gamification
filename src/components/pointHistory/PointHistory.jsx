@@ -123,8 +123,8 @@ function PointHistory({ setLoader }) {
     const year = date.getFullYear(); // Yil
 
     // Formatni qaytarish
-    // return `${weekday}, ${day} ${month}, ${year}`;
-    return ` ${day} ${month}, ${year}`;
+    return `${weekday}, ${day}-${month}, ${year}`;
+    // return ` ${day} ${month}, ${year}`;
   };
 
 
@@ -135,12 +135,12 @@ function PointHistory({ setLoader }) {
         <IoIosArrowBack onClick={() => {
           navigate(-1)
         }} />
-        <h2>Pointlar tarixi</h2>
+        <h2>Pointlar</h2>
       </div>
       <div className="pointhistory">
         {
-          pointData?.length == 0 ? "ma'lumot hozzircha mavjud emas" : pointData?.map((item) => {
-            return <div className="row">
+          pointData?.length == 0 ? "ma'lumot hozzircha mavjud emas" : pointData?.map((item,index) => {
+            return <div className="row" key={index}>
               <div className="div">
                 <div className="imgs">
                   <img src="imgs/coin-3.png" alt="" />
@@ -148,7 +148,7 @@ function PointHistory({ setLoader }) {
                 <div className="pointHistoryInfo">
                   <h3>{onePointType(item.point_type)?.name || "Noma'lum turi"}
                   </h3>
-                  <h4>{item?.description ? item?.description : "baho uchun izoh mavjud emas"}</h4>
+                  {/* <h4>{item?.description ? item?.description : "Izoh mavjud emas"}</h4> */}
                   <h5>
                     {formatDate(item?.created_at)}
                   </h5>

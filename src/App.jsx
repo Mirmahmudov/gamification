@@ -25,6 +25,7 @@ import { ToastContainer } from "react-toastify";
 import PointHistory from "./components/pointHistory/PointHistory";
 import PointHistoryTeacher from "./components/pointHistoryTeacher/PointHistoryTeacher";
 import EditPointHistory from "./components/pointHistoryTeacher/EditPointHistory";
+import { GoHistory } from "react-icons/go";
 
 function App() {
   const [isModalOpen, setModalOpen] = useState(getToken() ? false : true);
@@ -183,7 +184,7 @@ function App() {
                     <RiDashboardLine />
                     <h3>Dashboard</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
@@ -192,7 +193,7 @@ function App() {
                     <MdOutlineAssessment />
                     <h3>Baholash</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
@@ -201,7 +202,7 @@ function App() {
                     <MdOutlineWatchLater />
                     <h3>Yangiliklar</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
@@ -210,7 +211,7 @@ function App() {
                     <MdOutlineLeaderboard />
                     <h3>Leaderboard</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
@@ -219,7 +220,7 @@ function App() {
                     <RiAuctionLine />
                     <h3>Auksion</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
             </ul>
@@ -306,10 +307,10 @@ function App() {
               <li>
                 <NavLink to={"/"}>
                   <div>
-                    <MdWhatshot />
+                    <MdOutlineLeaderboard />
                     <h3>Leaderboard </h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
@@ -318,7 +319,7 @@ function App() {
                     <RiAuctionLine />
                     <h3>Auksion</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
 
@@ -328,7 +329,7 @@ function App() {
                     <MdOutlineWatchLater />
                     <h3>Yangiliklar</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
@@ -337,16 +338,16 @@ function App() {
                     <FaRegUser />
                     <h3>Profil</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
               <li>
                 <NavLink to={"/pointhistory"}>
                   <div>
-                    <FaHistory />
-                    <h3>Pointlar Tarixi</h3>
+                    <GoHistory />
+                    <h3>Pointlar</h3>
                   </div>
-                  <FaChevronRight />
+
                 </NavLink>
               </li>
             </ul>
@@ -381,8 +382,8 @@ function App() {
               <li>
                 <NavLink to={"/pointhistory"}>
                   <div>
-                    <FaHistory />
-                    <h3>Point_Tarixi</h3>
+                    <GoHistory />
+                    <h3>Pointlar</h3>
                   </div>
                 </NavLink>
               </li>

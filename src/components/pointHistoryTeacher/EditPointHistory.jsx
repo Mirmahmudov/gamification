@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'; // useNavigate import
 import "./EditPointHistory.css";
 import { getToken } from '../../service/token';
 import { baseUrl } from '../../config';
+import { IoIosArrowBack } from 'react-icons/io';
 
 function EditPointHistory({ mentorId, setLoader }) {
     const { id } = useParams();
@@ -80,7 +81,7 @@ function EditPointHistory({ mentorId, setLoader }) {
         fetch(`${baseUrl}/give-points/${id}/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                navigate('/assessment'); 
+                navigate('/assessment');
             })
             .catch((error) => console.error(error));
     };
@@ -116,7 +117,12 @@ function EditPointHistory({ mentorId, setLoader }) {
     return (
         <div className="edit_point">
             <div className="container">
-                <h1 className="profilName">Tahrirlash</h1>
+                <div className="pageName">
+                    <IoIosArrowBack onClick={() => {
+                        navigate(-1)
+                    }} />
+                    <h2>Yangiliklar</h2>
+                </div>
                 <form onSubmit={editPoint}>
                     <div className="row">
                         <div className="col">
@@ -172,6 +178,11 @@ function EditPointHistory({ mentorId, setLoader }) {
                         </button>
                         <button onClick={deletePoint} className="del">
                             O'chirish
+                        </button>
+                        <button onClick={()=>{
+                            navigate(-1)
+                        }}>
+                            bekor qilish
                         </button>
                     </div>
                 </form>

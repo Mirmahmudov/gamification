@@ -143,11 +143,14 @@
   display: flex;
   align-items: center;
   margin: 10px 0px;
-  gap: 50px;
+  gap: 10px;
   font-size: 20px;
-  font-weight: 700;
   color: #1d537c;
   margin-bottom: 20px;
+}
+
+.pageName h2 {
+  font-weight: 500;
 }
 
 .pageName svg {

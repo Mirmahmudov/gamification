@@ -80,14 +80,13 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus }) {
               <Link to={"/"} className="logo">
                 <img src="/imgs/logo.svg" alt="logo" />
               </Link>
-              <h1>Gamification</h1>
             </div>
             <div className="user">
-              {/* <div className="nav_point">
+              <div className="nav_point">
                 <img src="imgs/coin-3.png" alt="" />
-                <h3>100</h3>
+                <h3>{studentInfo?.point}</h3>
 
-              </div> */}
+              </div>
 
               <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
                 allNewsStatus?.num_unread_news != 0 ?

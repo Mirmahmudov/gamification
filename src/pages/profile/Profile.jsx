@@ -13,7 +13,7 @@ function Profile({ setLoader }) {
   const [editDate, setEditDate] = useState("");
   const [editImg, setEditImg] = useState(null);
   const [imgView, setImgView] = useState(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate() 
 
 
   const getStudentInfo = () => {
@@ -95,7 +95,7 @@ function Profile({ setLoader }) {
           <IoIosArrowBack onClick={() => {
             navigate(-1)
           }} />
-          <h2>Mening profilim</h2>
+          <h2> Ma'lumotlarim</h2>
         </div>
       {imgView && <div className="userProfileImgView" onClick={() => {
         setImgView(false)
@@ -181,8 +181,8 @@ function Profile({ setLoader }) {
             </div>
           </div>
           <div className="point">
-            <img src="imgs/coin-3.png" alt="" />
-            {studentInfo?.point}
+            {/* <img src="imgs/coin-3.png" alt="" />
+            {studentInfo?.point} */}
             <button onClick={() => setEditModal(true)}>
               <FaPen /> Tahrirlash
             </button>

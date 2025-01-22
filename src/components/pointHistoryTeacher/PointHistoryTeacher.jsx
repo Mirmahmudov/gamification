@@ -100,7 +100,7 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
     return (
         <>
             <div className="pointhistory teacherPoint">
-                <h1 className='PageName'>Pointlar Tahrixi</h1>
+                <h1 className='PageName'>Pointlar</h1>
 
                 {/* Search input */}
                 <input

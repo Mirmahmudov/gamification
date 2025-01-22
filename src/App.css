@@ -13,6 +13,9 @@
   padding: 40px 10px;
   flex-shrink: 0;
 }
+.links h3{
+  font-weight: 500;
+}
 
 .links_two {
   text-align: center;
@@ -35,6 +38,7 @@
 
 .links_two h3 {
   font-size: 11px;
+  
 }
 
 .links_two svg {
@@ -73,12 +77,12 @@
   display: flex !important;
   align-items: center;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   justify-content: space-between;
   text-decoration: none;
   color: #1E537D;
   padding: 10px 5px;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
 }
 
 .links li a:hover {
@@ -99,7 +103,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .links li a div svg {
