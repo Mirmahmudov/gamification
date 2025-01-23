@@ -41,7 +41,6 @@ function Profile({ setLoader }) {
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
         setLoader(false);
       });
   };
@@ -77,9 +76,7 @@ function Profile({ setLoader }) {
       })
       .catch((error) => {
         setEditModal(false)
-        console.error(error)
         setLoader(false)
-
       });
 
   };

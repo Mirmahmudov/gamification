@@ -7,7 +7,7 @@ import { HiTrophy } from 'react-icons/hi2';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
-function Students({ setLoader }) {
+function Students({ setLoader, mentorId }) {
     const [studentList, setStudentList] = useState([]);
     const [filterData, setFilterData] = useState([]);
     const [groups, setGroups] = useState([]);
@@ -36,12 +36,12 @@ function Students({ setLoader }) {
                 setLoader(false);
             })
             .catch((error) => {
-                console.error(error);
                 setLoader(false);
             });
     };
 
     const getStudentInfo = () => {
+        setLoader(true);
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -55,9 +55,12 @@ function Students({ setLoader }) {
             .then((response) => response.json())
 
             .then((result) => {
+                setLoader(false);
                 setStudentInfo(result)
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                setLoader(false);
+            });
     }
 
 
@@ -72,26 +75,30 @@ function Students({ setLoader }) {
             redirect: 'follow',
         };
 
-        fetch(`${baseUrl}/groups/`, requestOptions)
+        fetch(`${baseUrl}/groups/?mentor=${mentorId}&active=true`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setGroups(result || []);
                 setLoader(false);
             })
             .catch((error) => {
-                console.error(error);
                 setLoader(false);
             });
     };
 
     useEffect(() => {
         getStudent();
-        getGroup();
         getStudentInfo()
     }, []);
 
+
     useEffect(() => {
-        // Detect screen size
+        if (mentorId) {
+            getGroup();
+        }
+    }, [mentorId])
+
+    useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 700) {
                 setIsLargeScreen(true);
@@ -100,12 +107,13 @@ function Students({ setLoader }) {
             }
         };
         window.addEventListener('resize', handleResize);
-        handleResize(); // Initial check
+        handleResize();
 
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    
 
     const handleSearch = (event) => {
         const query = event.target.value.toLowerCase();
@@ -139,18 +147,6 @@ function Students({ setLoader }) {
             setStudentList(filteredStudents);
         }
     };
-
-    const reorderTopStudents = () => {
-        if (isLargeScreen && studentList.length > 1) {
-            const reordered = [...studentList];
-            const temp = reordered[0];
-            reordered[0] = reordered[1];
-            reordered[1] = temp;
-            return reordered;
-        }
-        return studentList;
-    };
-
     const getGroupName = (id) => {
         return groups?.find((item) => item.id == id);
     };
@@ -168,8 +164,8 @@ function Students({ setLoader }) {
                 </div>}
                 <div className="topStudents">
                     <div className="row">
-                        {Array.isArray(reorderTopStudents()) && reorderTopStudents().length > 0
-                            ? reorderTopStudents().slice(0, 3).map((item, index) => {
+                        {Array.isArray(studentList) && studentList.length > 0
+                            ? studentList.slice(0, 3).map((item, index) => {
                                 const groupName = Array.isArray(groups)
                                     ? groups.find((group) => group?.id === item.group)?.name
                                     : 'Mavjud emas';
@@ -204,7 +200,7 @@ function Students({ setLoader }) {
                                                             {groupName ? groupName : 'guruh mavjud emas'}
                                                         </h3>
                                                         <div className="pointRow">
-                                                            <span className="number">{ }</span>
+                                                            <span className="number">{index + 1}</span>
                                                             {/* <span className="point">{item?.point} XP</span> */}
                                                         </div>
                                                     </>
@@ -215,7 +211,7 @@ function Students({ setLoader }) {
                                                             {groupName ? groupName : 'guruh mavjud emas'}
                                                         </h3>
                                                         <div className="pointRow">
-                                                            <span className="number">{ }</span>
+                                                            <span className="number">{index + 1}</span>
                                                             {/* <span className="point">{item?.point} XP</span> */}
                                                         </div>
                                                     </>

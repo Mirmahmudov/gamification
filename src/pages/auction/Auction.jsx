@@ -13,7 +13,7 @@ function Auction({ setLoader }) {
   useEffect(() => {
     setLoader(true);
     Promise.all([getAuctionData()])
-      .catch((error) => console.error("Error fetching data:", error))
+      .catch((error) => {  })
       .finally(() => setLoader(false));
   }, []);
 
@@ -31,7 +31,7 @@ function Auction({ setLoader }) {
       const result = await response.json();
       setAuctionData(result);
     } catch (error) {
-      console.error("Error fetching auction data:", error);
+      
     }
   };
 

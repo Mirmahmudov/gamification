@@ -4,10 +4,11 @@ import { CiSearch } from "react-icons/ci";
 import { getToken } from "../../service/token";
 import { baseUrl } from "../../config";
 import GivePoint from "../../components/givePointModal/GivePoint";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import { Autocomplete, TextField } from "@mui/material";
 import { toast } from "react-toastify";
+import { IoIosArrowBack } from "react-icons/io";
 
 function Assessment({ courses, userInfo, setLoader }) {
   const [students, setStudents] = useState(null);
@@ -19,11 +20,13 @@ function Assessment({ courses, userInfo, setLoader }) {
   const [mentor, setMentor] = useState(null);
   const [student, setStudent] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const getCurrentDate = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
   };
+
   const getMentor = () => {
     setLoader(true);
     const myHeaders = new Headers();
@@ -42,7 +45,6 @@ function Assessment({ courses, userInfo, setLoader }) {
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
         setLoader(false);
       });
   };
@@ -61,15 +63,10 @@ function Assessment({ courses, userInfo, setLoader }) {
     fetch(`${baseUrl}/students/?group__mentor=${mentor ? mentor : ""}&${id ? id : ""}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-
-
-
         setStudents(result);
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
         setLoader(false);
       });
   };
@@ -78,12 +75,12 @@ function Assessment({ courses, userInfo, setLoader }) {
     setSearchQuery(e.target.value);
   };
 
-  const filteredStudents = students?.filter((student) => {
-    const fullName =
-      `${student.user?.first_name} ${student.user?.last_name}`.toLowerCase();
-    return fullName.includes(searchQuery.toLowerCase());
-  });
-
+  const filteredStudents = students
+    ?.filter((student) => {
+      const fullName = `${student.user?.first_name} ${student.user?.last_name}`.toLowerCase();
+      return fullName.includes(searchQuery.toLowerCase());
+    })
+    ?.sort((a, b) => (b.point || 0) - (a.point || 0)); // Point bo'yicha tartiblash
 
   const givePoint = () => {
     setLoader(true);
@@ -113,7 +110,7 @@ function Assessment({ courses, userInfo, setLoader }) {
         setShowGivePoint(false);
         getStudents();
         setLoader(false);
-        toast.success("Baholandi")
+        toast.success("Baholandi");
       })
       .catch((error) => {
         setLoader(false);
@@ -131,8 +128,13 @@ function Assessment({ courses, userInfo, setLoader }) {
       getStudents();
     }
   }, [mentor]);
+
   return (
     <div className="assessment">
+      <div className="pageName">
+        <IoIosArrowBack onClick={() => navigate(-1)} />
+        <h2>Baholash</h2>
+      </div>
       <GivePoint
         userInfo={userInfo}
         givePoint={givePoint}
@@ -154,9 +156,7 @@ function Assessment({ courses, userInfo, setLoader }) {
             onChange={(event, value) => {
               getStudents(`group=${value?.id || ""}`);
             }}
-            renderInput={(params) => (
-              <TextField {...params} label="Barcha guruhlar" />
-            )}
+            renderInput={(params) => <TextField {...params} label="Barcha guruhlar" />}
             isOptionEqualToValue={(option, value) => option?.id === value?.id}
             className="custom-autocomplete"
           />
@@ -186,52 +186,44 @@ function Assessment({ courses, userInfo, setLoader }) {
         <hr />
 
         <ul className="students-list">
-          {filteredStudents?.map((item, index) => {
-            return (
-              <li key={index} className="student-item">
-                <div className="student-info">
-                  <div className="avatar">
-                    {item?.image ? (
-                      <img src={`${item?.image}`} alt="" />
-                    ) : (
-                      <FaRegUser />
-                    )}
-                  </div>
-                  <div>
-                    <p className="student-name">
-                      {item?.user?.first_name || item?.user?.last_name ? (
-                        <>
-                          {item?.user?.first_name} {item?.user?.last_name}
-                        </>
-                      ) : (
-                        <>Ism mavjud emas</>
-                      )}
-                    </p>
-                    <p className="student-description">
-                      {item?.bio ? item.bio : "ma'lumot mavjud emas"}
-                    </p>
-                  </div>
+          {filteredStudents?.map((item, index) => (
+            <li key={index} className="student-item">
+              <div className="student-info">
+                <div className="avatar">
+                  {item?.image ? (
+                    <img src={`${item?.image}`} alt="" />
+                  ) : (
+                    <FaRegUser />
+                  )}
                 </div>
-                <div className="student-actions">
-                  <div className="div">
-                    {/* <img src="imgs/coin-3.png" alt="" /> */}
-                    <span className="xp">
-                      {item?.point ? item?.point : 0} </span>
-                    point
-                  </div>
-                  <button
-                    onClick={() => {
-                      setStudent(item?.id);
-                      setShowGivePoint(true);
-                    }}
-                    className="recent-add"
-                  >
-                    Rag'batlantirish
-                  </button>
+                <div>
+                  <p className="student-name">
+                    {item?.user?.first_name || item?.user?.last_name
+                      ? `${item?.user?.first_name || ""} ${item?.user?.last_name || ""}`
+                      : "Ism mavjud emas"}
+                  </p>
+                  <p className="student-description">
+                    {item?.bio ? item.bio : "ma'lumot mavjud emas"}
+                  </p>
                 </div>
-              </li>
-            );
-          })}
+              </div>
+              <div className="student-actions">
+                <div className="div">
+                  <span className="xp">{item?.point ? item?.point : 0}</span>
+                  point
+                </div>
+                <button
+                  onClick={() => {
+                    setStudent(item?.id);
+                    setShowGivePoint(true);
+                  }}
+                  className="recent-add"
+                >
+                  Rag'batlantirish
+                </button>
+              </div>
+            </li>
+          ))}
         </ul>
       </section>
     </div>

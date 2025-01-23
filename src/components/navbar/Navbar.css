@@ -17,8 +17,6 @@ nav .container {
   align-items: center;
   justify-content: space-between;
   color: #17222B;
-
-
 }
 
 .pageTitle {
@@ -26,7 +24,8 @@ nav .container {
   align-items: center;
   gap: 20px;
   font-size: 24px;
-  width: 280px;
+  width: 180px;
+  justify-content: center;
 }
 
 
@@ -38,26 +37,17 @@ nav .container {
   gap: 10px;
 }
 
-.pageTitle .logo img:nth-child(2) {
-  margin-bottom: 10px;
-}
-
-.pageTitle .logo.active img:nth-child(2) {
-  display: none;
-}
-
 .pageTitle .logo .coin_img {
   width: 50px;
-}
-
-.pageTitle .logo.active {
-  width: 50px;
-  /* background-color: red; */
 }
 
 .pageTitle .bar {
   color: #1d537c;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pageTitle h1 {
@@ -254,6 +244,7 @@ nav .container>div {
 
 
 
+  .pageTitle .logo.active,
   .pageTitle .logo {
     width: 100%;
     width: 100px;
@@ -265,13 +256,6 @@ nav .container>div {
 
   }
 
-  .pageTitle .logo img:nth-child(1) {
-    display: none;
-  }
-
-  .pageTitle .logo img:nth-child(2) {
-    margin-bottom: 0px;
-  }
 
   nav .pageTitle h1 {
     display: none;
@@ -280,6 +264,10 @@ nav .container>div {
   nav .logo img {
     width: 100%;
     object-fit: contain !important;
+  }
+
+  .pageTitle .logo.active img:nth-child(2) {
+    display: block;
   }
 
   nav .user span {
@@ -364,6 +352,10 @@ nav .container>div {
 
   .pageTitle .bar {
     display: none;
+  }
+
+  .pageTitle {
+    width: 110px;
   }
 
 }

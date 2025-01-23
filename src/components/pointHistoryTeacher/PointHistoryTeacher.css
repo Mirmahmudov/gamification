@@ -78,6 +78,11 @@
     margin-bottom: 20px;
     color: #333; /* Matn rangi */
 }
+.teacherPoint .historyFilter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 /* Focus qilingan holat */
 .teacherPoint .searchInput:focus {

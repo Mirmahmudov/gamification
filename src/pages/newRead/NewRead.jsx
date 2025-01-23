@@ -27,12 +27,12 @@ function NewRead({ setLoader }) {
                 setLoader(false)
             })
             .catch((error) => {
-                console.error(error)
                 setLoader(false)
             });
     }
 
     const readNews = () => {
+        setLoader(true);
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer  ${getToken()}`);
 
@@ -45,9 +45,11 @@ function NewRead({ setLoader }) {
         fetch(`${baseUrl}/news/${id}/mark-as-read/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                // console.log(result)
+                setLoader(false);
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                setLoader(false);
+            });
 
     }
 

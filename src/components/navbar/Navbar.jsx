@@ -47,7 +47,10 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
   };
 
   useEffect(() => {
-    getStudentInfo();
+
+      getStudentInfo();
+    
+
   }, []);
 
   const handleClickOutside = (e) => {
@@ -79,8 +82,8 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
           <div className="nav">
             <div className="container">
               <div className="pageTitle">
-                <Link to={"/"} className={barActive?"logo active":"logo"} >
-                  <img className="coin_img" src="imgs/coin-3.png" alt="" />
+                <Link to={"/"} className={barActive ? "logo active" : "logo"} >
+                  {/* <img className="coin_img" src="imgs/coin-3.png" alt="" /> */}
                   <img src="/imgs/logo.svg" alt="logo" />
                 </Link>
                 <div className="bar">
@@ -90,11 +93,14 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                 </div>
               </div>
               <div className="user">
-                <div className="nav_point">
-                  <img src="imgs/coin-3.png" alt="" />
-                  <h3>{studentInfo?.point}</h3>
+                {
+                  studentInfo?.point ? <div className="nav_point">
+                    <img src="/imgs/coin-3.png" alt="" />
+                    <h3>{studentInfo?.point}</h3>
 
-                </div>
+                  </div> : ""
+                }
+
 
                 <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
                   allNewsStatus?.num_unread_news != 0 ?

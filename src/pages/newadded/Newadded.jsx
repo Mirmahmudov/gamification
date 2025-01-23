@@ -31,14 +31,11 @@ function Newadded({ mentorId, courses, setLoader }) {
         getStudents();
       })
       .catch((error) => {
-        console.error(error);
         setLoader(false);
       });
   };
 
   const getStudents = (id) => {
-    console.log(mentorId);
-
     setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
@@ -52,8 +49,6 @@ function Newadded({ mentorId, courses, setLoader }) {
     fetch(`${baseUrl}/give-points/?mentor=${mentorId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-
         setStudents(result);
         setLoader(false);
       })
@@ -64,8 +59,10 @@ function Newadded({ mentorId, courses, setLoader }) {
 
 
   useEffect(() => {
-    getStudents();
-  }, []);
+    if (mentorId) {
+      getStudents();
+    }
+  }, [mentorId]);
 
   useEffect(() => {
     if (Array.isArray(students)) {

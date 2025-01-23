@@ -26,6 +26,7 @@ import PointHistory from "./components/pointHistory/PointHistory";
 import PointHistoryTeacher from "./components/pointHistoryTeacher/PointHistoryTeacher";
 import EditPointHistory from "./components/pointHistoryTeacher/EditPointHistory";
 import { GoHistory } from "react-icons/go";
+import OnePoint from "./components/onePoint/OnePoint";
 
 function App() {
   const [isModalOpen, setModalOpen] = useState(getToken() ? false : true);
@@ -56,7 +57,7 @@ function App() {
         setLoader(false)
       })
       .catch((error) => {
-        console.error(error)
+        // console.error(error)
         setLoader(false)
       });
   }
@@ -81,7 +82,7 @@ function App() {
       })
       .catch((error) => {
         setLoader(false)
-        console.error(error)
+        // console.error(error)
       });
   }
 
@@ -104,7 +105,7 @@ function App() {
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         setLoader(false);
       });
   };
@@ -128,7 +129,7 @@ function App() {
         setLoader(false);
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         setLoader(false);
       });
   };
@@ -178,7 +179,7 @@ function App() {
 
         {role == "mentor" ? (
           <div className="main container">
-            <ul className="links ">
+            <ul className={barActive ? "links active " : "links "}>
               <li>
                 <NavLink to={"/"}>
                   <div>
@@ -284,7 +285,7 @@ function App() {
 
                 <Route
                   path="/leaderboard"
-                  element={<Students setLoader={setLoader} />}
+                  element={<Students mentorId={mentorId} setLoader={setLoader} />}
                 />
                 <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
 
@@ -294,7 +295,7 @@ function App() {
                 />
                 <Route
                   path="/teacherhistory"
-                  element={<PointHistoryTeacher mentorId={mentorId && mentorId} courses={courses} setLoader={setLoader} />}
+                  element={<PointHistoryTeacher  mentorId={mentorId && mentorId} courses={courses} setLoader={setLoader} />}
                 />
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
                 <Route path="/edithistory/:id" element={<EditPointHistory setLoader={setLoader} mentorId={mentorId && mentorId} />} />
@@ -304,7 +305,7 @@ function App() {
           </div>
         ) : role === "student" ? (
           <div className="main container">
-            <ul className={barActive?"links active ":"links "} >
+            <ul className={barActive ? "links active " : "links "} >
               <li>
                 <NavLink to={"/"}>
                   <div>
@@ -406,7 +407,7 @@ function App() {
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
 
                 <Route path="/pointhistory" element={<PointHistory setLoader={setLoader} />} />
-
+                <Route path="/onepoint/:id" element={<OnePoint  setLoader={setLoader} />} />
               </Routes>
             </div>
           </div>

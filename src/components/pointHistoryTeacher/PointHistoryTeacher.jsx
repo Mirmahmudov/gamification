@@ -3,12 +3,15 @@ import "./PointHistoryTeacher.css"
 import { getToken } from '../../service/token'
 import { baseUrl } from '../../config'
 import { FaUser } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { IoIosArrowBack } from 'react-icons/io'
 
 function PointHistoryTeacher({ setLoader, mentorId, courses }) {
     const [pointData, setPointData] = useState()
     const [typeData, setTypeData] = useState()
-    const [searchQuery, setSearchQuery] = useState(''); // Search query state
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
 
     const getPoints = () => {
         setLoader(true)
@@ -28,12 +31,13 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
                 setLoader(false)
             })
             .catch((error) => {
-                console.error(error)
                 setLoader(false)
             });
     }
 
     const getPointsType = () => {
+        setLoader(true)
+
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -46,10 +50,11 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
         fetch(`${baseUrl}/point-types/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                setLoader(false)
                 setTypeData(result)
             })
             .catch((error) => {
-                console.error(error)
+                setLoader(false)
             });
     }
 
@@ -100,16 +105,24 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
     return (
         <>
             <div className="pointhistory teacherPoint">
-                <h1 className='PageName'>Pointlar</h1>
+                <div className="historyFilter">
+                    <div className="pageName">
+                        <IoIosArrowBack onClick={() => {
+                            navigate(-1)
+                        }} />
+                        <h2>Pointlar</h2>
+                    </div>
 
-                {/* Search input */}
-                <input
-                    type="text"
-                    placeholder="Ism yoki Familya bo'yicha qidirish..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="searchInput"
-                />
+
+
+                    <input
+                        type="text"
+                        placeholder="Ism yoki Familya bo'yicha qidirish..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="searchInput"
+                    />
+                </div>
 
                 {filteredPointData?.map((item, index) => {
                     return <Link key={index} to={`/edithistory/${item?.id}`} className="row">

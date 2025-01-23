@@ -27,7 +27,6 @@ function News({ getNewsStatus, setLoader, allNewsStatus }) {
 
       })
       .catch((error) => {
-        console.error(error)
         setLoader(false)
       });
   }

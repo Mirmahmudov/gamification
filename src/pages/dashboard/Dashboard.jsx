@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./Dashboard.css";
 import { getToken } from '../../service/token';
 import { baseUrl } from '../../config';
+import { IoIosArrowBack } from 'react-icons/io';
 
 function Dashboard({ setLoader }) {
   const [data, setData] = useState();
@@ -24,7 +25,6 @@ function Dashboard({ setLoader }) {
         setData(result);
       })
       .catch((error) => {
-        console.error(error)
         setLoader(false)
       });
   };
@@ -35,6 +35,12 @@ function Dashboard({ setLoader }) {
 
   return (
     <>
+      <div className="pageName">
+        <IoIosArrowBack onClick={() => {
+          navigate(-1)
+        }} />
+        <h2>Dashboard</h2>
+      </div>
       <div className="backend-data">
         {data?.map((item, index) => {
           const key = Object.keys(item)[0];

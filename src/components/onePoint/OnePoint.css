@@ -1,0 +1,96 @@
+.onePoint .onePointRow {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+
+    box-shadow: 2px 2px 10px #1e527daf;
+}
+
+.onePoint .onePointRow .onePointInfo{
+    width: 100%;
+
+}
+
+.onePoint .onePointRow .onePointInfo .coinInfo {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+    color: #1D537C;
+    font-weight: 600;
+    right: 20px;
+}
+
+.onePoint .onePointRow .onePointInfo .coinInfo img {
+    width: 30px;
+}
+
+.onePoint .onePointRow .onePointInfo h2 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #1D537C;
+    margin-bottom: 10px;
+}
+
+.onePoint .onePointRow .onePointInfo p {
+    margin-bottom: 5px;
+    color: #4F7999;
+}
+
+.onePoint .onePointRow .onePointInfo .info_row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #6B6B6B;
+}
+.onePoint .onePointRow .onePointInfo .info_row h3{
+    font-weight: 500;
+}
+.onePoint .onePointRow .onePointImg{
+    width: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-color: red;
+    justify-content: center ;
+}
+.onePoint .onePointRow .onePointImg img{
+    width: 100%;
+    object-fit: cover;
+}
+
+
+@media (max-width: 640px) {
+  
+.onePoint .onePointRow {
+    flex-direction: column;
+}
+
+.onePoint .onePointRow .onePointInfo h2  {
+    font-size: 20px;
+    margin-bottom: 0px;
+    
+}
+
+.onePoint .onePointRow .onePointInfo p {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.onePoint .onePointRow .onePointInfo .info_row h3 {
+    font-size: 12px;
+}
+.onePoint .onePointRow .onePointImg{
+    width: 100px;
+}
+.onePoint .onePointRow .onePointImg img{
+    width: 100%;
+}
+}

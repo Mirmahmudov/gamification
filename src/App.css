@@ -10,7 +10,8 @@
   width: 280px;
   background-color: white;
   min-height: 80vh;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  margin-top: -20px;
   padding: 40px 10px;
   flex-shrink: 0;
   transition: all 0.1s ease-in-out;

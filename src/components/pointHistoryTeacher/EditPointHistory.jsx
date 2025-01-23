@@ -4,6 +4,7 @@ import "./EditPointHistory.css";
 import { getToken } from '../../service/token';
 import { baseUrl } from '../../config';
 import { IoIosArrowBack } from 'react-icons/io';
+import { SiTunein } from 'react-icons/si';
 
 function EditPointHistory({ mentorId, setLoader }) {
     const { id } = useParams();
@@ -17,6 +18,7 @@ function EditPointHistory({ mentorId, setLoader }) {
 
 
     const getPointType = () => {
+        setLoader(true)
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -28,12 +30,17 @@ function EditPointHistory({ mentorId, setLoader }) {
 
         fetch(`${baseUrl}/point-types/`, requestOptions)
             .then((response) => response.json())
-            .then((result) => setGroup(result))
-            .catch((error) => console.error(error));
+            .then((result) => {
+                setGroup(result);
+                setLoader(false)
+            })
+            .catch((error) => {
+                setLoader(false)
+            });
     };
 
-    // Point ma'lumotlarini olish
     const getGivePoints = () => {
+        setLoader(true)
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
@@ -46,6 +53,7 @@ function EditPointHistory({ mentorId, setLoader }) {
         fetch(`${baseUrl}/give-points/${id}/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                setLoader(false)
                 setAmount(result.amount);
                 setPointDesc(result.description);
                 setPointType(result.point_type);
@@ -53,41 +61,85 @@ function EditPointHistory({ mentorId, setLoader }) {
                 setStudentId(result.student);
 
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+
+                setLoader(false)
+            });
     };
 
+
     const editPoint = (e) => {
+        setLoader(true)
         e.preventDefault();
+
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
+
         const raw = JSON.stringify({
-            amount,
-            description: pointDesc,
-            date: pointData,
-            mentor: mentorId,
-            student: 1, // Studentni dinamik qilib sozlashingiz mumkin
-            point_type: pointType,
+            "amount": amount,
+            "description": pointDesc,
+            "date": pointData,
+            "mentor": mentorId,
+            "student": studentId,
+            "point_type": pointType
         });
 
         const requestOptions = {
-            method: "PUT",
+            method: "PATCH",
             headers: myHeaders,
             body: raw,
-            redirect: "follow",
+            redirect: "follow"
         };
 
         fetch(`${baseUrl}/give-points/${id}/`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                navigate('/assessment');
+                setLoader(false)
+                navigate('/teacherhistory');
             })
-            .catch((error) => console.error(error));
-    };
+            .catch((error) => {
+                setLoader(false)
+            });
+    }
+
+    // const editPoint = (e) => {
+    //     e.preventDefault();
+    //     const myHeaders = new Headers();
+    //     myHeaders.append("Content-Type", "application/json");
+    //     myHeaders.append("Authorization", `Bearer ${getToken()}`);
+
+    //     const raw = JSON.stringify({
+    //         amount,
+    //         description: pointDesc,
+    //         date: pointData,
+    //         mentor: mentorId,
+    //         student: studentId, // Studentni dinamik qilib sozlashingiz mumkin
+    //         point_type: pointType,
+    //     });
+
+    //     const requestOptions = {
+    //         method: "PATCH",
+    //         headers: myHeaders,
+    //         body: raw,
+    //         redirect: "follow",
+    //     };
+
+    //     fetch(`${baseUrl}/give-points/${id}/`, requestOptions)
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             navigate('/teacherhistory');
+    //         })
+    //         .catch((error) => console.error(error));
+    // };
 
     // O'chirish funksiyasi
+
+
+
     const deletePoint = (e) => {
+        setLoader(true)
         e.preventDefault();
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${getToken()}`);
@@ -100,9 +152,12 @@ function EditPointHistory({ mentorId, setLoader }) {
 
         fetch(`${baseUrl}/give-points/${id}/`, requestOptions)
             .then(() => {
+                setLoader(false)
                 navigate('/assessment'); // O'chirishdan so'ng sahifani yo'naltirish
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                setLoader(false)
+            });
     };
 
     useEffect(() => {
@@ -179,8 +234,9 @@ function EditPointHistory({ mentorId, setLoader }) {
                         <button onClick={deletePoint} className="del">
                             O'chirish
                         </button>
-                        <button onClick={()=>{
-                            navigate(-1)
+                        <button onClick={(e) => {
+                            e.preventDefault()
+                            navigate("/assessment")
                         }}>
                             bekor qilish
                         </button>
