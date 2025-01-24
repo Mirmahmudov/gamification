@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import { RiAuctionLine, RiDashboardLine } from "react-icons/ri";
-import { FaChevronRight, FaHistory, FaRegUser } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaBars, FaChevronRight, FaHistory, FaRegUser } from "react-icons/fa";
 import "./App.css";
 import {
+  MdArrowBackIosNew,
+  MdArrowForwardIos,
   MdOutlineAssessment,
   MdOutlineLeaderboard,
   MdOutlineWatchLater,
@@ -177,6 +179,14 @@ function App() {
         {role == "mentor" ? (
           <div className="main container">
             <ul className={barActive ? "links active " : "links "}>
+              <div className="bar">
+                {barActive ? <MdArrowForwardIos onClick={() => {
+                  setBarActive(!barActive)
+                }} /> : <MdArrowBackIosNew onClick={() => {
+                  setBarActive(!barActive)
+                }} />}
+              </div>
+
               <li>
                 <NavLink to={"/"}>
                   <div>

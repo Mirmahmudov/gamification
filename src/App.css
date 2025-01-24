@@ -1,10 +1,20 @@
 .main {
   display: flex;
   gap: 10px;
-  margin-top: 90px !important;
+  margin-top: 80px !important;
   position: relative;
 }
 
+.main .bar{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 20px;
+  font-size: 25px;
+  cursor: pointer;
+  padding: 0px;
+  color: #1E537D;
+}
 .links {
   list-style: none;
   width: 280px;
@@ -12,7 +22,7 @@
   min-height: 80vh;
   /* border-radius: 10px; */
   margin-top: -20px;
-  padding: 40px 10px;
+  padding: 20px 10px;
   flex-shrink: 0;
   transition: all 0.1s ease-in-out;
 
@@ -20,6 +30,9 @@
 
 .links.active {
   width: 80px;
+}
+.links.active .bar{
+  justify-content: center;
 }
 
 .links h3 {

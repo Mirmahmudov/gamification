@@ -113,11 +113,11 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                   {/* <img className="coin_img" src="imgs/coin-3.png" alt="" /> */}
                   <img src="/imgs/logo.svg" alt="logo" />
                 </Link>
-                <div className="bar">
+                {/* <div className="bar">
                   <FaBars onClick={() => {
                     setBarActive(!barActive)
                   }} />
-                </div>
+                </div> */}
               </div>
               <div className="user">
                 {
