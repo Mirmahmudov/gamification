@@ -113,7 +113,7 @@ function Students({ setLoader, mentorId }) {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    
+
 
     const handleSearch = (event) => {
         const query = event.target.value.toLowerCase();

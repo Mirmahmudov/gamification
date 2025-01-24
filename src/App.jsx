@@ -136,13 +136,15 @@ function App() {
 
   useEffect(() => {
     userRole();
-    getMentorInfo()
     getNewsStatus()
   }, [getToken()]);
 
   useEffect(() => {
-    getMentorInfo();
-  }, []);
+    if (role == "mentor") {
+      getMentorInfo()
+    }
+  }, [role])
+
 
   useEffect(() => {
     if (mentorId) {
@@ -170,11 +172,6 @@ function App() {
           setLoader={setLoader}
           onClose={() => setModalOpen(false)} />
 
-        {/* <LoginModal
-          isOpen={isModalOpen}
-          setLoader={setLoader}
-          onClose={() => setModalOpen(false)}
-        /> */}
         {role ? <Navbar barActive={barActive} setBarActive={setBarActive} allNewsStatus={allNewsStatus} setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
 
         {role == "mentor" ? (
@@ -295,7 +292,7 @@ function App() {
                 />
                 <Route
                   path="/teacherhistory"
-                  element={<PointHistoryTeacher  mentorId={mentorId && mentorId} courses={courses} setLoader={setLoader} />}
+                  element={<PointHistoryTeacher mentorId={mentorId && mentorId} courses={courses} setLoader={setLoader} />}
                 />
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
                 <Route path="/edithistory/:id" element={<EditPointHistory setLoader={setLoader} mentorId={mentorId && mentorId} />} />
@@ -407,7 +404,7 @@ function App() {
                 <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
 
                 <Route path="/pointhistory" element={<PointHistory setLoader={setLoader} />} />
-                <Route path="/onepoint/:id" element={<OnePoint  setLoader={setLoader} />} />
+                <Route path="/onepoint/:id" element={<OnePoint setLoader={setLoader} />} />
               </Routes>
             </div>
           </div>

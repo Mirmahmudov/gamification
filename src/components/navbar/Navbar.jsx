@@ -16,8 +16,7 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef(null);
   const [studentInfo, setStudentInfo] = useState(null);
-
-
+  const [role, setRole] = useState()
 
   const getStudentInfo = () => {
     setLoader(true);
@@ -46,12 +45,40 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
       });
   };
 
+  const userRole = () => {
+    setLoader(true);
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${getToken()}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`${baseUrl}/users/get-me/`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setRole(result.role);
+        // setUserInfo(result);
+        setLoader(false);
+      })
+      .catch((error) => {
+        // console.error(error);
+        setLoader(false);
+      });
+  };
+
   useEffect(() => {
-
-      getStudentInfo();
-    
-
+    userRole()
   }, []);
+
+  useEffect(() => {
+    if (role == "student") {
+      getStudentInfo();
+    }
+  }, [role])
 
   const handleClickOutside = (e) => {
     if (userModal && modalRef.current && !modalRef.current.contains(e.target)) {
