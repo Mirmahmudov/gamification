@@ -40,6 +40,8 @@ function LoginPage({ isOpen, onClose, setLoader }) {
                     onClose();
                     setLoader(false);
                     toast.success("Siz muvafaqqiyatli ro'hatdan o'tdingiz");
+                    setPassword("")
+                    setUserName("")
                 } else {
                     toast.error("Login yoki parolda hatolik bor");
 
