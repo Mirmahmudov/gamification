@@ -149,7 +149,7 @@
 .studentTable {
   width: 100% !important;
   border-radius: 5px;
-  max-height: 500px;
+  max-height: 550px;
   overflow: auto;
   position: relative;
 }
@@ -624,9 +624,6 @@
     display: none;
   }
 
-  .table_Body {
-    /* height: 100vh; */
-  }
 
   .studentTable {
     border-radius: 5px;

@@ -70,12 +70,17 @@ function News({ getNewsStatus, setLoader, allNewsStatus }) {
                 </div>
                 <div className="new_info">
                   <h2>
-                    {item.title}
+                    {item?.title}
                   </h2>
-                  <p>{item.description.slice(0, 150)}...</p>
+                  <p>{item?.description.slice(0, 150)}...</p>
+                  {item?.point ? <h6> Point miqdori
+                    <b> {item?.point} </b> point
+                  </h6> : ""}
                   <span>
-                    {formatDate(item.created_at)}
+                    {formatDate(item?.created_at)}
                   </span>
+
+
                 </div>
               </Link>
 

@@ -311,8 +311,15 @@ function App() {
             </div>
           </div>
         ) : role === "student" ? (
-          <div className="main container">
+          <div className="main container" >
             <ul className={barActive ? "links active " : "links "} >
+              <div className="bar">
+                {barActive ? <MdArrowForwardIos onClick={() => {
+                  setBarActive(!barActive)
+                }} /> : <MdArrowBackIosNew onClick={() => {
+                  setBarActive(!barActive)
+                }} />}
+              </div>
               <li>
                 <NavLink to={"/"}>
                   <div>

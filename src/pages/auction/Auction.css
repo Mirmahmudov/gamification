@@ -7,6 +7,7 @@
 }
 
 .auction_data h3 {
+  font-weight: 500;
   color: #1d537c;
   margin-bottom: 10px;
   font-size: 18px;
@@ -56,6 +57,7 @@
 }
 
 .auction_product h1 {
+  font-weight: 500;
   margin: 15px 0px;
   text-transform: capitalize;
   color: #1d537c;
@@ -98,7 +100,7 @@
   text-align: left;
   margin-bottom: 5px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 500;
   padding-left: 5px;
 }
 
@@ -110,10 +112,13 @@
   font-weight: 500;
   padding-left: 5px;
   color: #1d537cda;
+
 }
 
+
+
 .auction_product .card h5 span {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .auction_product .card h6 {

@@ -11,9 +11,10 @@ function Profile({ setLoader }) {
   const [editModal, setEditModal] = useState(false);
   const [editBio, setEditBio] = useState("");
   const [editDate, setEditDate] = useState("");
+  const [editTel, setEditTel] = useState("");
   const [editImg, setEditImg] = useState(null);
   const [imgView, setImgView] = useState(false)
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
 
 
   const getStudentInfo = () => {
@@ -34,10 +35,12 @@ function Profile({ setLoader }) {
         }
         return response.json();
       })
-      .then((result) => {
+      .then((result) => {    
+            
         setStudentInfo(result);
         setEditBio(result?.bio || "");
         setEditDate(result?.birth_date || "");
+        setEditTel(result.phone_number)
         setLoader(false);
       })
       .catch((error) => {
@@ -53,6 +56,7 @@ function Profile({ setLoader }) {
 
     const formData = new FormData();
     formData.append("birth_date", editDate);
+    formData.append("phone_number", editTel);
     formData.append("bio", editBio);
     if (editImg) {
       formData.append("image", editImg);
@@ -88,12 +92,12 @@ function Profile({ setLoader }) {
 
   return (
     <div className="profilePage">
-       <div className="pageName">
-          <IoIosArrowBack onClick={() => {
-            navigate(-1)
-          }} />
-          <h2> Ma'lumotlarim</h2>
-        </div>
+      <div className="pageName">
+        <IoIosArrowBack onClick={() => {
+          navigate(-1)
+        }} />
+        <h2> Ma'lumotlarim</h2>
+      </div>
       {imgView && <div className="userProfileImgView" onClick={() => {
         setImgView(false)
 
@@ -132,6 +136,30 @@ function Profile({ setLoader }) {
             />
           </div>
           <div className="editRow">
+          
+            <div className="col">
+              <h4>Tug'ilgan sanangizni kiriting</h4>
+              <input
+                type="date"
+                value={editDate}
+                onChange={(e) => setEditDate(e.target.value)}
+              />
+              <br />
+              
+            </div>
+            <div className="col">
+              <h4>Telefon raqam kiriting</h4>
+              <input
+                type="tel"
+                value={editTel}
+                onChange={(e) => setEditTel(e.target.value)}
+                placeholder="+998 (__) ___-__-__"
+              />
+              <br />
+              
+            </div>
+          </div>
+          <div className="editRow">
             <div className="col">
               <h4>Oʻzingiz haqingizda yozing</h4>
               <textarea
@@ -140,14 +168,7 @@ function Profile({ setLoader }) {
                 placeholder="Bio"
               ></textarea>
             </div>
-            <div className="col">
-              <h4>Tug'ilgan sanangizni kiriting</h4>
-              <input
-                type="date"
-                value={editDate}
-                onChange={(e) => setEditDate(e.target.value)}
-              />
-            </div>
+          
           </div>
           <div className="btns">
             <button type="submit">O'zgarishlarni saqlash</button>
@@ -212,11 +233,12 @@ function Profile({ setLoader }) {
             <div className="row">
               <div className="col">
                 <h4>Tug'ilgan sana</h4>
-                <h3>{studentInfo?.birth_date}</h3>
+              
+                <h3>{studentInfo?.birth_date?studentInfo?.birth_date:"dd.mm.YYYY"}</h3>
               </div>
               <div className="col">
                 <h4>Telfon raqam</h4>
-                <h3>{studentInfo?.phone_number ? studentInfo?.phone_number : "+998xxxxxxx"}</h3>
+                <h3>{studentInfo?.phone_number ? studentInfo?.phone_number : "+998(__)___"}</h3>
               </div>
             </div>
           </div>

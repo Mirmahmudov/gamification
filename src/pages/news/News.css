@@ -75,6 +75,11 @@
   font-size: 27px;
 }
 
+.news .new_box .new_info h6 {
+  font-size: 14px;
+  font-weight: 500;
+
+}
 .news .new_box:hover .new_info h2 {
   color: #fa9f08;
 }

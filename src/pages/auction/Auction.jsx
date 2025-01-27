@@ -13,7 +13,7 @@ function Auction({ setLoader }) {
   useEffect(() => {
     setLoader(true);
     Promise.all([getAuctionData()])
-      .catch((error) => {  })
+      .catch((error) => { })
       .finally(() => setLoader(false));
   }, []);
 
@@ -31,7 +31,7 @@ function Auction({ setLoader }) {
       const result = await response.json();
       setAuctionData(result);
     } catch (error) {
-      
+
     }
   };
 
@@ -86,20 +86,23 @@ function Auction({ setLoader }) {
       <div className="auction_product">
         <h1>Mahsulotlar</h1>
         <div className="cards">
-          {auctionData?.products?.map((item, index) => (
-            <div className="card" key={index}>
-              <div className="images">
-                <img src={item?.image} alt={item?.name} loading="lazy" />
+          {auctionData?.products
+            ?.sort((a, b) => a.start_point - b.start_point)
+            .map((item, index) => (
+              <div className="card" key={index}>
+                <div className="images">
+                  <img src={item?.image} alt={item?.name} loading="lazy" />
+                </div>
+                <h4>{item?.name.slice(0, 20)}..</h4>
+                <h5>
+                  narxi: <span>{item?.start_point} XP</span>
+                </h5>
+                <h6>
+                  mavjud:<span> {item?.amount}</span>
+                </h6>
               </div>
-              <h4>{item?.name}</h4>
-              <h5>
-                narxi: <span>{item?.start_point} XP</span>
-              </h5>
-              <h6>
-                mavjud<span> {item?.amount}</span>
-              </h6>
-            </div>
-          ))}
+            ))}
+
         </div>
       </div>
     </>

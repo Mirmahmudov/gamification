@@ -94,6 +94,9 @@ function NewRead({ setLoader }) {
                     </div>
                     <h1>{onenew?.title} </h1>
                     <p>{onenew?.description}</p>
+                    {onenew?.point ? <h6> Point miqdori
+                    <b> {onenew?.point} </b> point
+                  </h6> : ""}
                 </div>
             </div>
         </>

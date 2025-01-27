@@ -367,9 +367,14 @@ input[type="file"] {
     height: 100%;
   }
 
-  .profilNavModal .editRow .col textarea {
-    font-size: 14px;
+  .profilNavModal .editRow:nth-child(2) {
+    flex-direction: column;
   }
+  .profilNavModal .editRow .col{
+    width: 90%;
+  }
+
+
 
   .profilNavModal .editRow .col input {
     font-size: 14px;

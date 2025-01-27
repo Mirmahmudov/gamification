@@ -11,6 +11,7 @@ function Students({ setLoader, mentorId }) {
     const [studentList, setStudentList] = useState([]);
     const [filterData, setFilterData] = useState([]);
     const [groups, setGroups] = useState([]);
+    const [oneGroups, setOneGroups] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const [isLargeScreen, setIsLargeScreen] = useState(false);
     const [imgViewModal, setImgViewModal] = useState(false)
@@ -78,6 +79,8 @@ function Students({ setLoader, mentorId }) {
         fetch(`${baseUrl}/groups/?mentor=${mentorId}&active=true`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                console.log(result);
+
                 setGroups(result || []);
                 setLoader(false);
             })
@@ -86,10 +89,37 @@ function Students({ setLoader, mentorId }) {
             });
     };
 
+    const getOneGroup = () => {
+
+        setLoader(true);
+        const myHeaders = new Headers();
+        myHeaders.append('Authorization', `Bearer ${getToken()}`);
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow',
+        };
+
+        fetch(`${baseUrl}/groups/`, requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+
+                setOneGroups(result || []);
+                setLoader(false);
+            })
+            .catch((error) => {
+                setLoader(false);
+            });
+
+    }
+
     useEffect(() => {
         getStudent();
         getStudentInfo()
+        getOneGroup()
     }, []);
+
 
 
     useEffect(() => {
@@ -148,7 +178,9 @@ function Students({ setLoader, mentorId }) {
         }
     };
     const getGroupName = (id) => {
-        return groups?.find((item) => item.id == id);
+        // console.log(groups);
+        // console.log(id);        
+        return oneGroups?.find((item) => item?.id == id);
     };
     return (
         <>
@@ -164,10 +196,10 @@ function Students({ setLoader, mentorId }) {
                 </div>}
                 <div className="topStudents">
                     <div className="row">
-                        {Array.isArray(studentList) && studentList.length > 0
-                            ? studentList.slice(0, 3).map((item, index) => {
-                                const groupName = Array.isArray(groups)
-                                    ? groups.find((group) => group?.id === item.group)?.name
+                        {Array.isArray(studentList) && studentList?.length > 0
+                            ? studentList?.slice(0, 3).map((item, index) => {
+                                const groupName = Array.isArray(oneGroups)
+                                    ? oneGroups?.find((group) => group?.id === item?.group)?.name
                                     : 'Mavjud emas';
 
                                 return (
@@ -182,9 +214,9 @@ function Students({ setLoader, mentorId }) {
                                             <div className="imgs" onClick={() => {
                                                 setUserImg(item?.image);
 
-                                                item.image && setImgViewModal(true);
+                                                item?.image && setImgViewModal(true);
                                             }}>
-                                                {item.image ? (
+                                                {item?.image ? (
                                                     <img src={item?.image} alt="" />
                                                 ) : (
                                                     <FaUser />
@@ -309,7 +341,7 @@ function Students({ setLoader, mentorId }) {
                     <div className="table_Body">
                         {Array.isArray(studentList) && studentList.length > 0
                             ? studentList
-                                .sort((a, b) => b.point - a.point)
+                                .sort((a, b) => b.point - a.point).slice(0, 20)
                                 .map((item, index) => {
 
                                     return (
