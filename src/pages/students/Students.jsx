@@ -79,7 +79,6 @@ function Students({ setLoader, mentorId }) {
         fetch(`${baseUrl}/groups/?mentor=${mentorId}&active=true`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
 
                 setGroups(result || []);
                 setLoader(false);
@@ -178,8 +177,6 @@ function Students({ setLoader, mentorId }) {
         }
     };
     const getGroupName = (id) => {
-        // console.log(groups);
-        // console.log(id);        
         return oneGroups?.find((item) => item?.id == id);
     };
     return (
@@ -233,7 +230,7 @@ function Students({ setLoader, mentorId }) {
                                                         </h3>
                                                         <div className="pointRow">
                                                             <span className="number">{index + 1}</span>
-                                                            {/* <span className="point">{item?.point} XP</span> */}
+                                                            <span className="point">{item?.point} coin</span>
                                                         </div>
                                                     </>
                                                 ) : (
@@ -244,7 +241,7 @@ function Students({ setLoader, mentorId }) {
                                                         </h3>
                                                         <div className="pointRow">
                                                             <span className="number">{index + 1}</span>
-                                                            {/* <span className="point">{item?.point} XP</span> */}
+                                                            <span className="point">{item?.point} coin</span>
                                                         </div>
                                                     </>
                                                 )}
@@ -375,8 +372,12 @@ function Students({ setLoader, mentorId }) {
                                                     <h3>  {getGroupName(item?.group)?.name || "Guruh mavjud emas"}</h3>
                                                 </div>
                                             </div>
-                                            <div className="studetTableCrown" >
-                                                <HiTrophy />
+                                            <div className="studentCointrow">
+
+                                                <div className="studetTableCrown" >
+                                                    <HiTrophy />
+                                                </div>
+                                                <div className="point">{item?.point ? item?.point : 0} coin</div>
                                             </div>
 
                                         </div>

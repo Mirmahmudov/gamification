@@ -19,7 +19,7 @@ const GivePoint = ({
   const [pointTypes, setPointTypes] = useState([]);
   const [selectedPointType, setSelectedPointType] = useState("");
   const [descriptionRequired, setDescriptionRequired] = useState(false);
-  const [description, updateDescription] = useState("");
+  const [description, setLocalDescription] = useState("");
   const [date, setLocalDate] = useState(() => {
     const today = new Date();
     today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
@@ -58,13 +58,14 @@ const GivePoint = ({
     setSelectedPointType(selectedType);
 
     const selectedPoint = pointTypes.find((item) => item.id.toString() === selectedType);
-    if (selectedPoint?.name === "Rag'bat") {
-      setDescriptionRequired(true);
-    } else {
-      setDescriptionRequired(false);
-    }
-
+    setDescriptionRequired(selectedPoint?.name === "Rag'bat");
     setPoint_type(selectedType);
+  };
+
+  const handleDescriptionChange = (e) => {
+    const value = e.target.value;
+    setLocalDescription(value); // Lokal state yangilanadi
+    setDescription(value); // Ota komponentga uzatiladi
   };
 
   const handleSubmit = (e) => {
@@ -114,7 +115,7 @@ const GivePoint = ({
             <div className="form-group">
               <label htmlFor="input2">Izoh</label>
               <input
-                onChange={(e) => updateDescription(e.target.value)}
+                onChange={handleDescriptionChange}
                 type="text"
                 id="input2"
                 placeholder="Enter value for description"

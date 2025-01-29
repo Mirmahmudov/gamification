@@ -158,7 +158,7 @@ function Newadded({ mentorId, courses, setLoader }) {
                   </div>
                 </div>
                 <div className="student-actions">
-                  <span className="xp">{item.amount} XP</span>
+                  <span className="xp">{item.amount} Coin</span>
                   <div className="btns">
                     <button className="recent-add">Tahrirlash</button>
                     <button

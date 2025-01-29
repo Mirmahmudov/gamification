@@ -143,7 +143,9 @@ function PointHistory({ setLoader }) {
       <div className="pointhistory">
         {
           pointData?.length == 0 ? "ma'lumot hozzircha mavjud emas" : pointData?.map((item, index) => {
-            return <Link to={`/onepoint/${item.id}`} key={index}>
+            return <Link
+            //  to={`/onepoint/${item.id}`}
+             key={index}>
 
               <div className="row" key={index}>
                 <div className="div">
@@ -153,13 +155,15 @@ function PointHistory({ setLoader }) {
                   <div className="pointHistoryInfo">
                     <h3>{onePointType(item.point_type)?.name || "Noma'lum turi"}
                     </h3>
+                    <p>{item?.description ? item?.description : "point uchun izoh mavjud emas"}</p>
+
                     <h5>
                       {formatDate(item?.created_at)}
                     </h5>
                   </div>
                 </div>
                 <div className="pointHistoryNumber">
-                  +{item?.amount} points
+                  +{item?.amount} coin
                 </div>
 
               </div>

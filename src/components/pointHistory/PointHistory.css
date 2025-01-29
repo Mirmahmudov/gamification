@@ -12,6 +12,17 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.pointhistory .row .div:hover p {
+
+    height: 100%;
+
+}
+
+.pointhistory .row .div p {
+    color: #1E537D;
 }
 
 .pointhistory .row .div .imgs {
@@ -64,6 +75,8 @@
 
     .pointhistory .row .div h3 {
         font-size: 16px !important;
+        line-height: 18px;
+        margin-bottom: 0px;
     }
 
     .pointhistory .row .div h4 {
@@ -79,9 +92,10 @@
     }
 
     .pointhistory .row .div .imgs {
-        width: 40px;
+        width: 40px !important;
         height: 40px;
     }
+
 
     .pointhistory .row .div .imgs img {
         width: 100%;
@@ -89,6 +103,12 @@
         object-fit: contain;
 
     }
+
+    .pointhistory .row .div p {
+        
+        font-size: 12px;
+    }
+
 
 
 }

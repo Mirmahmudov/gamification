@@ -39,18 +39,18 @@ function LoginPage({ isOpen, onClose, setLoader }) {
                     setToken(result.access);
                     onClose();
                     setLoader(false);
-                    toast.success("Siz muvafaqqiyatli ro'hatdan o'tdingiz");
+                    toast.success("Siz muvafaqqiyatli ro'xatdan o'tdingiz");
                     setPassword("")
                     setUserName("")
                 } else {
-                    toast.error("Login yoki parolda hatolik bor");
+                    toast.error("Login yoki parolda xatolik bor");
 
                 }
             })
             .catch((error) => {
 
                 setLoader(false);
-                toast.error("Login yoki parolda hatolik bor");
+                toast.error("Login yoki parolda xatolik bor");
             });
     };
 

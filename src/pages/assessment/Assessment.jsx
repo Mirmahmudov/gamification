@@ -87,7 +87,8 @@ function Assessment({ courses, userInfo, setLoader }) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
-
+    console.log(description);
+    
     const raw = JSON.stringify({
       amount,
       description,
@@ -210,7 +211,7 @@ function Assessment({ courses, userInfo, setLoader }) {
               <div className="student-actions">
                 <div className="div">
                   <span className="xp">{item?.point ? item?.point : 0}</span>
-                  point
+                  coins
                 </div>
                 <button
                   onClick={() => {

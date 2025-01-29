@@ -148,7 +148,7 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
                             </div>
                         </div>
                         <div className="pointHistoryNumber">
-                            +{item?.amount} points
+                            +{item?.amount} coin
                         </div>
                     </Link>
                 })}

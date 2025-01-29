@@ -73,7 +73,7 @@ function Auction({ setLoader }) {
 
       <div className="auction_data">
         <div className="div">
-          <h3>Keyingi auctiongacha qolgan vaqt</h3>
+          <h3>Keyingi auksiongacha qolgan vaqt</h3>
           {memoizedCountdown}
         </div>
         <div className="div">
@@ -95,7 +95,7 @@ function Auction({ setLoader }) {
                 </div>
                 <h4>{item?.name.slice(0, 20)}..</h4>
                 <h5>
-                  narxi: <span>{item?.start_point} XP</span>
+                  narxi: <span>{item?.start_point} coin</span>
                 </h5>
                 <h6>
                   mavjud:<span> {item?.amount}</span>

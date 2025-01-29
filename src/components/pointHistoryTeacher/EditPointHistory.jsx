@@ -191,7 +191,7 @@ function EditPointHistory({ mentorId, setLoader }) {
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="amount">Point miqdori</label>
+                            <label htmlFor="amount">coin miqdori</label>
                             <input
                                 id="amount"
                                 value={amount}
@@ -203,7 +203,7 @@ function EditPointHistory({ mentorId, setLoader }) {
                     </div>
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="pointType">Point turi</label>
+                            <label htmlFor="pointType">coin turi</label>
                             <select
                                 id="pointType"
                                 value={pointType}

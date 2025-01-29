@@ -76,10 +76,22 @@
 }
 
 .news .new_box .new_info h6 {
-  font-size: 14px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 500;
 
 }
+
+.news .new_box .new_info h6 span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: #1E537D;
+}
+
 .news .new_box:hover .new_info h2 {
   color: #fa9f08;
 }
@@ -89,6 +101,10 @@
   transition: all 0.3s ease-in-out;
   line-height: 20px;
   font-size: 17px;
+}
+
+.news .new_box .new_info img {
+  width: 16px;
 }
 
 .news .new_box .new_info span {

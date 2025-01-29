@@ -26,13 +26,15 @@
   padding: 20px 10px;
 }
 
-.students .topStudents .col:nth-child(1){
+.students .topStudents .col:nth-child(1) {
   order: 2;
 }
-.students .topStudents .col:nth-child(2){
+
+.students .topStudents .col:nth-child(2) {
   order: 1;
 }
-.students .topStudents .col:nth-child(3){
+
+.students .topStudents .col:nth-child(3) {
   order: 3;
 }
 
@@ -142,7 +144,6 @@
 .students .topStudents .col .pointRow .point {
   background-color: #fffced;
   color: #f0c02d;
-  text-transform: uppercase;
 }
 
 /* studentTable */
@@ -274,9 +275,12 @@
 
 .table_Body {
   padding: 10px;
+
+
 }
 
 .table_Body .student_table_row {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -287,16 +291,18 @@
   box-shadow: 0px 0px 4px 0px #00000040;
 }
 
-.table_Body .student_table_row.active{
-  background-color:#BBDDFE ;
+.table_Body .student_table_row.active {
+  background-color: #BBDDFE;
   position: sticky;
   bottom: 0px;
 
 }
+
 .table_Body .student_table_row .div {
   display: flex;
   align-items: center;
   gap: 20px;
+  
 }
 
 
@@ -315,7 +321,8 @@
 
 .table_Body .student_table_row h2 {
   color: #1E537D;
-  font-weight:600;
+  font-weight: 600;
+  
 }
 
 .table_Body .student_table_row h3 {
@@ -325,6 +332,17 @@
 
 }
 
+
+.table_Body .student_table_row .studentCointrow{
+  display: flex;
+  align-items: center;
+}
+.table_Body .student_table_row .studentCointrow .point{
+  color: #FF9D00;
+  min-width:  100px;
+  font-size: 18px;
+
+}
 .studentsTableImg {
   overflow: hidden;
   width: 80px;
@@ -484,7 +502,6 @@
   .students .topStudents .col .pointRow .point {
     background-color: #fffced;
     color: #f0c02d;
-    text-transform: uppercase;
   }
 
 
@@ -498,6 +515,23 @@
   .tableHeader h1 {
     font-size: 20px;
     margin-bottom: 10px;
+  }
+
+  .table_Body .student_table_row .studetTableCrown {
+    width: 22px;
+  }
+  .table_Body .student_table_row .studetTableCrown svg{
+    font-size: 25px !important;
+  }
+  .table_Body .student_table_row .studentCointrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .table_Body .student_table_row .studentCointrow .point{
+    font-size: 11px;
+    min-width: 50px;
   }
 
   .tableHeader select {
@@ -554,25 +588,27 @@
   }
 
   .table_Body .student_table_row .student_num {
-    width: 30px;
-    height: 30px;
-    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    font-size: 11px !important;
 
   }
 
   .table_Body .student_table_row .div {
-    gap: 10px;
+    width: 70%;
+    gap: 5px;
   }
 
   .studentsTableImg {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     padding: 2px;
+    
 
   }
 
   .studentsTableImg svg {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .studentsTableImg img {
@@ -582,14 +618,19 @@
 
   .table_Body .student_table_row h2 {
     font-size: 16px;
+    line-height: 20px;
   }
 
   .table_Body .student_table_row h3 {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 
   .table_Body .student_table_row .studetTableCrown svg {
     font-size: 25px;
+  }
+
+  .table_Body .studentTableCol {
+    width: 180px;
   }
 
   .tableHeader {
@@ -628,10 +669,10 @@
   .studentTable {
     border-radius: 5px;
     background-color: white;
-    width: 100%;
+    width: 100% !important;
     overflow: auto;
     padding-bottom: 20px;
-    max-height: 100vh;
+    max-height: 90vh;
 
   }
 

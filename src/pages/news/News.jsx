@@ -73,8 +73,13 @@ function News({ getNewsStatus, setLoader, allNewsStatus }) {
                     {item?.title}
                   </h2>
                   <p>{item?.description.slice(0, 150)}...</p>
-                  {item?.point ? <h6> Point miqdori
-                    <b> {item?.point} </b> point
+                  {item?.point ? <h6> Ishtirok uchun:
+                    <span>
+                    <b> {item?.point} </b>
+                    <img src="/imgs/coin-3.png" alt="" />
+                    </span>
+
+
                   </h6> : ""}
                   <span>
                     {formatDate(item?.created_at)}

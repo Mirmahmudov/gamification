@@ -94,8 +94,12 @@ function NewRead({ setLoader }) {
                     </div>
                     <h1>{onenew?.title} </h1>
                     <p>{onenew?.description}</p>
-                    {onenew?.point ? <h6> Point miqdori
-                    <b> {onenew?.point} </b> point
+                    {onenew?.point ? <h6> Ishtirok uchun:
+                    <span>
+                    <b> {onenew?.point} </b>
+                    <img src="/imgs/coin-3.png" alt="" />
+                    </span>
+
                   </h6> : ""}
                 </div>
             </div>

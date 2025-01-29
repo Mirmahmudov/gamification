@@ -60,10 +60,20 @@
 
 .new_read .info h6 {
     color: #1E537D;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-
+.new_read .info h6 img{
+    width: 25px;
+}
+.new_read .info h6 span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .new_read .info p {
     font-size: 18px;
     color: #455561;
