@@ -98,7 +98,7 @@ function Profile({ setLoader }) {
       redirect: 'follow',
     };
 
-    fetch(`${baseUrl}/groups/`, requestOptions)
+    fetch(`${baseUrl}/groups/?active=true`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result) {

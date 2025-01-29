@@ -100,7 +100,7 @@ function App() {
       redirect: "follow",
     };
 
-    fetch(`${baseUrl}/groups/?mentor=${mentorId}`, requestOptions)
+    fetch(`${baseUrl}/groups/?mentor=${mentorId}&active=true`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setCourses(result);

@@ -100,7 +100,7 @@ function Students({ setLoader, mentorId }) {
             redirect: 'follow',
         };
 
-        fetch(`${baseUrl}/groups/`, requestOptions)
+        fetch(`${baseUrl}/groups/?active=true`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
 
