@@ -301,8 +301,8 @@ function Students({ setLoader, mentorId }) {
                                             filterGroup(e.target.textContent);
                                         }}>Barchasi</button>
                                         <button onClick={(e) => {
-                                            filterGroup(e.target.textContent);
-                                        }} value={"meningguruhim"}>meningguruhim</button>
+                                            filterGroup(e.target.value);
+                                        }} value={"meningguruhim"}>mening guruhim</button>
                                     </div>
                                 </> : <>
                                     <div className="user_filter">

@@ -39,7 +39,7 @@ function LoginPage({ isOpen, onClose, setLoader }) {
                     setToken(result.access);
                     onClose();
                     setLoader(false);
-                    toast.success("Siz muvafaqqiyatli ro'xatdan o'tdingiz");
+                    toast.success("Siz muvafaqqiyatli tizimga kirdingiz");
                     setPassword("")
                     setUserName("")
                 } else {

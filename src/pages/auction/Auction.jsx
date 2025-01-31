@@ -35,6 +35,7 @@ function Auction({ setLoader }) {
     }
   };
 
+
   const dateTimeString = useMemo(() => {
     if (auctionData?.date && auctionData?.time) {
       return `${auctionData.date}T${auctionData.time}`;
@@ -59,6 +60,7 @@ function Auction({ setLoader }) {
     : "";
 
   const memoizedCountdown = useMemo(() => {
+
     return <FlipCountdown targetTime={dateTime} />;
   }, [dateTime]);
 
@@ -71,40 +73,56 @@ function Auction({ setLoader }) {
         <h2>Auction</h2>
       </div>
 
-      <div className="auction_data">
-        <div className="div">
-          <h3>Keyingi auksiongacha qolgan vaqt</h3>
-          {memoizedCountdown}
-        </div>
-        <div className="div">
-          <h3>Sana va vaqt</h3>
-          <div className="date">
-            <span>{formattedDate}</span> <span>{formattedTime}</span>
-          </div>
-        </div>
-      </div>
-      <div className="auction_product">
-        <h1>Mahsulotlar</h1>
-        <div className="cards">
-          {auctionData?.products
-            ?.sort((a, b) => a.start_point - b.start_point)
-            .map((item, index) => (
-              <div className="card" key={index}>
-                <div className="images">
-                  <img src={item?.image} alt={item?.name} loading="lazy" />
-                </div>
-                <h4>{item?.name.slice(0, 20)}..</h4>
-                <h5>
-                  narxi: <span>{item?.start_point} coin</span>
-                </h5>
-                <h6>
-                  mavjud:<span> {item?.amount}</span>
-                </h6>
-              </div>
-            ))}
+      {
+        auctionData?.date || auctionData?.time || auctionData?.description ?
+          <>
+            <div className="auction_data">
+              <div className="div">
+                <h3>Keyingi auksiongacha qolgan vaqt</h3>
 
-        </div>
-      </div>
+                {memoizedCountdown}
+              </div>
+              <div className="div">
+                <h3>Sana va vaqt</h3>
+                <div className="date">
+                  <span>{formattedDate}</span> <span>{formattedTime}</span>
+                </div>
+              </div>
+            </div>
+            <div className="auction_product">
+              <h1>Mahsulotlar</h1>
+
+              <div className="cards">
+                {auctionData?.products
+                  ?.sort((a, b) => a.start_point - b.start_point)
+                  .map((item, index) => (
+                    <div className="card" key={index}>
+                      <div className="images">
+                        <img src={item?.image} alt={item?.name} loading="lazy" />
+                      </div>
+                      <h4>{item?.name.slice(0, 20)}..</h4>
+                      <h5>
+                        narxi: <span>{item?.start_point} coin</span>
+                      </h5>
+                      <h6>
+                        mavjud:<span> {item?.amount}</span>
+                      </h6>
+                    </div>
+                  ))}
+
+              </div>
+            </div>
+
+          </> :
+          <div className="auction_data">
+            <div className="div">
+              <h3>Auksion sanasi belgilanmagan</h3>
+            </div>
+
+          </div>
+      }
+
+
     </>
   );
 }

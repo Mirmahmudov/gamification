@@ -1,7 +1,7 @@
 .main {
   display: flex;
   gap: 10px;
-  margin-top: 80px !important;
+  margin-top: 85px !important;
   position: relative;
 }
 
@@ -174,7 +174,7 @@
   }
 
   .viewPage {
-    background-color: transparent;
+    /* background-color: transparent; */
     padding: 10px;
     height: 100vh;
     margin-bottom: 50px;

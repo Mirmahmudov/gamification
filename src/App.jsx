@@ -29,6 +29,7 @@ import PointHistoryTeacher from "./components/pointHistoryTeacher/PointHistoryTe
 import EditPointHistory from "./components/pointHistoryTeacher/EditPointHistory";
 import { GoHistory } from "react-icons/go";
 import OnePoint from "./components/onePoint/OnePoint";
+import SiteInfo from "./pages/siteInfo/SiteInfo";
 
 function App() {
   const [isModalOpen, setModalOpen] = useState(getToken() ? false : true);
@@ -283,6 +284,8 @@ function App() {
             <div className="viewPage">
               <Routes>
                 <Route path="/" element={<Dashboard setLoader={setLoader} />} />
+                <Route path="/info" element={<SiteInfo />} />
+
                 <Route
                   path="/assessment"
                   element={
@@ -361,7 +364,7 @@ function App() {
                 <NavLink to={"/pointhistory"}>
                   <div>
                     <GoHistory />
-                    <h3>Pointlar</h3>
+                    <h3>Coinlar</h3>
                   </div>
 
                 </NavLink>
@@ -384,7 +387,6 @@ function App() {
                   </div>
                 </NavLink>
               </li>
-              <div className="circle"></div>
 
               <li>
                 <NavLink to={"/news"}>
@@ -399,7 +401,7 @@ function App() {
                 <NavLink to={"/pointhistory"}>
                   <div>
                     <GoHistory />
-                    <h3>Pointlar</h3>
+                    <h3>Coinlar</h3>
                   </div>
                 </NavLink>
               </li>
@@ -407,6 +409,7 @@ function App() {
             <div className="viewPage">
               <Routes>
                 <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
+                <Route path="/info" element={<SiteInfo />} />
                 <Route
                   path="/profile"
                   element={<Profile setLoader={setLoader} />}

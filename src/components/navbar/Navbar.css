@@ -67,9 +67,12 @@ nav .container>div {
   gap: 10px;
   position: relative;
 }
+nav .user .flex{
+    display: flex;
+    align-items: center;
+}
 
 .user .nav_point {
-
   font-size: 24px;
   color: #1d537c;
   height: 50px;
@@ -82,10 +85,12 @@ nav .container>div {
 .user .nav_point h3 {
   font-weight: 600;
   font-size: 24px;
+  
 }
 
 .user .nav_point img {
   width: 30px;
+  
 }
 
 .modalBg {
@@ -242,6 +247,9 @@ nav .container>div {
     padding: 10px;
   }
 
+nav .user .flex{
+  gap: 0px;
+}
 
 
   .pageTitle .logo.active,
@@ -279,8 +287,10 @@ nav .container>div {
     color: white;
     width: 30px;
     height: 30px;
+    
 
   }
+
 
   nav .user .name {
     width: 100px;

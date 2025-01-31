@@ -5,7 +5,7 @@ import { baseUrl } from '../../config';
 import { IoIosArrowBack } from 'react-icons/io';
 
 function Dashboard({ setLoader }) {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
 
   const getData = () => {
     setLoader(true)

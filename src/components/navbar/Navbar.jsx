@@ -120,29 +120,38 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                 </div> */}
               </div>
               <div className="user">
+
                 {
+
+
                   studentInfo?.point ? <div className="nav_point">
                     <img src="/imgs/coin-3.png" alt="" />
                     <h3>{studentInfo?.point}</h3>
 
-                  </div> : ""
+                  </div> : <div className="nav_point">
+                    <img src="/imgs/coin-3.png" alt="" />
+                    <h3>0</h3>
+
+                  </div>
                 }
 
 
-                <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
-                  allNewsStatus?.num_unread_news != 0 ?
-                    <b>{allNewsStatus?.num_unread_news}</b>
-                    : ""
+                <div className="flex">
+                  <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
+                    allNewsStatus?.num_unread_news != 0 ?
+                      <b>{allNewsStatus?.num_unread_news}</b>
+                      : ""
 
-                }
-                </span>
-                </Link>
-                <span
-                  onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
-                >
-                  <FaUser />
-                </span>
+                  }
+                  </span>
+                  </Link>
+                  <span
+                    onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
+                  >
+                    <FaUser />
+                  </span>
 
+                </div>
                 {/* Modal */}
                 <div
                   ref={modalRef}
@@ -170,18 +179,22 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                     </Link>
                     <FaChevronRight />
                   </div>
-                  <hr />
+
 
                   {/* Ilova haqida */}
-                  {/* <div className="row">
-                    <div className="div">
+                  <div className="row">
+                    <Link to={"/info"} onClick={() => {
+                      setUserModal(false);
+                    }} className="div">
                       <span>
                         <TiInfoLarge />
                       </span>
-                      <h3>Ilova haqida</h3>
-                    </div>
+                      <h3> Rag'batlantirish nizomi</h3>
+                    </Link>
                     <FaChevronRight />
-                  </div> */}
+                  </div>
+                  <hr />
+
 
                   {/* Logout */}
                   <div
@@ -204,6 +217,10 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                   </div>
                 </div>
               </div>
+
+
+
+
             </div>
           </div>
         </nav>

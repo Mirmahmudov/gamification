@@ -138,11 +138,11 @@ function PointHistory({ setLoader }) {
         <IoIosArrowBack onClick={() => {
           navigate(-1)
         }} />
-        <h2>Pointlar</h2>
+        <h2>Coinlar</h2>
       </div>
       <div className="pointhistory">
         {
-          pointData?.length == 0 ? "ma'lumot hozzircha mavjud emas" : pointData?.map((item, index) => {
+          pointData?.length == 0 ? "Sizda coinlar mavjud emas😢" : pointData?.map((item, index) => {
             return <Link
             //  to={`/onepoint/${item.id}`}
              key={index}>

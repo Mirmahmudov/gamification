@@ -61,15 +61,17 @@
 .new_read .info h6 {
     color: #1E537D;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 20px;
 }
 .new_read .info h6 img{
     width: 25px;
 }
 .new_read .info h6 span{
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,7 +132,7 @@
     .new_read .info h1 {
         font-size: 22px;
         color: #1E537D;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
 }

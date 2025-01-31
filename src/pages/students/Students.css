@@ -641,6 +641,7 @@
 
   .tableHeader .user_btns {
     display: flex;
+    justify-content: center;
     width: 100%;
     gap: 10px;
 
@@ -648,9 +649,9 @@
 
   .tableHeader .user_btns button {
     width: 50%;
-    font-size: 18px;
+    font-size: 15px;
     text-transform: capitalize;
-    padding: 6px 10px;
+    padding: 4px 6px;
     border-radius: 10px;
     border: none;
     color: white;
