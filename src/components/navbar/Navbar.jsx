@@ -189,7 +189,7 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                       <span>
                         <TiInfoLarge />
                       </span>
-                      <h3> Rag'batlantirish nizomi</h3>
+                      <h3> Baholash nizomi</h3>
                     </Link>
                     <FaChevronRight />
                   </div>
