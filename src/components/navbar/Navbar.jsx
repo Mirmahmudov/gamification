@@ -166,7 +166,7 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                   <div className="row">
                     <Link onClick={() => {
                       setUserModal(false);
-                    }} to={"/profile"} className="div">
+                    }} to={role=="mentor" ? "" : "/profile"} className="div">
                       <span className="navUserImg">
                         {/* <TiInfoLarge /> */}
                         {studentInfo?.image ? (
