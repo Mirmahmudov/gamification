@@ -20,7 +20,10 @@ function Assessment({ courses, userInfo, setLoader }) {
   const [mentor, setMentor] = useState(null);
   const [student, setStudent] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState(null); // Guruhni saqlash
   const navigate = useNavigate();
+  
+  const [filteredStudents, setFilteredStudents] = useState([]); // Filterlangan o'quvchilarni saqlash
 
   const getCurrentDate = () => {
     const today = new Date();
@@ -49,7 +52,7 @@ function Assessment({ courses, userInfo, setLoader }) {
       });
   };
 
-  const getStudents = (id) => {
+  const getStudents = (groupId = selectedGroup) => {
     setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
@@ -60,10 +63,15 @@ function Assessment({ courses, userInfo, setLoader }) {
       redirect: "follow",
     };
 
-    fetch(`${baseUrl}/students/?group__mentor=${mentor ? mentor : ""}&${id ? id : ""}`, requestOptions)
+    const url = groupId 
+      ? `${baseUrl}/students/?group=${groupId}&group__mentor=${mentor ? mentor : ""}` 
+      : `${baseUrl}/students/?group__mentor=${mentor ? mentor : ""}`;
+
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setStudents(result);
+        setFilteredStudents(result); // O'quvchilarni filterlab, saqlab qo'yamiz
         setLoader(false);
       })
       .catch((error) => {
@@ -75,7 +83,7 @@ function Assessment({ courses, userInfo, setLoader }) {
     setSearchQuery(e.target.value);
   };
 
-  const filteredStudents = students
+  const filtered = filteredStudents
     ?.filter((student) => {
       const fullName = `${student.user?.first_name} ${student.user?.last_name}`.toLowerCase();
       return fullName.includes(searchQuery.toLowerCase());
@@ -87,7 +95,6 @@ function Assessment({ courses, userInfo, setLoader }) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
-    console.log(description);
     
     const raw = JSON.stringify({
       amount,
@@ -109,13 +116,13 @@ function Assessment({ courses, userInfo, setLoader }) {
       .then((response) => response.json())
       .then((result) => {
         setShowGivePoint(false);
-        getStudents();
+        getStudents(selectedGroup); // Baholashdan keyin guruhni saqlagan holda o'quvchilarni qayta yuklash
         setLoader(false);
         toast.success("Baholandi");
       })
       .catch((error) => {
         setLoader(false);
-        toast.error("hatolik mavjud");
+        toast.error("Hatolik mavjud");
       });
   };
 
@@ -155,7 +162,8 @@ function Assessment({ courses, userInfo, setLoader }) {
             getOptionLabel={(option) => option?.name || ""}
             sx={{ width: 300, padding: "0px" }}
             onChange={(event, value) => {
-              getStudents(`group=${value?.id || ""}`);
+              setSelectedGroup(value?.id || null); // Guruhni tanlaganda saqlaymiz
+              getStudents(value?.id || null); // Guruhni tanlaganda faqat o'sha guruhni olish
             }}
             renderInput={(params) => <TextField {...params} label="Barcha guruhlar" />}
             isOptionEqualToValue={(option, value) => option?.id === value?.id}
@@ -187,7 +195,7 @@ function Assessment({ courses, userInfo, setLoader }) {
         <hr />
 
         <ul className="students-list">
-          {filteredStudents?.map((item, index) => (
+          {filtered?.map((item, index) => (
             <li key={index} className="student-item">
               <div className="student-info">
                 <div className="avatar">

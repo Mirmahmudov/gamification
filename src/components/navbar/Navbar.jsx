@@ -120,20 +120,21 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                 </div> */}
               </div>
               <div className="user">
-
                 {
+                  role == "mentor" ? "" : <>
+                    {
+                      studentInfo?.point ? <div className="nav_point">
+                        <img src="/imgs/coin-3.png" alt="" />
+                        <h3>{studentInfo?.point}</h3>
 
-
-                  studentInfo?.point ? <div className="nav_point">
-                    <img src="/imgs/coin-3.png" alt="" />
-                    <h3>{studentInfo?.point}</h3>
-
-                  </div> : <div className="nav_point">
-                    <img src="/imgs/coin-3.png" alt="" />
-                    <h3>0</h3>
-
-                  </div>
+                      </div> : <div className="nav_point">
+                        <img src="/imgs/coin-3.png" alt="" />
+                        <h3>0</h3>
+                      </div>
+                    }
+                  </>
                 }
+
 
 
                 <div className="flex">
