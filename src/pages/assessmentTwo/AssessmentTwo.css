@@ -1,0 +1,188 @@
+.assessmentTwo table {
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+    border: none;
+    color: #1C517A;
+    margin-bottom: 20px;
+
+}
+
+.assessmentTwo table th {
+    padding: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+}
+
+.assessmentTwo table td {
+    text-align: center;
+    padding: 5px;
+    border: none;
+}
+
+.assessmentTwo table td input {
+    padding: 3px 5px;
+    width: 50px;
+    outline: none;
+    padding: px 5px;
+    border-radius: 5px;
+    border: 1px solid #C4C4C4;
+}
+
+.assessmentTwo table td textarea {
+    height: 50px;
+    outline: none;
+    padding: 7px;
+
+    border-radius: 5px;
+    border: 1px solid #C4C4C4;
+
+}
+
+.assessmentTwo table td.td_name {
+    font-size: 12px;
+    text-align: left;
+}
+
+.assessmentTwo table td.td_name h2 {
+    font-weight: 500;
+    font-size: 16px;
+
+}
+
+.assessmentTwo table td .imgs {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #BBBBBB;
+}
+
+.assessmentTwo table td img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.assessmentTwo table td .imgs svg {
+    font-size: 22px;
+    color: white;
+}
+
+.assessmentTwo table .date {
+    width: 130px;
+}
+
+.assessmentTwo .btnrow {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.assessmentTwo .btnrow button {
+    padding: 8px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    background-color: #1C517A;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.assessmentTwo .modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    align-items: center;
+    left: -200px;
+    justify-content: center;
+    transform: scale(0);
+    display: flex;
+}
+
+.assessmentTwo .modal.active {
+    left: 0px;
+    transform: scale(1);
+
+}
+
+.assessmentTwo .modal .form {
+    background-color: white;
+    box-shadow: 1px 1px 10px black;
+    width: 400px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px;
+    position: relative;
+}
+
+.assessmentTwo .modal .form h2 {
+    margin-bottom: 20px;
+    color: #1C517A;
+}
+
+.assessmentTwo .modal .form h4 {
+    width: 80%;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #1c517ade;
+}
+
+.assessmentTwo .modal .form input {
+    width: 80%;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #C4C4C4;
+}
+
+.assessmentTwo .modal .form textarea {
+    width: 80%;
+    margin-bottom: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #C4C4C4;
+}
+.assessmentTwo .modal .form .btns {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+}
+.assessmentTwo .studentTable{
+    min-height: 200px;
+    max-height: 500px;
+
+}
+.assessmentTwo .modal .form button {
+    padding: 5px 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1C517A;
+    color: white;
+    cursor: pointer;
+}
+
+
+.assessmentTwo .modal .form .exit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #1C517A;
+    font-size: 20px;
+    cursor: pointer;
+}

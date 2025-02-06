@@ -30,6 +30,7 @@ import EditPointHistory from "./components/pointHistoryTeacher/EditPointHistory"
 import { GoHistory } from "react-icons/go";
 import OnePoint from "./components/onePoint/OnePoint";
 import SiteInfo from "./pages/siteInfo/SiteInfo";
+import AssessmentTwo from "./pages/assessmentTwo/AssessmentTwo";
 
 function App() {
   const [isModalOpen, setModalOpen] = useState(getToken() ? false : true);
@@ -41,6 +42,7 @@ function App() {
   const [mentorId, setMentorId] = useState(null)
   const [allNewsStatus, setAllNewsStatus] = useState()
   const [barActive, setBarActive] = useState(false)
+  
 
   const getNewsStatus = () => {
     setLoader(true)
@@ -286,16 +288,17 @@ function App() {
                 <Route path="/" element={<Dashboard setLoader={setLoader} />} />
                 <Route path="/info" element={<SiteInfo />} />
 
-                <Route
+                {/* <Route
                   path="/assessment"
                   element={
                     <Assessment setLoader={setLoader} courses={courses} />
                   }
-                />
+                /> */}
+                <Route path="/assessment" element={<AssessmentTwo setLoader={setLoader} courses={courses} />} />
 
                 <Route
                   path="/leaderboard"
-                  element={<Students mentorId={mentorId} setLoader={setLoader} />}
+                  element={<Students role={role} mentorId={mentorId} setLoader={setLoader} />}
                 />
                 <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
 

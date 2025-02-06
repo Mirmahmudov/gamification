@@ -84,10 +84,10 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
             "iyul", "avgust", "sentyabr", "oktyabr", "noyabr", "dekabr",
         ];
 
-        const weekday = weekdays[date.getDay()];
+        const weekday = weekdays[date?.getDay()];
         const day = date.getDate();
-        const month = months[date.getMonth()];
-        const year = date.getFullYear();
+        const month = months[date?.getMonth()];
+        const year = date?.getFullYear();
 
         return ` ${day} ${month}, ${year}`;
     };
@@ -119,7 +119,7 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
                         type="text"
                         placeholder="Ism yoki Familya bo'yicha qidirish..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={(e) => setSearchQuery(e?.target?.value)}
                         className="searchInput"
                     />
                 </div>
@@ -143,7 +143,7 @@ function PointHistoryTeacher({ setLoader, mentorId, courses }) {
                                     <>Ism mavjud emas</>
                                 )}</h3>
 
-                                <h4>{getCoursName((item).student.group)?.name || "Guruh mavjud emas"}</h4>
+                                <h4>{getCoursName((item)?.student?.group)?.name || "Guruh mavjud emas"}</h4>
                                 <h5>{formatDate(item?.created_at)}</h5>
                             </div>
                         </div>

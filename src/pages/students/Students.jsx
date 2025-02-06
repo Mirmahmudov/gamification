@@ -7,7 +7,7 @@ import { HiTrophy } from 'react-icons/hi2';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
-function Students({ setLoader, mentorId }) {
+function Students({ setLoader, mentorId, role }) {
     const [studentList, setStudentList] = useState([]);
     const [filterData, setFilterData] = useState([]);
     const [groups, setGroups] = useState([]);
@@ -230,7 +230,7 @@ function Students({ setLoader, mentorId }) {
                                                         </h3>
                                                         <div className="pointRow">
                                                             <span className="number">{index + 1}</span>
-                                                            <span className="point">{item?.point} coin</span>
+                                                            {role == "mentor" ? <span className="point">{item?.point} coin</span> : ""}
                                                         </div>
                                                     </>
                                                 ) : (
@@ -241,7 +241,7 @@ function Students({ setLoader, mentorId }) {
                                                         </h3>
                                                         <div className="pointRow">
                                                             <span className="number">{index + 1}</span>
-                                                            <span className="point">{item?.point} coin</span>
+                                                            {role == "mentor" ? <span className="point">{item?.point} coin</span> : ""}
                                                         </div>
                                                     </>
                                                 )}
@@ -377,7 +377,10 @@ function Students({ setLoader, mentorId }) {
                                                 <div className="studetTableCrown" >
                                                     <HiTrophy />
                                                 </div>
-                                                <div className="point">{item?.point ? item?.point : 0} coin</div>
+                                                {
+                                                    role == "mentor" ?
+                                                        <div className="point">{item?.point ? item?.point : 0} coin</div> : ""
+                                                }
                                             </div>
 
                                         </div>
