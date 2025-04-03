@@ -11,12 +11,19 @@ import { baseUrl } from "../../config";
 import { toast } from "react-toastify";
 import { FaBarsStaggered } from "react-icons/fa6";
 
-function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive, barActive }) {
+function Navbar({
+  setLoader,
+  setModalOpen,
+  userInfo,
+  allNewsStatus,
+  setBarActive,
+  barActive,
+}) {
   const navigate = useNavigate();
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef(null);
   const [studentInfo, setStudentInfo] = useState(null);
-  const [role, setRole] = useState()
+  const [role, setRole] = useState();
 
   const getStudentInfo = () => {
     setLoader(true);
@@ -71,14 +78,14 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
   };
 
   useEffect(() => {
-    userRole()
+    userRole();
   }, []);
 
   useEffect(() => {
     if (role == "student") {
       getStudentInfo();
     }
-  }, [role])
+  }, [role]);
 
   const handleClickOutside = (e) => {
     if (userModal && modalRef.current && !modalRef.current.contains(e.target)) {
@@ -94,22 +101,18 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
     };
   }, [userModal]);
 
-
-
   return (
     <>
-
       <div className="navBar">
         <div
           className={`modalBg ${userModal ? "active" : ""}`}
           onClick={() => setUserModal(false)} // Fonga bosganda ham modal yopiladi
         ></div>
-        <nav >
-
+        <nav>
           <div className="nav">
             <div className="container">
               <div className="pageTitle">
-                <Link to={"/"} className={barActive ? "logo active" : "logo"} >
+                <Link to={"/"} className={barActive ? "logo active" : "logo"}>
                   {/* <img className="coin_img" src="imgs/coin-3.png" alt="" /> */}
                   <img src="/imgs/logo.svg" alt="logo" />
                 </Link>
@@ -120,38 +123,41 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                 </div> */}
               </div>
               <div className="user">
-                {
-                  role == "mentor" ? "" : <>
-                    {
-                      studentInfo?.point ? <div className="nav_point">
+                {role == "mentor" ? (
+                  ""
+                ) : (
+                  <>
+                    {studentInfo?.point ? (
+                      <div className="nav_point">
                         <img src="/imgs/coin-3.png" alt="" />
                         <h3>{studentInfo?.point}</h3>
-
-                      </div> : <div className="nav_point">
+                      </div>
+                    ) : (
+                      <div className="nav_point">
                         <img src="/imgs/coin-3.png" alt="" />
                         <h3>0</h3>
                       </div>
-                    }
+                    )}
                   </>
-                }
-
-
+                )}
 
                 <div className="flex">
-                  <Link to={"/news"}> <span className="navNotificat" ><IoIosNotifications />{
-                    allNewsStatus?.num_unread_news != 0 ?
-                      <b>{allNewsStatus?.num_unread_news}</b>
-                      : ""
-
-                  }
-                  </span>
+                  <Link to={"/news"}>
+                    {" "}
+                    <span className="navNotificat">
+                      <IoIosNotifications />
+                      {allNewsStatus?.num_unread_news != 0 ? (
+                        <b>{allNewsStatus?.num_unread_news}</b>
+                      ) : (
+                        ""
+                      )}
+                    </span>
                   </Link>
                   <span
                     onClick={() => setUserModal(!userModal)} // Modalni ochish/yopish
                   >
                     <FaUser />
                   </span>
-
                 </div>
                 {/* Modal */}
                 <div
@@ -164,29 +170,38 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                   </div>
 
                   <div className="row">
-                    <Link onClick={() => {
-                      setUserModal(false);
-                    }} to={role=="mentor" ? "" : "/profile"} className="div">
+                    <Link
+                      onClick={() => {
+                        setUserModal(false);
+                      }}
+                      to={role == "mentor" ? "" : "/profile"}
+                      className="div"
+                    >
                       <span className="navUserImg">
                         {/* <TiInfoLarge /> */}
                         {studentInfo?.image ? (
                           <img src={studentInfo?.image} alt="" />
-
                         ) : (
                           <FaUser />
                         )}
                       </span>
-                      <h3> {userInfo.first_name} {userInfo.last_name} </h3>
+                      <h3>
+                        {" "}
+                        {userInfo.first_name} {userInfo.last_name}{" "}
+                      </h3>
                     </Link>
                     <FaChevronRight />
                   </div>
 
-
                   {/* Ilova haqida */}
                   <div className="row">
-                    <Link to={"/info"} onClick={() => {
-                      setUserModal(false);
-                    }} className="div">
+                    <Link
+                      to={"/info"}
+                      onClick={() => {
+                        setUserModal(false);
+                      }}
+                      className="div"
+                    >
                       <span>
                         <TiInfoLarge />
                       </span>
@@ -196,7 +211,6 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                   </div>
                   <hr />
 
-
                   {/* Logout */}
                   <div
                     className="row"
@@ -205,7 +219,8 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                       navigate("/");
                       setModalOpen(true);
                       setUserModal(false);
-                      toast.success("Tizimdan muvafaqqiyatli chiqdingiz")
+                      toast.success("Tizimdan muvafaqqiyatli chiqdingiz");
+                      window.location.reload();
                     }}
                   >
                     <div className="div">
@@ -218,10 +233,6 @@ function Navbar({ setLoader, setModalOpen, userInfo, allNewsStatus, setBarActive
                   </div>
                 </div>
               </div>
-
-
-
-
             </div>
           </div>
         </nav>

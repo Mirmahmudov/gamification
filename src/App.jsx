@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import { RiAuctionLine, RiDashboardLine } from "react-icons/ri";
-import { FaArrowLeft, FaArrowRight, FaBars, FaChevronRight, FaHistory, FaRegUser } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaBars,
+  FaChevronRight,
+  FaHistory,
+  FaRegUser,
+} from "react-icons/fa";
 import "./App.css";
 import {
   MdArrowBackIosNew,
@@ -38,58 +45,56 @@ function App() {
   const [role, setRole] = useState();
   const [userInfo, setUserInfo] = useState();
   const [loader, setLoader] = useState(false);
-  const [mentorInfo, setMentorInfo] = useState()
-  const [mentorId, setMentorId] = useState(null)
-  const [allNewsStatus, setAllNewsStatus] = useState()
-  const [barActive, setBarActive] = useState(false)
-  
+  const [mentorInfo, setMentorInfo] = useState();
+  const [mentorId, setMentorId] = useState(null);
+  const [allNewsStatus, setAllNewsStatus] = useState();
+  const [barActive, setBarActive] = useState(false);
 
   const getNewsStatus = () => {
-    setLoader(true)
+    setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer  ${getToken()}`);
 
     const requestOptions = {
       method: "GET",
       headers: myHeaders,
-      redirect: "follow"
+      redirect: "follow",
     };
 
     fetch(`${baseUrl}/news/get-read-status/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setAllNewsStatus(result)
-        setLoader(false)
+        setAllNewsStatus(result);
+        setLoader(false);
       })
       .catch((error) => {
         // console.error(error)
-        setLoader(false)
+        setLoader(false);
       });
-  }
+  };
 
   const getMentorInfo = () => {
-    setLoader(true)
+    setLoader(true);
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
     const requestOptions = {
       method: "GET",
       headers: myHeaders,
-      redirect: "follow"
+      redirect: "follow",
     };
 
     fetch(`${baseUrl}/mentors/get-me/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setLoader(false)
+        setLoader(false);
         setMentorInfo(result);
         setMentorId(result.id); // mentorId ni to'g'ri oling
       })
       .catch((error) => {
-        setLoader(false)
-        // console.error(error)
+        setLoader(false);
       });
-  }
+  };
 
   const getCourses = () => {
     if (!mentorId) return; // Agar mentorId yo'q bo'lsa, so'rov yubormaslik
@@ -129,9 +134,17 @@ function App() {
     fetch(`${baseUrl}/users/get-me/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setRole(result.role);
-        setUserInfo(result);
-        setLoader(false);
+        if (result?.role || result?.id) {
+          setRole(result?.role);
+          setUserInfo(result);
+          setLoader(false);
+        } else {
+          localStorage.clear();
+          if (window.location.pathname !== "/") {
+            window.location.href = "/";
+          }
+          // window.location.reload()
+        }
       })
       .catch((error) => {
         // console.error(error);
@@ -141,15 +154,14 @@ function App() {
 
   useEffect(() => {
     userRole();
-    getNewsStatus()
+    getNewsStatus();
   }, [getToken()]);
 
   useEffect(() => {
     if (role == "mentor") {
-      getMentorInfo()
+      getMentorInfo();
     }
-  }, [role])
-
+  }, [role]);
 
   useEffect(() => {
     if (mentorId) {
@@ -170,24 +182,46 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light" />
+          theme="light"
+        />
 
         {loader ? <Loader /> : ""}
-        <LoginPage isOpen={isModalOpen}
+        <LoginPage
+          isOpen={isModalOpen}
           setLoader={setLoader}
-          onClose={() => setModalOpen(false)} />
+          onClose={() => setModalOpen(false)}
+        />
 
-        {role ? <Navbar barActive={barActive} setBarActive={setBarActive} allNewsStatus={allNewsStatus} setLoader={setLoader} setModalOpen={setModalOpen} userInfo={userInfo} /> : ""}
+        {role ? (
+          <Navbar
+            barActive={barActive}
+            setBarActive={setBarActive}
+            allNewsStatus={allNewsStatus}
+            setLoader={setLoader}
+            setModalOpen={setModalOpen}
+            userInfo={userInfo}
+          />
+        ) : (
+          ""
+        )}
 
         {role == "mentor" ? (
           <div className="main container">
             <ul className={barActive ? "links active " : "links "}>
               <div className="bar">
-                {barActive ? <MdArrowForwardIos onClick={() => {
-                  setBarActive(!barActive)
-                }} /> : <MdArrowBackIosNew onClick={() => {
-                  setBarActive(!barActive)
-                }} />}
+                {barActive ? (
+                  <MdArrowForwardIos
+                    onClick={() => {
+                      setBarActive(!barActive);
+                    }}
+                  />
+                ) : (
+                  <MdArrowBackIosNew
+                    onClick={() => {
+                      setBarActive(!barActive);
+                    }}
+                  />
+                )}
               </div>
 
               <li>
@@ -196,7 +230,6 @@ function App() {
                     <RiDashboardLine />
                     <h3>Dashboard</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -205,7 +238,6 @@ function App() {
                     <MdOutlineAssessment />
                     <h3>Baholash</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -214,7 +246,6 @@ function App() {
                     <MdOutlineWatchLater />
                     <h3>Yangiliklar</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -223,7 +254,6 @@ function App() {
                     <MdOutlineLeaderboard />
                     <h3>Leaderboard</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -232,7 +262,6 @@ function App() {
                     <RiAuctionLine />
                     <h3>Auksion</h3>
                   </div>
-
                 </NavLink>
               </li>
             </ul>
@@ -243,7 +272,6 @@ function App() {
                     <RiDashboardLine />
                     <h3>Dashboard</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -252,7 +280,6 @@ function App() {
                     <MdOutlineAssessment />
                     <h3>Baholash</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -261,7 +288,6 @@ function App() {
                     <MdOutlineWatchLater />
                     <h3>Yangiliklar</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -270,7 +296,6 @@ function App() {
                     <MdOutlineLeaderboard />
                     <h3>Leaderboard</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -279,7 +304,6 @@ function App() {
                     <RiAuctionLine />
                     <h3>Auksion</h3>
                   </div>
-
                 </NavLink>
               </li>
             </ul>
@@ -294,13 +318,33 @@ function App() {
                     <Assessment setLoader={setLoader} courses={courses} />
                   }
                 /> */}
-                <Route path="/assessment" element={<AssessmentTwo setLoader={setLoader} courses={courses} />} />
+                <Route
+                  path="/assessment"
+                  element={
+                    <AssessmentTwo setLoader={setLoader} courses={courses} />
+                  }
+                />
 
                 <Route
                   path="/leaderboard"
-                  element={<Students role={role} mentorId={mentorId} setLoader={setLoader} />}
+                  element={
+                    <Students
+                      role={role}
+                      mentorId={mentorId}
+                      setLoader={setLoader}
+                    />
+                  }
                 />
-                <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
+                <Route
+                  path="/news"
+                  element={
+                    <News
+                      getNewsStatus={getNewsStatus}
+                      allNewsStatus={allNewsStatus}
+                      setLoader={setLoader}
+                    />
+                  }
+                />
 
                 <Route
                   path="/auction"
@@ -308,40 +352,62 @@ function App() {
                 />
                 <Route
                   path="/teacherhistory"
-                  element={<PointHistoryTeacher mentorId={mentorId && mentorId} courses={courses} setLoader={setLoader} />}
+                  element={
+                    <PointHistoryTeacher
+                      mentorId={mentorId && mentorId}
+                      courses={courses}
+                      setLoader={setLoader}
+                    />
+                  }
                 />
-                <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
-                <Route path="/edithistory/:id" element={<EditPointHistory setLoader={setLoader} mentorId={mentorId && mentorId} />} />
-
+                <Route
+                  path="newread/:id"
+                  element={<NewRead setLoader={setLoader} />}
+                />
+                <Route
+                  path="/edithistory/:id"
+                  element={
+                    <EditPointHistory
+                      setLoader={setLoader}
+                      mentorId={mentorId && mentorId}
+                    />
+                  }
+                />
               </Routes>
             </div>
           </div>
         ) : role === "student" ? (
-          <div className="main container" >
-            <ul className={barActive ? "links active " : "links "} >
+          <div className="main container">
+            <ul className={barActive ? "links active " : "links "}>
               <div className="bar">
-                {barActive ? <MdArrowForwardIos onClick={() => {
-                  setBarActive(!barActive)
-                }} /> : <MdArrowBackIosNew onClick={() => {
-                  setBarActive(!barActive)
-                }} />}
+                {barActive ? (
+                  <MdArrowForwardIos
+                    onClick={() => {
+                      setBarActive(!barActive);
+                    }}
+                  />
+                ) : (
+                  <MdArrowBackIosNew
+                    onClick={() => {
+                      setBarActive(!barActive);
+                    }}
+                  />
+                )}
               </div>
-              <li>
+              {/* <li>
                 <NavLink to={"/"}>
                   <div>
                     <MdOutlineLeaderboard />
                     <h3>Leaderboard </h3>
                   </div>
-
                 </NavLink>
-              </li>
+              </li> */}
               <li>
-                <NavLink to={"/auction"}>
+                <NavLink to={"/"}>
                   <div>
                     <RiAuctionLine />
                     <h3>Auksion</h3>
                   </div>
-
                 </NavLink>
               </li>
 
@@ -351,7 +417,6 @@ function App() {
                     <MdOutlineWatchLater />
                     <h3>Yangiliklar</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -360,7 +425,6 @@ function App() {
                     <FaRegUser />
                     <h3>Profil</h3>
                   </div>
-
                 </NavLink>
               </li>
               <li>
@@ -369,21 +433,20 @@ function App() {
                     <GoHistory />
                     <h3>Coinlar</h3>
                   </div>
-
                 </NavLink>
               </li>
             </ul>
             <ul className="links_two">
-              <li>
+              {/* <li>
                 <NavLink to={"/"}>
                   <div>
                     <MdWhatshot />
                     <h3>Leaderboard </h3>
                   </div>
                 </NavLink>
-              </li>
+              </li> */}
               <li>
-                <NavLink to={"/auction"}>
+                <NavLink to={"/"}>
                   <div>
                     <RiAuctionLine />
                     <h3>Auksion</h3>
@@ -411,23 +474,36 @@ function App() {
             </ul>
             <div className="viewPage">
               <Routes>
-                <Route path="/news" element={<News getNewsStatus={getNewsStatus} allNewsStatus={allNewsStatus} setLoader={setLoader} />} />
+                <Route
+                  path="/news"
+                  element={
+                    <News
+                      getNewsStatus={getNewsStatus}
+                      allNewsStatus={allNewsStatus}
+                      setLoader={setLoader}
+                    />
+                  }
+                />
                 <Route path="/info" element={<SiteInfo />} />
                 <Route
                   path="/profile"
                   element={<Profile setLoader={setLoader} />}
                 />
+                <Route path="/" element={<Auction setLoader={setLoader} />} />
+                {/* <Route path="/" element={<Students setLoader={setLoader} />} /> */}
                 <Route
-                  path="/auction"
-                  element={<Auction setLoader={setLoader} />}
+                  path="newread/:id"
+                  element={<NewRead setLoader={setLoader} />}
                 />
-                <Route path="/"
-                  element={<Students setLoader={setLoader} />}
-                />
-                <Route path="newread/:id" element={<NewRead setLoader={setLoader} />} />
 
-                <Route path="/pointhistory" element={<PointHistory setLoader={setLoader} />} />
-                <Route path="/onepoint/:id" element={<OnePoint setLoader={setLoader} />} />
+                <Route
+                  path="/pointhistory"
+                  element={<PointHistory setLoader={setLoader} />}
+                />
+                <Route
+                  path="/onepoint/:id"
+                  element={<OnePoint setLoader={setLoader} />}
+                />
               </Routes>
             </div>
           </div>

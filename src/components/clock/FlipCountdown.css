@@ -1,130 +1,127 @@
 .timaPage {
-    width: 100%;
-    color: #1d537c;
-    padding: 20px 0px;
-    font-size: clamp(2em, 4.5vw, 5em);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif !important;
-
+  width: 100%;
+  color: #1d537c;
+  padding: 20px 0px;
+  font-size: clamp(2em, 4.5vw, 5em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
-
-
 .timaPage .flip-card {
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    border-radius: 0.1em;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: 0.1em;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 .timaPage .top,
 .timaPage .bottom,
 .timaPage .flip-card.flip::after,
 .timaPage .flip-card.flip::before {
-    padding: 0.25em;
-    height: 0.75em;
-    line-height: 1;
-    overflow: hidden;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  padding: 0.25em;
+  height: 0.75em;
+  line-height: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .top,
 .timaPage .flip-card.flip::before {
-    background-color: #f7f7f7;
-    border-top-left-radius: 0.1em;
-    border-top-right-radius: 0.1em;
-    border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  background-color: #f7f7f7;
+  border-top-left-radius: 0.1em;
+  border-top-right-radius: 0.1em;
+  border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .bottom,
 .timaPage .flip-card.flip::after {
-    display: flex;
-    align-items: flex-end;
-    background-color: white;
-    border-bottom-left-radius: 0.1em;
-    border-bottom-right-radius: 0.1em;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  display: flex;
+  align-items: flex-end;
+  background-color: white;
+  border-bottom-left-radius: 0.1em;
+  border-bottom-right-radius: 0.1em;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .flip-card.flip::before {
-    top: 0;
-    left: 0;
-    width: 100%;
-    content: attr(data-current-number);
-    position: absolute;
-    transform-origin: bottom;
-    animation: flip-bottom 500ms ease;
-    backface-visibility: hidden;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  content: attr(data-current-number);
+  position: absolute;
+  transform-origin: bottom;
+  animation: flip-bottom 500ms ease;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 @keyframes flip-bottom {
-    100% {
-        transform: rotateX(180deg);
-    }
+  100% {
+    transform: rotateX(180deg);
+  }
 }
 
 .timaPage .flip-card.flip::after {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    content: attr(data-next-number);
-    position: absolute;
-    transform-origin: top;
-    animation: flip-top 500ms ease;
-    transform: rotateX(180deg);
-    backface-visibility: hidden;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  content: attr(data-next-number);
+  position: absolute;
+  transform-origin: top;
+  animation: flip-top 500ms ease;
+  transform: rotateX(180deg);
+  backface-visibility: hidden;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 @keyframes flip-top {
-    100% {
-        transform: rotateX(0deg);
-    }
+  100% {
+    transform: rotateX(0deg);
+  }
 }
 
 .timaPage .countdown-container {
-    display: flex;
-    gap: 0.5em; 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  display: flex;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .countdown-cards {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .card-title {
-    font-size: clamp(.8rem, 1.5vw, 1rem);
-    letter-spacing: 1px;
-    margin-bottom: .5em;
-    color: rgb(29, 27, 27);
-    text-transform: uppercase;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  letter-spacing: 1px;
+  margin-bottom: 0.5em;
+  color: rgb(29, 27, 27);
+  text-transform: uppercase;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .timaPage .card-container {
-    display: flex;
-    gap: 0.125em;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif !important;
+  display: flex;
+  gap: 0.125em;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif !important;
 }

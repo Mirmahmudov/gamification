@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-between;
   gap: 20px;
   scrollbar-width: none;
 
@@ -62,7 +62,7 @@
 }
 
 .auction_product .card {
-  width: 250px;
+  width: 270px;
   padding: 10px;
   border-radius: 15px;
   overflow: hidden;
