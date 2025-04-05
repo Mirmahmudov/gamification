@@ -216,6 +216,7 @@ function Navbar({
                     className="row"
                     onClick={() => {
                       localStorage.clear();
+
                       setModalOpen(true);
                       setUserModal(false);
                       toast.success("Tizimdan muvafaqqiyatli chiqdingiz");

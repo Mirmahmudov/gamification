@@ -1,13 +1,13 @@
-import { Autocomplete, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { getToken } from '../../service/token';
-import { baseUrl } from '../../config';
-import { FaRegUser } from 'react-icons/fa';
-import './AssessmentTwo.css';
-import { toast } from 'react-toastify';
-import { FaXmark } from 'react-icons/fa6';
+import { Autocomplete, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { IoIosArrowBack } from "react-icons/io";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getToken } from "../../service/token";
+import { baseUrl } from "../../config";
+import { FaRegUser } from "react-icons/fa";
+import "./AssessmentTwo.css";
+import { toast } from "react-toastify";
+import { FaXmark } from "react-icons/fa6";
 
 function AssessmentTwo({ courses, userInfo, setLoader }) {
   const navigate = useNavigate();
@@ -22,17 +22,19 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
   const getStudents = (groupId = selectedGroup) => {
     setLoader(true);
     const myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${getToken()}`);
+    myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow',
+      redirect: "follow",
     };
 
     const url = groupId
-      ? `${baseUrl}/students/?group=${groupId}&group__mentor=${mentor ? mentor : ''}`
-      : `${baseUrl}/students/?group__mentor=${mentor ? mentor : ''}`;
+      ? `${baseUrl}/students/?group=${groupId}&group__mentor=${
+          mentor ? mentor : ""
+        }`
+      : `${baseUrl}/students/?group__mentor=${mentor ? mentor : ""}`;
 
     fetch(url, requestOptions)
       .then((response) => response.json())
@@ -49,12 +51,12 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
   const getMentor = () => {
     setLoader(true);
     const myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${getToken()}`);
+    myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      redirect: 'follow',
+      redirect: "follow",
     };
 
     fetch(`${baseUrl}/mentors/get-me`, requestOptions)
@@ -81,7 +83,9 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
   // Ballarni o'zgartirish
   const handlePointChange = (studentId, pointType, value) => {
     const updatedPoints = [...points];
-    const pointIndex = updatedPoints.findIndex((point) => point.studentId === studentId && point.pointType === pointType);
+    const pointIndex = updatedPoints.findIndex(
+      (point) => point.studentId === studentId && point.pointType === pointType
+    );
 
     if (pointIndex === -1) {
       updatedPoints.push({
@@ -109,12 +113,14 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
     let value = 0;
 
     // Vaqtida_keldi bo'lsa, 30 ball berish
-    if (pointType === 2) { // 2 = Vaqtida_keldi
+    if (pointType === 2) {
+      // 2 = Vaqtida_keldi
       value = 30;
     }
 
     // Qatnashdi bo'lsa, 20 ball berish
-    if (pointType === 4) { // 4 = Qatnashdi
+    if (pointType === 4) {
+      // 4 = Qatnashdi
       value = 20;
     }
 
@@ -123,12 +129,12 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
 
   // Backendga ballarni va izohlarni yuborish
   const handleSubmit = () => {
-    const date = new Date().toISOString().split('T')[0]; // Bugungi sana
+    const date = new Date().toISOString().split("T")[0]; // Bugungi sana
 
     points.forEach((point) => {
       const data = {
         amount: point.value,
-        description: comments[point.studentId] || '', // Izohni yuborish
+        description: comments[point.studentId] || "", // Izohni yuborish
         date,
         mentor,
         student: point.studentId,
@@ -136,14 +142,14 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
       };
 
       const myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'application/json');
-      myHeaders.append('Authorization', `Bearer ${getToken()}`);
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${getToken()}`);
 
       const requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: myHeaders,
         body: JSON.stringify(data),
-        redirect: 'follow',
+        redirect: "follow",
       };
 
       fetch(`${baseUrl}/give-points/`, requestOptions)
@@ -151,13 +157,13 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
         .then((result) => {
           // Backendga muvaffaqiyatli yuborilganidan keyin
           setLoader(false);
-          toast.success('Baholandi');
+          toast.success("Baholandi");
           resetForm(); // Inputlarni bo'shatish
         })
         .catch((error) => {
           // Hatolik yuz berganda
           setLoader(false);
-          toast.error('Hatolik mavjud');
+          toast.error("Hatolik mavjud");
         });
     });
 
@@ -168,10 +174,10 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
   const resetForm = () => {
     setPoints([]); // Ballarni tozalash
     setComments({}); // Izohlarni tozalash
-    const checkboxes = document.querySelectorAll('.check');
+    const checkboxes = document.querySelectorAll(".check");
     checkboxes.forEach((checkbox) => (checkbox.checked = false)); // Checkboxlarni bo'shatish
-    const inputs = document.querySelectorAll('.num, .date, textarea');
-    inputs.forEach((input) => (input.value = '')); // Inputlarni bo'shatish
+    const inputs = document.querySelectorAll(".num, .date, textarea");
+    inputs.forEach((input) => (input.value = "")); // Inputlarni bo'shatish
   };
 
   return (
@@ -186,26 +192,28 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
             <Autocomplete
               disablePortal
               options={courses && Array.isArray(courses) ? courses : []}
-              getOptionLabel={(option) => option?.name || ''}
-              sx={{ width: 300, padding: '0px' }}
+              getOptionLabel={(option) => option?.name || ""}
+              sx={{ width: 300, padding: "0px" }}
               onChange={(event, value) => {
                 setSelectedGroup(value?.id || null);
                 getStudents(value?.id || null);
               }}
-              renderInput={(params) => <TextField {...params} label="Barcha guruhlar" />}
+              renderInput={(params) => (
+                <TextField {...params} label="Barcha guruhlar" />
+              )}
               isOptionEqualToValue={(option, value) => option?.id === value?.id}
               className="custom-autocomplete"
             />
           </div>
 
-          <NavLink to="/teacherhistory" className={'recent-add'}>
+          <NavLink to="/teacherhistory" className={"recent-add"}>
             Baholar Tarixi
           </NavLink>
         </header>
       </div>
 
       <div className="studentTable">
-        <table border={'1px'}>
+        <table border={"1px"}>
           <thead>
             <tr>
               <th colSpan={2}>Ism</th>
@@ -233,10 +241,12 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
                 <td className="td_name">
                   <h2>
                     {item?.user?.first_name || item?.user?.last_name
-                      ? ` ${item?.user?.first_name || ''} ${item?.user?.last_name || ''}`
-                      : 'Ism mavjud emas'}
+                      ? ` ${item?.user?.first_name || ""} ${
+                          item?.user?.last_name || ""
+                        }`
+                      : "Ism mavjud emas"}
                   </h2>
-                  <span>{item?.bio ? item.bio : 'ma\'lumot mavjud emas'}</span>
+                  <span>{item?.bio ? item.bio : "ma'lumot mavjud emas"}</span>
                 </td>
 
                 <td>
@@ -245,7 +255,11 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
                     placeholder="100"
                     type="text"
                     onChange={(e) =>
-                      handlePointChange(item.id, 1, parseInt(e.target.value, 10) || 0)
+                      handlePointChange(
+                        item.id,
+                        1,
+                        parseInt(e.target.value, 10) || 0
+                      )
                     }
                   />
                 </td>
@@ -255,32 +269,51 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
                     placeholder="100"
                     type="text"
                     onChange={(e) =>
-                      handlePointChange(item.id, 5, parseInt(e.target.value, 10) || 0)
+                      handlePointChange(
+                        item.id,
+                        5,
+                        parseInt(e.target.value, 10) || 0
+                      )
                     }
                   />
                 </td>
                 <td>
-                  <input
-                    className="check"
-                    type="checkbox"
-                    onChange={() => handleCheckboxChange(item?.id, 4)} // Darsga qatnashdi
-                  />
+                  <div className="row">
+                    {" "}
+                    <input
+                      className="check"
+                      type="checkbox"
+                      id={`qatnashdi${item?.id}`}
+                      onChange={() => handleCheckboxChange(item?.id, 4)} // Darsga qatnashdi
+                    />
+                    <label htmlFor={`qatnashdi${item?.id}`}>qatnashdi</label>
+                  </div>
+                </td>
+                <td>
+                  <div className="row">
+                    <input
+                      className="check"
+                      type="checkbox"
+                      id={`keldi${item?.id}`}
+                      onChange={() => handleCheckboxChange(item?.id, 2)} // Darsga o'z vaqtida keldi
+                    />
+                    <label htmlFor={`keldi${item?.id}`}>keldi</label>
+                  </div>
                 </td>
                 <td>
                   <input
-                    className="check"
-                    type="checkbox"
-                    onChange={() => handleCheckboxChange(item?.id, 2)} // Darsga o'z vaqtida keldi
+                    type="date"
+                    className="date"
+                    defaultValue={new Date().toISOString().split("T")[0]}
                   />
-                </td>
-                <td>
-                  <input type="date" className="date" defaultValue={new Date().toISOString().split('T')[0]} />
                 </td>
                 <td>
                   <textarea
                     placeholder="coin uchun izoh"
-                    value={comments[item.id] || ''}
-                    onChange={(e) => handleCommentChange(item.id, e.target.value)}
+                    value={comments[item.id] || ""}
+                    onChange={(e) =>
+                      handleCommentChange(item.id, e.target.value)
+                    }
                   />
                 </td>
                 <td>
@@ -289,7 +322,11 @@ function AssessmentTwo({ courses, userInfo, setLoader }) {
                     placeholder="1000"
                     type="text"
                     onChange={(e) =>
-                      handlePointChange(item.id, 6, parseInt(e.target.value, 10) || 0)
+                      handlePointChange(
+                        item.id,
+                        6,
+                        parseInt(e.target.value, 10) || 0
+                      )
                     }
                   />
                 </td>
