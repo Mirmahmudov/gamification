@@ -59,6 +59,7 @@ function Auction({ setLoader }) {
   const memoizedCountdown = useMemo(() => {
     return <FlipCountdown targetTime={dateTime} />;
   }, [dateTime]);
+  const [hoveredId, setHoveredId] = useState(null);
 
   return (
     <>
@@ -97,7 +98,48 @@ function Auction({ setLoader }) {
                     <div className="images">
                       <img src={item?.image} alt={item?.name} loading="lazy" />
                     </div>
-                    <h4>{item?.name.slice(0, 20)}..</h4>
+                    <div
+                      style={{ position: "relative", display: "inline-block" }}
+                    >
+                      <h4
+                        key={item.id}
+                        onMouseEnter={() => setHoveredId(item.id)}
+                        onMouseLeave={() => setHoveredId(null)}
+                        style={{
+                          maxWidth: "200px",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {item.name.length > 20
+                          ? hoveredId === item.id
+                            ? item.name // matnni to'liq ko'rsatish
+                            : `${item.name.slice(0, 20)}..`
+                          : item.name}
+                      </h4>
+
+                      {hoveredId === item.id && item.name.length > 10 && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "100%",            
+                            left: 0,
+                            background: "white",
+                            padding: "5px 10px",
+                            fontSize:"14px",
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                            zindex: 10,
+                            whiteSpace: "normal",
+                            // minWidth:"200px",
+                            maxWidth: "400px",
+                          }}
+                        >
+                          {item.name}
+                        </div>
+                      )}
+                    </div>
+
                     <h5>
                       narxi: <span>{item?.start_point} coin</span>
                     </h5>

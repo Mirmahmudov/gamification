@@ -216,11 +216,11 @@ function Navbar({
                     className="row"
                     onClick={() => {
                       localStorage.clear();
-                      navigate("/");
                       setModalOpen(true);
                       setUserModal(false);
                       toast.success("Tizimdan muvafaqqiyatli chiqdingiz");
                       window.location.reload();
+                      navigate("/");
                     }}
                   >
                     <div className="div">

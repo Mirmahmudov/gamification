@@ -38,10 +38,10 @@
   border-radius: 10px;
   margin-bottom: 10px;
 }
-
+/* 
 .auction_product {
   text-align: center;
-}
+} */
 
 .auction_product .cards {
   width: 100%;
@@ -51,7 +51,7 @@
   justify-content: space-between;
   gap: 20px;
   scrollbar-width: none;
-
+  margin-bottom: 50px;
 }
 
 .auction_product h1 {
@@ -68,7 +68,6 @@
   overflow: hidden;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
-
 }
 
 .auction_product .card .images {
@@ -77,14 +76,11 @@
   transition: all 0.3s ease-in-out;
   margin: 5px auto;
   margin-bottom: 20px;
-
 }
 
 .auction_product .card:hover .images {
   transform: scale(1.03);
-
 }
-
 
 .auction_product .card img {
   width: 100%;
@@ -94,7 +90,7 @@
 }
 
 .auction_product .card h4 {
-  color: #1D537C;
+  color: #1d537c;
   text-align: left;
   margin-bottom: 5px;
   font-size: 18px;
@@ -109,10 +105,7 @@
   font-weight: 500;
   padding-left: 5px;
   color: #1d537cda;
-
 }
-
-
 
 .auction_product .card h5 span {
   font-weight: 600;
@@ -126,7 +119,6 @@
   margin-bottom: 5px;
   font-size: 14px;
   color: #718096;
-
 }
 
 .auction_product .card h6 span {
@@ -139,7 +131,6 @@
   color: #1d537c;
   margin-bottom: 10px;
 }
-
 
 .pageName {
   display: flex;
@@ -159,7 +150,6 @@
   font-size: 20px;
   cursor: pointer;
 }
-
 
 @media (max-width: 640px) {
   .auction_point {
